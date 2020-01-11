@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 import frc.robot.Constants;
 import frc.robot.OI;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -53,8 +54,9 @@ public class Drive extends SubsystemBase {
     double leftYJoy = this.adjustedInput.getXboxLeftY();
     double rightYJoy = this.adjustedInput.getXboxRightY();
 
-    drivePower(leftYJoy, rightYJoy);
+    // drivePower(leftYJoy, rightYJoy);
 
+    DriverStation.reportWarning("Left Y:" + " " + leftYJoy + "and Right Y: " + rightYJoy , false);
 
   }
 }
