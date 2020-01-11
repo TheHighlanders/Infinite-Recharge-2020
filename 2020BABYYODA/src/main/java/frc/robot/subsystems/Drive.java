@@ -17,15 +17,44 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class Drive extends SubsystemBase {
 
-  
+  public WPI_TalonSRX left;
+  public WPI_TalonSRX right;
 
+  private double ramp = 0.5;
+
+  public OI adjustedInput;
 
   public Drive() {
+    left = new WPI_TalonSRX(Constants.LEFT_WHEELS);
+    right = new WPI_TalonSRX(Constants.RIGHT_WHEELS);
 
+    left.configOpenloopRamp(ramp,0);
+    right.configOpenloopRamp(ramp,0);
+     
+    left.setNeutralMode(NeutralMode.Coast);
+    right.setNeutralMode(NeutralMode.Coast);
+
+    adjustedInput = new OI();
+
+  }
+  public void drivePower(double left_power, double right_power){
+    left.set(left_power);
+    right.set(right_power);
+
+
+
+  }
+  public void stopPower(){
+   drivePower(0,0); 
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    double leftYJoy = this.adjustedInput.getXboxLeftY();
+    double rightYJoy = this.adjustedInput.getXboxRightY();
+
+    drivePower(leftYJoy, rightYJoy);
+
+
   }
 }
