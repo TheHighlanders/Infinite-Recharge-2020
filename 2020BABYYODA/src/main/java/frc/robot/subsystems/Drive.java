@@ -54,7 +54,7 @@ public class Drive extends SubsystemBase {
     double leftYJoy = this.adjustedInput.getXboxLeftY();
     double rightYJoy = this.adjustedInput.getXboxRightY();
 
-    // drivePower(leftYJoy, rightYJoy);
+    drivePower(-leftYJoy, rightYJoy);
 
     DriverStation.reportWarning("Left Y:" + " " + leftYJoy + "and Right Y: " + rightYJoy , false);
 
