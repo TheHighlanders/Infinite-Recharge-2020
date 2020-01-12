@@ -5,34 +5,28 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-
-/** This Command will transfer the data needed to drive during teleop. */
-
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drive;
-import edu.wpi.first.wpilibj.DriverStation;
+import frc.robot.subsystems.Shooting;
+import frc.robot.Robot;
 import frc.robot.OI;
 
-public class TeleopDriveCommand extends CommandBase {
-  /**
-   * m_LeftYJoy and m_RightYJoy ranges from -1 to 1
-   */
 
-  private final Drive m_Drive;
+public class ShootingCommand extends CommandBase {
+  /**
+   * Creates a new ShootingCommand.
+   */
+  private final Shooting m_Shooting;
   private final OI m_OI;
 
 
-  public TeleopDriveCommand(Drive drive_subsystem, OI xbox_oi) {
-
-    m_Drive = drive_subsystem;
-    m_OI = xbox_oi;
-
-    addRequirements(m_Drive);
-
+  public ShootingCommand(Shooting shooting_subsystem, OI xbox_io) {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_Shooting = shooting_subsystem;
+    m_OI = xbox_io;
+
+    addRequirements(m_Shooting);
   }
 
   // Called when the command is initially scheduled.
@@ -43,11 +37,7 @@ public class TeleopDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    m_Drive.drivePower(-Math.pow(this.m_OI.getXboxLeftY(), 3)/1.25, Math.pow(this.m_OI.getXboxRightY(), 3)/1.25);
-    // DriverStation.reportWarning("Left Y:" + " " + m_OI.getXboxLeftY() + "and Right Y: " + m_OI.getXboxRightY() , false);
-
-
+    m_Shooting.ShootingLaunch();
   }
 
   // Called once the command ends or is interrupted.

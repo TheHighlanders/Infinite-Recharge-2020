@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -26,7 +27,7 @@ public class RobotContainer {
 
   private final Drive m_robotDrive = new Drive();
   private final OI m_OI = new OI();
-
+  private final Shooting m_Shooting = new Shooting();
 
   
   
@@ -41,7 +42,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
-    configureButtonBindings();
+   configureButtonBindings();
     
     m_robotDrive.setDefaultCommand(new TeleopDriveCommand(m_robotDrive, m_OI));
 
@@ -56,11 +57,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
-
-
-
-
+    new JoystickButton(m_OI.xbox, 1).whileHeld(()->m_Shooting.ShootingLaunch());
 
   }
 

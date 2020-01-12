@@ -24,8 +24,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   public static final Drive driving = new Drive();
-
-  private RobotContainer m_robotContainer;
+  
+  private RobotContainer m_robotContainer;  
+  private final Shooting m_roboShooting = new Shooting();  
   private final Drive m_robotDrive = new Drive();
   private final OI m_OI = new OI(); 
   /**

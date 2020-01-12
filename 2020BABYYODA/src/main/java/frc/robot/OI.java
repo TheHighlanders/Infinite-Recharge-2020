@@ -9,13 +9,13 @@ package frc.robot;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController.Button;
+
+
 /** import edu.wpi.first.hal.sim.mockdata.DriverStationDataJNI; import edu.wpi.first.wpilibj.Joystick;*/
 
 
 public class OI {
 
-    public Button[] xboxButton_array = new Button[11];
     public XboxController xbox = new XboxController(Constants.XBOX_PORT);
 
     /** Contructer */
@@ -33,7 +33,11 @@ public class OI {
 
 
     }
-    /**   Xbox Joysticks */    
+    /**   Xbox Joysticks */   
+
+    public boolean getXboxButtonA(){
+        return xbox.getAButton();
+    }
 
 
     public double getXboxLeftX() {

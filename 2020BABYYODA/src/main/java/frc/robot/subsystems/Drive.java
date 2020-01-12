@@ -21,8 +21,7 @@ public class Drive extends SubsystemBase {
   public WPI_TalonSRX left;
   public WPI_TalonSRX right;
 
-  private double ramp = 0.5;
-
+  private double ramp = 0.2;
   public OI xbox_io;
 
   public Drive() {
@@ -43,7 +42,7 @@ public class Drive extends SubsystemBase {
     left.set(left_power);
     right.set(right_power);
 
-    DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
+    // DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
 
 
 
