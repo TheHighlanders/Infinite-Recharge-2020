@@ -43,6 +43,8 @@ public class Drive extends SubsystemBase {
     left.set(left_power);
     right.set(right_power);
 
+    DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
+
 
 
   }
@@ -54,7 +56,7 @@ public class Drive extends SubsystemBase {
   public void periodic() {
 
 
-
+    /*
     double leftYJoy = this.xbox_io.getXboxLeftY();
     double rightYJoy = this.xbox_io.getXboxRightY();
 
@@ -68,6 +70,7 @@ public class Drive extends SubsystemBase {
     DriverStation.reportWarning("Left Y:" + " " + leftYJoy + "and Right Y: " + rightYJoy , false);
     DriverStation.reportWarning("Adjusted Left Y:" + " " + adjusted_leftYJoy + "and Adjusted Right Y: " + adjusted_rightYJoy , false);
 
+    **/
 
   }
 }
