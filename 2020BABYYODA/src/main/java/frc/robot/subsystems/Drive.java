@@ -23,7 +23,7 @@ public class Drive extends SubsystemBase {
 
   private double ramp = 0.5;
 
-  public OI adjustedInput;
+  public OI xbox_io;
 
   public Drive() {
     left = new WPI_TalonSRX(Constants.LEFT_WHEELS);
@@ -35,7 +35,8 @@ public class Drive extends SubsystemBase {
     left.setNeutralMode(NeutralMode.Coast);
     right.setNeutralMode(NeutralMode.Coast);
 
-    adjustedInput = new OI();
+    xbox_io = new OI();
+
 
   }
   public void drivePower(double left_power, double right_power){
@@ -51,12 +52,22 @@ public class Drive extends SubsystemBase {
 
   @Override
   public void periodic() {
-    double leftYJoy = this.adjustedInput.getXboxLeftY();
-    double rightYJoy = this.adjustedInput.getXboxRightY();
 
-    drivePower(-leftYJoy, rightYJoy);
+
+
+    double leftYJoy = this.xbox_io.getXboxLeftY();
+    double rightYJoy = this.xbox_io.getXboxRightY();
+
+    double adjusted_leftYJoy = -Math.pow(leftYJoy,3);
+    double adjusted_rightYJoy = Math.pow(rightYJoy,3);
+
+    drivePower(adjusted_leftYJoy, adjusted_rightYJoy);
+
+
 
     DriverStation.reportWarning("Left Y:" + " " + leftYJoy + "and Right Y: " + rightYJoy , false);
+    DriverStation.reportWarning("Adjusted Left Y:" + " " + adjusted_leftYJoy + "and Adjusted Right Y: " + adjusted_rightYJoy , false);
+
 
   }
 }
