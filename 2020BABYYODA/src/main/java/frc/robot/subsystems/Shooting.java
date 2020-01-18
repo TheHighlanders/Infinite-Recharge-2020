@@ -42,6 +42,11 @@ public class Shooting extends SubsystemBase {
     m_Intake.IntakeMaxSpeed();
   }
 
+  public void ShootingStop(){
+    shootingMotor.set(0);
+    DriverStation.reportWarning("Shooting has stopped", false);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

@@ -57,7 +57,9 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(m_OI.xbox, 1).whileHeld(()->m_Shooting.ShootingLaunch());
+    new JoystickButton(m_OI.xbox, 1).whenPressed(()->m_Shooting.ShootingLaunch());
+    new JoystickButton(m_OI.xbox, 1).whenReleased(()->m_Shooting.ShootingStop());
+
 
   }
 
