@@ -25,15 +25,14 @@ public class Shooting extends SubsystemBase {
     private WPI_TalonSRX shootingMotor = new WPI_TalonSRX(Constants.SHOOTER);
     private double ramp = 0.2;
     public OI shooting_io;
-    private final Intake m_Intake;
+    private final Intake m_Intake = new Intake();
 
-  public Shooting(Intake intake_subsystem) {
+
+  public Shooting() {
 
     shootingMotor.configOpenloopRamp(ramp,0);
     shootingMotor.setNeutralMode(NeutralMode.Brake);
-
-    m_Intake = intake_subsystem;
-
+    
     shooting_io = new OI();
   }
 

@@ -25,6 +25,7 @@ public class Intake extends SubsystemBase {
   private double ramp = 0.2;
   public OI intake_io;
 
+  
   public Intake() {
 
     intakeMotor.configOpenloopRamp(ramp,0);
