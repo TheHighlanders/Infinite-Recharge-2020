@@ -15,40 +15,32 @@ import frc.robot.commands.ShootingCommand;
 import edu.wpi.first.hal.sim.DriverStationSim;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.SpeedController;
-import frc.robot.subsystems.Intake;
 
-public class Shooting extends SubsystemBase {
+public class Intake extends SubsystemBase {
   /**
-   * Creates a new Shooting.
+   * Creates a new Intake.
    */
-    private WPI_TalonSRX shootingMotor = new WPI_TalonSRX(Constants.SHOOTER);
-    private double ramp = 0.2;
-    public OI shooting_io;
-    private final Intake m_Intake;
 
-  public Shooting(Intake intake_subsystem) {
+  private WPI_TalonSRX intakeMotor = new WPI_TalonSRX(Constants.INTAKE);
+  private double ramp = 0.2;
+  public OI intake_io;
 
-    shootingMotor.configOpenloopRamp(ramp,0);
-    shootingMotor.setNeutralMode(NeutralMode.Brake);
+  public Intake() {
 
-    m_Intake = intake_subsystem;
+    intakeMotor.configOpenloopRamp(ramp,0);
+    intakeMotor.setNeutralMode(NeutralMode.Brake);
 
-    shooting_io = new OI();
+    intake_io = new OI();
+
   }
 
-  public void ShootingLaunch(){
-    shootingMotor.set(1);
-    DriverStation.reportWarning("Bombs Away!" , false);
-    m_Intake.IntakeMaxSpeed();
+  public void IntakeMaxSpeed() {
+    intakeMotor.set(1);
+    DriverStation.reportWarning("Ready to Fire!" , false);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-
-    
-
-
   }
 }

@@ -28,6 +28,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;  
   private final Shooting m_roboShooting = new Shooting();  
   private final Drive m_robotDrive = new Drive();
+  private final Intake m_robotIntake = new Intake();
   private final OI m_OI = new OI(); 
   /**
    * This function is run when the robot is first started up and should be used for any
