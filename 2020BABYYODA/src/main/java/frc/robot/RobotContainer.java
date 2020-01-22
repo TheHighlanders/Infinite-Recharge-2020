@@ -28,6 +28,7 @@ public class RobotContainer {
   private final Drive m_robotDrive = new Drive();
   private final OI m_OI = new OI();
   private final Shooting m_Shooting = new Shooting();
+  private Command m_autoCommand;
 
   
   
@@ -47,6 +48,7 @@ public class RobotContainer {
     m_robotDrive.setDefaultCommand(new TeleopDriveCommand(m_robotDrive, m_OI));
 
     DriverStation.reportWarning("Initialized",false);
+    m_autoCommand = new SetDrivePowerAuto(m_robotDrive);
 
   }
 
@@ -70,9 +72,10 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */ 
   
-   /**
+  
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-     m_autoCommand; 
-  } */
+     return m_autoCommand;
+     
+  } 
 }
