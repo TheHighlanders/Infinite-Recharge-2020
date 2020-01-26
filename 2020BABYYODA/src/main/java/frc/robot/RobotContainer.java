@@ -49,7 +49,7 @@ public class RobotContainer {
 
     DriverStation.reportWarning("Initialized",false);
     m_autoCommand = new SetDrivePowerAuto(m_robotDrive);
-
+  
   }
 
   /**

@@ -25,4 +25,7 @@ public final class Constants {
     
     public static final int INTAKE = 13;
 
+    public static final int INTAKE_AUTO = 1;
+    
+
 }
