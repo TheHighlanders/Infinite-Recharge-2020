@@ -16,6 +16,7 @@ import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
+
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -29,6 +30,7 @@ public class RobotContainer {
   private final OI m_OI = new OI();
   private final Shooting m_Shooting = new Shooting();
   private Command m_autoCommand;
+  private final climber1 m_Climber1 = new climber1();
 
   
   
@@ -61,7 +63,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(m_OI.xbox, 1).whenPressed(()->m_Shooting.ShootingLaunch());
     new JoystickButton(m_OI.xbox, 1).whenReleased(()->m_Shooting.ShootingStop());
-
+    new JoystickButton(m_OI.xbox, 2).whenReleased(()->m_Climber1.Up());
 
   }
 

@@ -53,7 +53,7 @@ public class OI {
 	}
 
     public double getXboxRightY() {
-		return xbox.getY(GenericHID.Hand.kRight);
+		return xbox.getY(GenericHID.Hand.kRight) - 0.1;//try this later
 
     }
 

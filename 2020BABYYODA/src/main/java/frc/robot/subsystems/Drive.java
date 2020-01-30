@@ -18,30 +18,40 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class Drive extends SubsystemBase {
 
-  public WPI_TalonSRX left;
-  public WPI_TalonSRX right;
+  public WPI_TalonSRX left_1;
+  public WPI_TalonSRX left_2;
+  public WPI_TalonSRX right_1;
+  public WPI_TalonSRX right_2;
 
   private double ramp = 0.2;
   public OI xbox_io;
 
   public Drive() {
-    left = new WPI_TalonSRX(Constants.LEFT_WHEELS);
-    right = new WPI_TalonSRX(Constants.RIGHT_WHEELS);
+    left_1 = new WPI_TalonSRX(Constants.LEFT_WHEELS_1);
+    left_2 = new WPI_TalonSRX(Constants.LEFT_WHEELS_2);
+    right_1 = new WPI_TalonSRX(Constants.RIGHT_WHEELS_1);
+    right_2 = new WPI_TalonSRX(Constants.RIGHT_WHEELS_2);
 
-    left.configOpenloopRamp(ramp,0);
-    right.configOpenloopRamp(ramp,0);
+    left_1.configOpenloopRamp(ramp,0);
+    left_2.configOpenloopRamp(ramp,0);
+    right_1.configOpenloopRamp(ramp,0);
+    right_2.configOpenloopRamp(ramp,0);
      
-    left.setNeutralMode(NeutralMode.Coast);
-    right.setNeutralMode(NeutralMode.Coast);
+    left_1.setNeutralMode(NeutralMode.Coast);
+    left_2.setNeutralMode(NeutralMode.Coast);
+    right_1.setNeutralMode(NeutralMode.Coast);
+    right_2.setNeutralMode(NeutralMode.Coast);
 
     xbox_io = new OI();
 
 
   }
   public void drivePower(double left_power, double right_power){
-    left.set(left_power);
-    right.set(right_power);
+    left_1.set(left_power);
+    left_2.set(left_power);
 
+    right_1.set(right_power);
+    right_2.set(right_power);
     // DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
 
 
