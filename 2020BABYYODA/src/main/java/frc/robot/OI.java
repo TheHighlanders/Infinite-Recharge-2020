@@ -9,7 +9,7 @@ package frc.robot;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID;
-
+import edu.wpi.first.wpilibj.Joystick;
 
 /** import edu.wpi.first.hal.sim.mockdata.DriverStationDataJNI; import edu.wpi.first.wpilibj.Joystick;*/
 
@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 public class OI {
 
     public XboxController xbox = new XboxController(Constants.XBOX_PORT);
+    public Joystick Control1 = new Joystick(Constants.CONTROL1_PORT);    
+    public Joystick Control2 = new Joystick(Constants.CONTROL2_PORT);
 
     /** Contructer */
 

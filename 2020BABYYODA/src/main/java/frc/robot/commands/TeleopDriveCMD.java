@@ -5,27 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
-import frc.robot.Robot;
-import frc.robot.OI;
-import frc.robot.subsystems.Intake;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IntakeCommand extends CommandBase {
+/** This Command will transfer the data needed to drive during teleop. */
+
+
+package frc.robot.commands;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Drive;
+import edu.wpi.first.wpilibj.DriverStation;
+import frc.robot.OI;
+
+public class TeleopDriveCMD extends CommandBase {
   /**
-   * Creates a new IntakeCommand.
+   * m_LeftYJoy and m_RightYJoy ranges from -1 to 1
    */
 
-  private final Intake m_Intake;
+  private final Drive m_Drive;
   private final OI m_OI;
 
-  
-  public IntakeCommand(Intake intake_subsystem, OI xbox_io) {
 
-    m_Intake = intake_subsystem;
-    m_OI = xbox_io;
+  public TeleopDriveCMD(Drive drive_subsystem, OI xbox_oi) {
 
-    addRequirements(m_Intake);
+    m_Drive = drive_subsystem;
+    m_OI = xbox_oi;
+
+    addRequirements(m_Drive);
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -38,7 +43,11 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Intake.IntakeMaxSpeed();
+
+    m_Drive.drivePower(-Math.pow(this.m_OI.getXboxLeftY(), 3)/1.25, Math.pow(this.m_OI.getXboxRightY(), 3)/1.25);
+    // DriverStation.reportWarning("Left Y:" + " " + m_OI.getXboxLeftY() + "and Right Y: " + m_OI.getXboxRightY() , false);
+
+
   }
 
   // Called once the command ends or is interrupted.

@@ -10,12 +10,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drive;
 
-public class SetDrivePowerAuto extends CommandBase {
+public class DrivePowerAUTO extends CommandBase {
   private final Drive m_drive;
   /**
    * Creates a new SetDrivePowerAuto.
    */
-  public SetDrivePowerAuto(Drive drive_subsystem) {
+  public DrivePowerAUTO(Drive drive_subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_drive = drive_subsystem;
     addRequirements(m_drive);

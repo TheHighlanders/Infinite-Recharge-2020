@@ -11,12 +11,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.OI;
-import frc.robot.commands.ShootingCommand;
 import edu.wpi.first.hal.sim.DriverStationSim;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.SpeedController;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Conveyor;;
 
 public class Shooting extends SubsystemBase {
   /**
@@ -25,7 +22,7 @@ public class Shooting extends SubsystemBase {
     private WPI_TalonSRX shootingMotor = new WPI_TalonSRX(Constants.SHOOTER);
     private double ramp = 0.2;
     public OI shooting_io;
-    private final Intake m_Intake = new Intake();
+    private final Conveyor m_Conveyor = new Conveyor();
 
 
   public Shooting() {
@@ -39,7 +36,7 @@ public class Shooting extends SubsystemBase {
   public void ShootingLaunch(){
     shootingMotor.set(1);
     DriverStation.reportWarning("Bombs Away!" , false);
-    m_Intake.IntakeMaxSpeed();
+    m_Conveyor.ConveyorMaxIN();
   }
 
   public void ShootingStop(){
