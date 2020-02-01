@@ -8,21 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeArm;
-
-public class IntakeArmMoveUp extends CommandBase {
-  public final IntakeArm m_IntakeArmUp;
-   
-  
+import frc.robot.subsystems.Hanger;
+public class HangerUpCMD extends CommandBase {
   /**
-   * Creates a new IntakeAutoMoveUp.
+   * Creates a new HangerUpCMD.
    */
-
-  public IntakeArmMoveUp(IntakeArm IntakeAuto_subsytem) {
+  private final Hanger m_Hanger;
+  public HangerUpCMD(Hanger hanger_subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_IntakeArmUp = IntakeAuto_subsytem;
-    addRequirements(m_IntakeArmUp);
-
+    m_Hanger = hanger_subsystem;
+    addRequirements(hanger_subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -33,8 +28,7 @@ public class IntakeArmMoveUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_IntakeArmUp.ArmUp();
-
+    m_Hanger.HangerUp();
   }
 
   // Called once the command ends or is interrupted.

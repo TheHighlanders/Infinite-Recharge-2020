@@ -17,6 +17,8 @@ package frc.robot;
  */
 public final class Constants {
     public static final int XBOX_PORT = 0;
+    public static final int CONTROL1_PORT = 2;
+    public static final int CONTROL2_PORT = 3;
     
     public static final int LEFT_WHEELS_1 = 6;
     public static final int LEFT_WHEELS_2 = 3;
@@ -25,11 +27,15 @@ public final class Constants {
 
     public static final int SHOOTER = 3;
     
+    public static final int HANGER1 = 17;
+
     public static final int INTAKE = 13;
 
     public static final int CLIMBER1MOTOR = 17;//change laters
 
     public static final int INTAKE_AUTO = 1;
+
+    public static final int INTAKE_BRUSH = 14;
     
 
 }

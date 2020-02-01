@@ -6,28 +6,19 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import frc.robot.Robot;
-import frc.robot.OI;
-import frc.robot.subsystems.Intake;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Hanger;
 
-public class IntakeCommand extends CommandBase {
+public class HangerDownCMD extends CommandBase {
   /**
-   * Creates a new IntakeCommand.
+   * Creates a new HangerDownCMD.
    */
-
-  private final Intake m_Intake;
-  private final OI m_OI;
-
-  
-  public IntakeCommand(Intake intake_subsystem, OI xbox_io) {
-
-    m_Intake = intake_subsystem;
-    m_OI = xbox_io;
-
-    addRequirements(m_Intake);
-
+  private final Hanger m_Hanger;
+  public HangerDownCMD(Hanger hanger_subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_Hanger = hanger_subsystem;
+    addRequirements(m_Hanger);
   }
 
   // Called when the command is initially scheduled.
@@ -38,7 +29,7 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Intake.IntakeMaxSpeed();
+    m_Hanger.HangerDown();
   }
 
   // Called once the command ends or is interrupted.

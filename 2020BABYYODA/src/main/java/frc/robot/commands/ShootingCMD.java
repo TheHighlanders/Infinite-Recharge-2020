@@ -8,18 +8,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeArm;
+import frc.robot.subsystems.Shooting;
+import frc.robot.Robot;
 
-public class IntakeArmMoveDown extends CommandBase {
-  public final IntakeArm m_IntakeArmDown; 
 
+public class ShootingCMD extends CommandBase {
   /**
-   * Creates a new IntakeAutoDown.
+   * Creates a new ShootingCommand.
    */
-  public IntakeArmMoveDown(IntakeArm IntakeAuto_subsytem) {
+  private final Shooting m_Shooting;
+
+
+  public ShootingCMD(Shooting shooting_subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_IntakeArmDown= IntakeAuto_subsytem;
-    addRequirements(m_IntakeArmDown);
+    m_Shooting = shooting_subsystem;
+    addRequirements(m_Shooting);
   }
 
   // Called when the command is initially scheduled.
@@ -30,7 +33,7 @@ public class IntakeArmMoveDown extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_IntakeArmDown.ArmDown();
+    m_Shooting.ShootingLaunch();
   }
 
   // Called once the command ends or is interrupted.

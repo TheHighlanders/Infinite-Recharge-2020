@@ -25,13 +25,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  private final OI m_OI = new OI();
 
   private final Drive m_robotDrive = new Drive();
-  private final OI m_OI = new OI();
   private final Shooting m_Shooting = new Shooting();
+  private final IntakeArm m_IntakeArm = new IntakeArm();
+  private final IntakeBrush m_IntakeBrush = new IntakeBrush();
   private Command m_autoCommand;
-  private final climber1 m_Climber1 = new climber1();
-
   
   
   /** private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -47,10 +47,10 @@ public class RobotContainer {
     // Configure the button bindings
    configureButtonBindings();
     
-    m_robotDrive.setDefaultCommand(new TeleopDriveCommand(m_robotDrive, m_OI));
+    m_robotDrive.setDefaultCommand(new TeleopDriveCMD(m_robotDrive, m_OI));
 
     DriverStation.reportWarning("Initialized",false);
-    m_autoCommand = new SetDrivePowerAuto(m_robotDrive);
+    m_autoCommand = new DrivePowerAUTO(m_robotDrive);
   
   }
 
@@ -61,9 +61,31 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(m_OI.xbox, 1).whenPressed(()->m_Shooting.ShootingLaunch());
-    new JoystickButton(m_OI.xbox, 1).whenReleased(()->m_Shooting.ShootingStop());
-    new JoystickButton(m_OI.xbox, 2).whenReleased(()->m_Climber1.Up());
+
+    JoystickButton ctrlINTAKE_UP = new JoystickButton(m_OI.Control1, 5);
+    JoystickButton ctrlINTAKE_DOWN = new JoystickButton(m_OI.Control1,2);
+
+    JoystickButton ctrlINTAKER_OUT = new JoystickButton(m_OI.Control2, 5);
+    JoystickButton ctrlINTAKER_IN = new JoystickButton(m_OI.Control2, 4);
+    
+    JoystickButton ctrlLEFT_UP = new JoystickButton(m_OI.Control1, 4);
+    JoystickButton ctrlLEFT_DOWN = new JoystickButton(m_OI.Control1, 7);
+
+    JoystickButton ctrlRIGHT_UP = new JoystickButton(m_OI.Control1, 2);
+    JoystickButton ctrlRIGHT_DOWN = new JoystickButton(m_OI.Control1, 1);
+
+    JoystickButton ctrlCONVEYOR_OUT = new JoystickButton(m_OI.Control2, 3);
+    JoystickButton ctrlCONVEYOR_IN = new JoystickButton(m_OI.Control2, 2);
+
+    JoystickButton xboxA = new JoystickButton(m_OI.xbox,1);
+
+    xboxA.whileHeld(new ShootingCMD(m_Shooting));
+
+    ctrlINTAKE_UP.whenPressed(new IntakeArmUpCMD(m_IntakeArm));
+    ctrlINTAKE_DOWN.whenPressed(new IntakeArmDownCMD(m_IntakeArm));
+
+    // ctrlINTAKER_OUT.toggleWhenPressed();
+    
 
   }
 

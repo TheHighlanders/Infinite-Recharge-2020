@@ -11,33 +11,35 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.OI;
-import frc.robot.commands.ShootingCommand;
+import frc.robot.commands.ShootingCMD;
 import edu.wpi.first.hal.sim.DriverStationSim;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DriverStation;
 
-public class Intake extends SubsystemBase {
+public class Conveyor extends SubsystemBase {
   /**
    * Creates a new Intake.
    */
 
-  private WPI_TalonSRX intakeMotor = new WPI_TalonSRX(Constants.INTAKE);
+  private WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(Constants.INTAKE);
   private double ramp = 0.2;
   public OI intake_io;
 
   
-  public Intake() {
+  public Conveyor() {
 
-    intakeMotor.configOpenloopRamp(ramp,0);
-    intakeMotor.setNeutralMode(NeutralMode.Brake);
+    conveyorMotor.configOpenloopRamp(ramp,0);
+    conveyorMotor.setNeutralMode(NeutralMode.Brake);
 
     intake_io = new OI();
 
   }
 
-  public void IntakeMaxSpeed() {
-    intakeMotor.set(1);
-    DriverStation.reportWarning("Ready to Fire!" , false);
+  public void ConveyorMaxIN() {
+    conveyorMotor.set(1);
+  }
+
+  public void ConveyorMaxOUT() {
+    conveyorMotor.set(-1);
   }
 
   @Override

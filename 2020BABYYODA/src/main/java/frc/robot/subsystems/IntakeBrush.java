@@ -6,31 +6,30 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DriverStation;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public class IntakeArm extends SubsystemBase {
+public class IntakeBrush extends SubsystemBase {
   /**
-   * Creates a new IntakeAuto.
+   * Creates a new IntakeBrush.
    */
-  private WPI_TalonSRX intakeArm = new WPI_TalonSRX(Constants.INTAKE_AUTO);
-
-
-  public IntakeArm() {
-
-  }
-  public void ArmDown() {
-    intakeArm.set(1);
-    DriverStation.reportWarning("Arm down" , false);
+    public WPI_TalonSRX brush = new WPI_TalonSRX(Constants.INTAKE_BRUSH);
+    private double ramp = 0.2;
+  public IntakeBrush() {
+    brush.configOpenloopRamp(ramp,0);
+    brush.setNeutralMode(NeutralMode.Brake);
 
   }
-  
-  public void ArmUp() {
-    intakeArm.set(1);
-    DriverStation.reportWarning("Arm up" , false);
 
+  public void IntakeBrushIN(){
+    brush.set(1);
+  }
+
+  public void IntakeBrushOUT(){
+    brush.set(-1);
   }
 
   @Override
