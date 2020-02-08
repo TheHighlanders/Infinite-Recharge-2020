@@ -13,7 +13,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.OI;
 import edu.wpi.first.hal.sim.DriverStationSim;
 import edu.wpi.first.wpilibj.DriverStation;
-import frc.robot.subsystems.Conveyor;;
+import frc.robot.subsystems.Conveyor;
 
 public class Shooting extends SubsystemBase {
   /**
