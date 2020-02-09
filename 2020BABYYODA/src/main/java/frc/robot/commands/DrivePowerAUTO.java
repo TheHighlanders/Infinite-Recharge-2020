@@ -12,13 +12,21 @@ import frc.robot.subsystems.Drive;
 
 public class DrivePowerAUTO extends CommandBase {
   private final Drive m_drive;
+  private int milliSeconds;
+  private long startTime;
+  private boolean running;
+  private boolean complete;
   /**
    * Creates a new SetDrivePowerAuto.
    */
-  public DrivePowerAUTO(Drive drive_subsystem) {
+  public DrivePowerAUTO(Drive drive_subsystem, int milliSeconds) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_drive = drive_subsystem;
     addRequirements(m_drive);
+
+    this.running = false;
+    this.milliSeconds = milliSeconds;
+    this.complete = false;
   }
 
   // Called when the command is initially scheduled.
@@ -29,7 +37,20 @@ public class DrivePowerAUTO extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  m_drive.drivePower(0.1 ,0.1);
+    m_drive.drivePower(0.1 ,0.1);
+    if(!running)
+    {
+      this.running = true;
+      this.startTime = System.currentTimeMillis();
+    }
+    if(running)
+    {
+      long elapsed = System.currentTimeMillis() - this.startTime;
+      if(elapsed > this.milliSeconds)
+      {
+        this.complete = true;
+      }
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +61,6 @@ public class DrivePowerAUTO extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return this.complete;
   }
 }
