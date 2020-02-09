@@ -61,27 +61,32 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    JoystickButton ctrlINTAKE_UP = new JoystickButton(m_OI.Control1, 5);
-    JoystickButton ctrlINTAKE_DOWN = new JoystickButton(m_OI.Control1,2);
+    // JoystickButton ctrlINTAKE_UP = new JoystickButton(m_OI.Control1, 5);
+    // JoystickButton ctrlINTAKE_DOWN = new JoystickButton(m_OI.Control1,2);
 
-    JoystickButton ctrlINTAKER_OUT = new JoystickButton(m_OI.Control2, 5);
-    JoystickButton ctrlINTAKER_IN = new JoystickButton(m_OI.Control2, 4);
+    // JoystickButton ctrlINTAKER_OUT = new JoystickButton(m_OI.Control2, 5);
+    // JoystickButton ctrlINTAKER_IN = new JoystickButton(m_OI.Control2, 4);
     
-    JoystickButton ctrlLEFT_UP = new JoystickButton(m_OI.Control1, 4);
-    JoystickButton ctrlLEFT_DOWN = new JoystickButton(m_OI.Control1, 7);
+    // JoystickButton ctrlLEFT_UP = new JoystickButton(m_OI.Control1, 4);
+    // JoystickButton ctrlLEFT_DOWN = new JoystickButton(m_OI.Control1, 7);
 
-    JoystickButton ctrlRIGHT_UP = new JoystickButton(m_OI.Control1, 2);
-    JoystickButton ctrlRIGHT_DOWN = new JoystickButton(m_OI.Control1, 1);
+    // JoystickButton ctrlRIGHT_UP = new JoystickButton(m_OI.Control1, 2);
+    // JoystickButton ctrlRIGHT_DOWN = new JoystickButton(m_OI.Control1, 1);
 
-    JoystickButton ctrlCONVEYOR_OUT = new JoystickButton(m_OI.Control2, 3);
-    JoystickButton ctrlCONVEYOR_IN = new JoystickButton(m_OI.Control2, 2);
+    // JoystickButton ctrlCONVEYOR_OUT = new JoystickButton(m_OI.Control2, 3);
+    // JoystickButton ctrlCONVEYOR_IN = new JoystickButton(m_OI.Control2, 2);
 
     JoystickButton xboxA = new JoystickButton(m_OI.xbox,1);
+    JoystickButton xboxB = new JoystickButton(m_OI.xbox,2);
+    JoystickButton xboxC = new JoystickButton(m_OI.xbox,3);
 
     xboxA.whileHeld(new ShootingCMD(m_Shooting));
+    xboxB.whenPressed(new IncrementShootingSpeed(m_Shooting));
+    xboxC.whenPressed(new DecrementShootingSpeed(m_Shooting));
+    xboxA.whenReleased(new ShootingEndCMD(m_Shooting));
 
-    ctrlINTAKE_UP.whenPressed(new IntakeArmUpCMD(m_IntakeArm));
-    ctrlINTAKE_DOWN.whenPressed(new IntakeArmDownCMD(m_IntakeArm));
+    // ctrlINTAKE_UP.whenPressed(new IntakeArmUpCMD(m_IntakeArm));
+    // ctrlINTAKE_DOWN.whenPressed(new IntakeArmDownCMD(m_IntakeArm));
 
     // ctrlINTAKER_OUT.toggleWhenPressed();
     
