@@ -31,6 +31,8 @@ public final class Constants {
 
     public static final int INTAKE = 13;
 
+    public static final int CLIMBER1MOTOR = 17;//change laters
+
     public static final int INTAKE_AUTO = 1;
 
     public static final int INTAKE_BRUSH = 14;
