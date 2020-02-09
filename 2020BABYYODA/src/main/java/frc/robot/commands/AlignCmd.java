@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.Drive;
+import frc.robot.Constants;
 
 public class AlignCmd extends CommandBase {
     private final Drive m_drive;
@@ -45,26 +46,22 @@ public class AlignCmd extends CommandBase {
   */
   public double currentAngleOffset;
 
-  /*
-    GRIP stuff
-    Assuming it is 
-    - angle1 which should be 120
-    - angle2 which should also be 120
-    
-  */
-  NetworkTableEntry angle1;
-  NetworkTableEntry angle2;
+  NetworkTableEntry goalCenterX;
+  NetworkTableEntry goalCenterY;
+  double goalCenterX_b;
+  double goalCenterY_b;
+
 
   public AlignCmd(Drive drive_subsystem) {
     //getting Drive Train classes
     m_drive = drive_subsystem;
     addRequirements(m_drive);
-    //some NetworkTable stuff 
+
     NetworkTableInstance ntInst = NetworkTableInstance.getDefault();
     NetworkTable visionTable = ntInst.getTable("visionTable");
-    //I'm assuming this is getting the vaules 
-    angle1 = visionTable.getEntry("angle1");
-    angle2 = visionTable.getEntry("angle2");
+    goalCenterX = visionTable.getEntry("goalCenterX");
+    goalCenterY = visionTable.getEntry("goalCenterY");
+
   }
 
   // Called when the command is initially scheduled.
@@ -75,53 +72,40 @@ public class AlignCmd extends CommandBase {
       10000 is the default value
       so that makes sense
     */
-    double angle1_b = angle1.getDouble(1000);
-    double angle2_b = angle2.getDouble(1000);
-    //Getting the amount of which we want to turn the robot
-    //Will get changed
-    rotationToTargetAmount = (angle1_b + angle2_b) / 2;
-    //resetting the gryo so we can have fun with turning
-    Robot.driving.resetGyro();
-    /*
-      How far we have to turn is being figured out here
-      We do this by:
-        Where we want to be (rotationToTargetAmount) - where the robot is currently at (gyro)
-    */
-    currentAngleOffset = rotationToTargetAmount - Robot.m_drive.getGyroAngle();
+    goalCenterX_b = goalCenterX.getDouble(1000);
+    goalCenterY_b = goalCenterY.getDouble(1000);
   }
-
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //we didn't find it!!!
+    //we didn't find it
     if(didWeFindIt != true){
         //run this again
         initialize();
     }
-    //how much we gotta turn = how far we wanna turn - where the robot is 
-    currentAngleOffset = rotationToTargetAmount - Robot.driving.getGyroAngle();
-      //once we figure out currentAngleOffset
+      //once we figure out currentAngleOffset/
       //math time: if the answer is greater than or less than the "okay" angle
-      if(currentAngleOffset >= maxTurnSpeed){
+      if(goalCenterX_b >= maxTurnSpeed){
           //spin to the left at half speed
           Robot.driving.drivePower(0.50,-0.50);
       }
 
       //if the answer is greater than or equal to the answer, 
-      else if (currentAngleOffset <= maxTurnSpeed) {
+      else if (goalCenterX_b <= maxTurnSpeed) {
         //spin to the right at half speed
         Robot.driving.drivePower(-0.50,0.50);
       }
-    //if we found it!! 
+    //if we found it
     else{
-      //if the angle that we have to turn at is less than zero
-      //then turn to the left
-      if(currentAngleOffset < 0){
+      if(goalCenterX_b < Constants.GOAL_RIGHT_BOUND & goalCenterX_b > Constants.GOAL_RIGHT_BOUND){
+        DriverStation.reportWarning("It is aligned", false);
+      }
+      //x is greater than A then turn to the left
+      else if(goalCenterX_b < Constants.GOAL_LEFT_BOUND){
         Robot.driving.drivePower(-0.15, 0.15);
       }
-      //if the angle that we have to turn at is greater than zero
-      //then turn to the right
-      else if(currentAngleOffset > 0){
+      //x is less than B then turn to the right
+      else if(goalCenterX_b > Constants.GOAL_RIGHT_BOUND){
         Robot.driving.drivePower(0.15, -0.15);
       }
     }      
@@ -131,8 +115,6 @@ public class AlignCmd extends CommandBase {
   //we done 
   @Override
   public void end(boolean interrupted) {
-    DriverStation.reportWarning("We're done!", false);
-    DriverStation.reportWarning("currentAngleOffset" + currentAngleOffset, false);
     
   }
 

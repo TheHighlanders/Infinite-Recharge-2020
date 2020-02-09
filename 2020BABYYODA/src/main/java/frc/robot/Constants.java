@@ -37,5 +37,10 @@ public final class Constants {
 
     public static final int INTAKE_BRUSH = 14;
     
+    //the range that the goal has to be in so we can shoot
+    public static final int GOAL_LEFT_BOUND = 62;//a
+
+    public static final int GOAL_RIGHT_BOUND = 1;//b
+    
 
 }
