@@ -17,18 +17,21 @@ public class IntakeArm extends SubsystemBase {
    */
   private WPI_TalonSRX intakeArm = new WPI_TalonSRX(Constants.INTAKE_AUTO);
 
-
   public IntakeArm() {
 
   }
   public void ArmDown() {
     intakeArm.set(1);
+    double armCurrent = intakeArm.getStatorCurrent();
+    DriverStation.reportWarning("Arm Current: " + armCurrent, false);
     DriverStation.reportWarning("Arm down" , false);
 
   }
   
   public void ArmUp() {
-    intakeArm.set(1);
+    intakeArm.set(-1);
+    double armCurrent = intakeArm.getStatorCurrent();
+    DriverStation.reportWarning("Arm Current: " + armCurrent, false);
     DriverStation.reportWarning("Arm up" , false);
 
   }
@@ -36,5 +39,8 @@ public class IntakeArm extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // double armCurrent = intakeArm.getStatorCurrent();
+    // DriverStation.reportWarning("Arm Current: " + armCurrent, false);
+
   }
 }
