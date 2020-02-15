@@ -8,29 +8,38 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import grip.JavaGripPipeline;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry; 
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
+
 import java.util.*;
+
 public class Vision extends SubsystemBase {
   /**
    * Creates a new Vision.
    */
-  
-  NetworkTableEntry x1; NetworkTableEntry y1;
-  NetworkTableEntry x2; NetworkTableEntry y2;
-  NetworkTableEntry length;
-
-  List x1i; List y1i;
-  List x2i; List y2i;
-  List lengthi;
+  NetworkTableEntry Distance;
+  NetworkTableInstance inst = NetworkTableInstance.getDefault();
+  NetworkTable table;
+  private boolean TargetAligned = false;
+  double xt = 0;
   
   public Vision() {
+    DriverStation.reportWarning("Vision Ran" , false);
+    table = inst.getTable("datatableeo"); 
+    Distance = table.getEntry("Distance");
+
   }
+  
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    Distance.setDouble(xt);
+    xt += 0.1;
   }
 }

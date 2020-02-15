@@ -31,7 +31,7 @@ public class RobotContainer {
   private final IntakeArm m_IntakeArm = new IntakeArm();
   private final IntakeBrush m_IntakeBrush = new IntakeBrush();
   private Command m_autoCommand;
-  
+  private final Vision m_Vision = new Vision(); 
   
   /** private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
