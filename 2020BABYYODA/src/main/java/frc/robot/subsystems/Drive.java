@@ -9,11 +9,6 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.OI;
-<<<<<<< HEAD
-import frc.robot.Robot;
-=======
-
->>>>>>> Vision
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
