@@ -107,8 +107,6 @@ public class Drive extends SubsystemBase {
     left1.getSensorCollection().setPulseWidthPosition(pulses, 0);
     right1.getSensorCollection().setPulseWidthPosition(pulses, 0);
 
-    DriverStation.reportWarning("Right Drive Encoder:" + Robot.driving.left1.getSensorCollection().getPulseWidthPosition(), false);
-    DriverStation.reportWarning("Right Drive Encoder:" + Robot.driving.right1.getSensorCollection().getPulseWidthPosition(), false);
   }
 
       
