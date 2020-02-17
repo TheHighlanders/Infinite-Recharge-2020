@@ -14,14 +14,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 public class Drive extends SubsystemBase {
 
   public WPI_TalonSRX left1;
-  public WPI_TalonSRX left2;
+  public WPI_VictorSPX left2;
   public WPI_TalonSRX right1;
-  public WPI_TalonSRX right2;
+  public WPI_VictorSPX right2;
 
   private double ramp = 0.2;
   public OI xbox_io;
@@ -30,9 +32,9 @@ public class Drive extends SubsystemBase {
 
   public Drive() {
     left1 = new WPI_TalonSRX(Constants.LEFT_WHEELS_1);
-    left2 = new WPI_TalonSRX(10);
+    left2 = new WPI_VictorSPX(Constants.LEFT_WHEELS_2);
     right1 = new WPI_TalonSRX(Constants.RIGHT_WHEELS_1);
-    right2 = new WPI_TalonSRX(Constants.RIGHT_WHEELS_2);
+    right2 = new WPI_VictorSPX(Constants.RIGHT_WHEELS_2);
 
     left1.configOpenloopRamp(ramp,0);
     left2.configOpenloopRamp(ramp,0);

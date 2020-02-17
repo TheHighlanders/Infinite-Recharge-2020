@@ -8,45 +8,42 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooting;
-import frc.robot.Robot;
-import frc.robot.OI;
+import frc.robot.subsystems.IntakeBrush;
 
-
-public class IncrementShootingSpeed extends CommandBase {
+public class IntakeStopCMD extends CommandBase {
+  private final IntakeBrush m_IntakeBrush;
   /**
-   * Creates a new ShootingCommand.
+   * Creates a new IntakeStopCMD.
    */
-  private final Shooting m_Shooting;
-
-
-  public IncrementShootingSpeed(Shooting shooting_subsystem) {
-    m_Shooting = shooting_subsystem;
-    addRequirements(m_Shooting);
-    
+  public IntakeStopCMD(IntakeBrush IntakeIn_Sub) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    m_IntakeBrush = IntakeIn_Sub;
+    addRequirements(m_IntakeBrush);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Shooting.incrementShootSpeed();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    m_IntakeBrush.IntakeStop();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
+    m_IntakeBrush.IntakeStop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
+
+public static void whenReleased(IntakeStopCMD intakeStopCMD) {
+}
 }

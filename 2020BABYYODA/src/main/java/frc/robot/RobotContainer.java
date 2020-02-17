@@ -77,6 +77,35 @@ public class RobotContainer {
     // JoystickButton ctrlCONVEYOR_OUT = new JoystickButton(m_OI.Control2, 3);
     // JoystickButton ctrlCONVEYOR_IN = new JoystickButton(m_OI.Control2, 2);
 
+    /*
+      Drive #2 controllers
+      Moving the Intake Arm up and down
+      //up down up down balance is Board 3
+    */
+    //NEEDS
+    //TO
+    //BE
+    //TESTED
+    JoystickButton ArmUp = new JoystickButton(m_OI.Control3,6);
+    JoystickButton ArmDown = new JoystickButton(m_OI.Control3,5);
+    ArmUp.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
+    ArmDown.whileHeld(new IntakeArmDownCMD(m_IntakeArm));
+    
+    /*
+       Drive #2 controllers
+      Intake in and out
+    */
+    JoystickButton IntakeIn = new JoystickButton(m_OI.Control3, 4);
+    JoystickButton IntakeOUT = new JoystickButton(m_OI.Control3, 5);
+    IntakeIn.whileHeld(new IntakeInCMD(m_IntakeBrush));
+    IntakeOUT.whileHeld(new IntakeOutCmd(m_IntakeBrush));
+    IntakeStopCMD.whenReleased(new IntakeStopCMD(m_IntakeBrush));
+  
+
+    /*
+      Drive #1 controll
+    */
+
     JoystickButton xboxA = new JoystickButton(m_OI.xbox,1);
     JoystickButton xboxB = new JoystickButton(m_OI.xbox,2);
     JoystickButton xboxC = new JoystickButton(m_OI.xbox,3);
