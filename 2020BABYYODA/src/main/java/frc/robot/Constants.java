@@ -26,16 +26,16 @@ public final class Constants {
     public static final int RIGHT_WHEELS_2 = 12;
 
     public static final int SHOOTER = 3;
-    
-    public static final int HANGER1 = 17;
+
+    public static final int INTAKE_ARM = 6;
+
+    public static final int INTAKE = 31;
 
     public static final int CONVEYOR = 13;
 
-    public static final int CLIMBER1MOTOR = 17;//change laters
+    public static final int CLIMBER1MOTOR = 17;//CHANGE LATER
 
-    public static final int INTAKE_AUTO = 1;
-
-    public static final int INTAKE = 31;
+    public static final int HOOK = 17;
     
 
 }

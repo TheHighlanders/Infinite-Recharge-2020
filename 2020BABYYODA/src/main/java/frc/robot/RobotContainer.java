@@ -31,6 +31,7 @@ public class RobotContainer {
   private final Shooting m_Shooting = new Shooting();
   private final IntakeArm m_IntakeArm = new IntakeArm();
   private final IntakeBrush m_IntakeBrush = new IntakeBrush();
+  private final Conveyor m_Conveyor = new Conveyor();
   private Command m_autoCommand;
   private final Vision m_Vision = new Vision(); 
   
@@ -62,46 +63,42 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    // JoystickButton ctrlINTAKE_UP = new JoystickButton(m_OI.Control1, 5);
-    // JoystickButton ctrlINTAKE_DOWN = new JoystickButton(m_OI.Control1,2);
-
-    // JoystickButton ctrlINTAKER_OUT = new JoystickButton(m_OI.Control2, 5);
-    // JoystickButton ctrlINTAKER_IN = new JoystickButton(m_OI.Control2, 4);
-    
-    // JoystickButton ctrlLEFT_UP = new JoystickButton(m_OI.Control1, 4);
-    // JoystickButton ctrlLEFT_DOWN = new JoystickButton(m_OI.Control1, 7);
-
-    // JoystickButton ctrlRIGHT_UP = new JoystickButton(m_OI.Control1, 2);
-    // JoystickButton ctrlRIGHT_DOWN = new JoystickButton(m_OI.Control1, 1);
-
-    // JoystickButton ctrlCONVEYOR_OUT = new JoystickButton(m_OI.Control2, 3);
-    // JoystickButton ctrlCONVEYOR_IN = new JoystickButton(m_OI.Control2, 2);
 
     /*
       Drive #2 controllers
       Moving the Intake Arm up and down
-      //up down up down balance is Board 3
     */
-    //NEEDS
-    //TO
-    //BE
-    //TESTED
     JoystickButton ArmUp = new JoystickButton(m_OI.Control3,6);
     JoystickButton ArmDown = new JoystickButton(m_OI.Control3,5);
     ArmUp.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
     ArmDown.whileHeld(new IntakeArmDownCMD(m_IntakeArm));
     
     /*
-       Drive #2 controllers
+      Drive #2 controllers
       Intake in and out
     */
-    JoystickButton IntakeIn = new JoystickButton(m_OI.Control3, 4);
-    JoystickButton IntakeOUT = new JoystickButton(m_OI.Control3, 5);
+    JoystickButton IntakeIn = new JoystickButton(m_OI.Control2, 4);
+    JoystickButton IntakeOUT = new JoystickButton(m_OI.Control2, 5);
     IntakeIn.whileHeld(new IntakeInCMD(m_IntakeBrush));
     IntakeOUT.whileHeld(new IntakeOutCmd(m_IntakeBrush));
-    IntakeStopCMD.whenReleased(new IntakeStopCMD(m_IntakeBrush));
-  
+    
+    /*
+      Drive #2 controllers
+      Conveyor in and out
+    */
+    JoystickButton ConveyorIn = new JoystickButton(m_OI.Control2, 2);
+    JoystickButton ConveyorOut = new JoystickButton(m_OI.Control2, 3);
+    ConveyorIn.whileHeld(new ConveyorMaxInCMD(m_Conveyor));
+    ConveyorOut.whileHeld(new ConveyorMaxOutCMD(m_Conveyor));
 
+    /*
+      Drive #2 controlls
+      Shoot
+    */
+    JoystickButton Shoot = new JoystickButton(m_OI.Control2, 1);
+    Shoot.whileHeld(new ShootingCMD(m_Shooting));
+    
+    
     /*
       Drive #1 controll
     */
@@ -114,12 +111,6 @@ public class RobotContainer {
     xboxB.whenPressed(new IncrementShootingSpeed(m_Shooting));
     xboxC.whenPressed(new DecrementShootingSpeed(m_Shooting));
     xboxA.whenReleased(new ShootingEndCMD(m_Shooting));
-
-    // ctrlINTAKE_UP.whenPressed(new IntakeArmUpCMD(m_IntakeArm));
-    // ctrlINTAKE_DOWN.whenPressed(new IntakeArmDownCMD(m_IntakeArm));
-
-    // ctrlINTAKER_OUT.toggleWhenPressed();
-    
 
   }
 

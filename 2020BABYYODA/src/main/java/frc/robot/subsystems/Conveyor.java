@@ -7,20 +7,18 @@
 
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.OI;
-import frc.robot.commands.ShootingCMD;
-import edu.wpi.first.hal.sim.DriverStationSim;
-import edu.wpi.first.wpilibj.DriverStation;
 
 public class Conveyor extends SubsystemBase {
   /**
    * Creates a new Intake.
    */
 
-  private WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(Constants.INTAKE);
+  private WPI_VictorSPX conveyorMotor = new WPI_VictorSPX(Constants.CONVEYOR);
   private double ramp = 0.2;
   public OI intake_io;
 
@@ -35,13 +33,16 @@ public class Conveyor extends SubsystemBase {
   }
 
   public void ConveyorMaxIN() {
-    conveyorMotor.set(1);
-  }
-
-  public void ConveyorMaxOUT() {
     conveyorMotor.set(-1);
   }
 
+  public void ConveyorMaxOUT() {
+    conveyorMotor.set(1);
+  }
+  
+  public void ConveyorMaxSTOP(){
+    conveyorMotor.set(0);
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

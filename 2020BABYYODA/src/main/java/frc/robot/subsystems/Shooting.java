@@ -14,9 +14,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.OI;
-import edu.wpi.first.hal.sim.DriverStationSim;
 import edu.wpi.first.wpilibj.DriverStation;
-import frc.robot.subsystems.Conveyor;
 
 public class Shooting extends SubsystemBase {
   /**
@@ -47,8 +45,8 @@ public class Shooting extends SubsystemBase {
 
   public void ShootingLaunch(){
     
-    DriverStation.reportWarning("Bombs Away!" , false);
-    DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
+    //DriverStation.reportWarning("Bombs Away!" , false);
+    //DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
     // shootingMotor.set(ControlMode.PercentOutput, this.shootingSpeed/100);
     shootingMotor.set(ControlMode.Velocity, this.shootingSpeed * 10);
   }
@@ -60,7 +58,7 @@ public class Shooting extends SubsystemBase {
     {
       this.shootingSpeed = 1;
     }
-    DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
+    //DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
   }
 
   public void decrementShootSpeed()
@@ -70,12 +68,12 @@ public class Shooting extends SubsystemBase {
     {
       this.shootingSpeed = -1;
     }
-    DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
+    //DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
   }
 
   public void ShootingStop(){
     
-    DriverStation.reportWarning("Shooting has stopped", false);
+    //DriverStation.reportWarning("Shooting has stopped", false);
     shootingMotor.set(ControlMode.PercentOutput, 0);
   }
 
