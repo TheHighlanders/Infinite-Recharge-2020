@@ -32,19 +32,10 @@ public class AlignCmd extends CommandBase {
   public double maxTurnSpeed = 62;
 
   /*
-    How far we want to turn the robot from where we are
-  */
-  public double rotationToTargetAmount;
-
-  /*
     where we want the robot be - where the robot is
   */
   public double acceptedAngleOffset;
 
-  /*
-    rotationToTargetAmount - robot's current angle
-  */
-  public double currentAngleOffset;
 
   NetworkTableEntry goalCenterX;
   NetworkTableEntry goalCenterY;
@@ -99,6 +90,7 @@ public class AlignCmd extends CommandBase {
     else{
       if(goalCenterX_b < Constants.GOAL_RIGHT_BOUND & goalCenterX_b > Constants.GOAL_RIGHT_BOUND){
         DriverStation.reportWarning("It is aligned", false);
+        Robot.driving.drivePower(0,0);
       }
       //x is greater than A then turn to the left
       else if(goalCenterX_b < Constants.GOAL_LEFT_BOUND){
