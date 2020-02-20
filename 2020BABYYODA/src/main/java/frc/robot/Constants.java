@@ -36,6 +36,8 @@ public final class Constants {
     public static final int CLIMBER1MOTOR = 17;//CHANGE LATER
 
     public static final int HOOK = 17;
+
+    public static final double INCHES_PER_ROTATION = 6*Math.PI;
     
 
 }

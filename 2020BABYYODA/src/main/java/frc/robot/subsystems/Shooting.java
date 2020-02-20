@@ -27,6 +27,7 @@ public class Shooting extends SubsystemBase {
 
 
   public Shooting() {
+
     shootingMotor.configFactoryDefault();
     shootingMotor.setNeutralMode(NeutralMode.Brake);
     shootingMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 1000);
@@ -48,6 +49,7 @@ public class Shooting extends SubsystemBase {
     //DriverStation.reportWarning("Bombs Away!" , false);
     //DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
     // shootingMotor.set(ControlMode.PercentOutput, this.shootingSpeed/100);
+    
     shootingMotor.set(ControlMode.Velocity, this.shootingSpeed * 10);
   }
 
