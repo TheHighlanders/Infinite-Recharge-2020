@@ -24,23 +24,16 @@ public class OI {
 
     public OI() {
 
-    
-        /**	Fill in the Xbox Array
-         * 
-         *  for(int i = 1; i < xboxButton_array.length; i++) {
-			    xboxButton_array[i] = new JoystickButton(xbox, i);	
-		    }
-        */
-	
-
 
     }
-    /**   Xbox Joysticks */   
+    /*
+        Driver #1
+        Xbox control
+    */
 
     public boolean getXboxButtonA(){
         return xbox.getAButton();
     }
-
 
     public double getXboxLeftX() {
 		return xbox.getX(GenericHID.Hand.kLeft);
@@ -55,7 +48,7 @@ public class OI {
 	}
 
     public double getXboxRightY() {
-		return xbox.getY(GenericHID.Hand.kRight) - 0.1;//try this later
+		return xbox.getY(GenericHID.Hand.kRight);
 
     }
 
@@ -75,9 +68,6 @@ public class OI {
         xbox.setRumble(GenericHID.RumbleType.kRightRumble, power);
         }
     */
-
-
-
 
 
 

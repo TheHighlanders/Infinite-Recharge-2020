@@ -6,18 +6,19 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
+import frc.robot.subsystems.Conveyor;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Hanger;
-public class HangerUpCMD extends CommandBase {
+
+public class ConveyorInCMD extends CommandBase {
   /**
-   * Creates a new HangerUpCMD.
+   * Creates a new ConveyorCMD.
    */
-  private final Hanger m_Hanger;
-  public HangerUpCMD(Hanger hanger_subsystem) {
+  private final Conveyor m_Conveyor;
+
+  public ConveyorInCMD(Conveyor conveyor_subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_Hanger = hanger_subsystem;
-    addRequirements(hanger_subsystem);
+    m_Conveyor = conveyor_subsystem;
+    addRequirements(m_Conveyor);
   }
 
   // Called when the command is initially scheduled.
@@ -28,12 +29,13 @@ public class HangerUpCMD extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Hanger.HangerUp();
+   m_Conveyor.ConveyorIN();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_Conveyor.ConveyorSTOP();
   }
 
   // Returns true when the command should end.

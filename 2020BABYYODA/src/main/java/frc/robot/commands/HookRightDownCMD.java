@@ -6,19 +6,19 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import frc.robot.subsystems.Conveyor;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.subsystems.Hook;
+import edu.wpi.first.wpilibj.DigitalInput;
 
-public class ConveyorMaxOutCMD extends CommandBase {
-  /**
-   * Creates a new ConveyorMaxOutCMD.
-   */
-  private final Conveyor m_Conveyor;
+public class HookRightDownCMD extends CommandBase {
+  private final Hook m_Hook;
+  DigitalInput limitSwitch = new DigitalInput(Constants.LIMITSWITCH);
 
-  public ConveyorMaxOutCMD(Conveyor conveyor_subsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_Conveyor = conveyor_subsystem;
-    addRequirements(m_Conveyor);
+  public HookRightDownCMD(Hook Hook_subsystem) {
+    m_Hook = Hook_subsystem;
+    addRequirements(m_Hook);
   }
 
   // Called when the command is initially scheduled.
@@ -29,13 +29,13 @@ public class ConveyorMaxOutCMD extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Conveyor.ConveyorMaxOUT();
+    m_Hook.HookDownRight();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Conveyor.ConveyorMaxSTOP();
+    m_Hook.HookDownRight();
   }
 
   // Returns true when the command should end.

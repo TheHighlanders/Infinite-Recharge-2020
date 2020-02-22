@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -32,6 +33,8 @@ public class RobotContainer {
   private final IntakeArm m_IntakeArm = new IntakeArm();
   private final IntakeBrush m_IntakeBrush = new IntakeBrush();
   private final Conveyor m_Conveyor = new Conveyor();
+  private final Hook m_hook = new Hook();
+
   private Command m_autoCommand;
   private final Vision m_Vision = new Vision(); 
   
@@ -88,8 +91,24 @@ public class RobotContainer {
     */
     JoystickButton ConveyorIn = new JoystickButton(m_OI.Control2, 2);
     JoystickButton ConveyorOut = new JoystickButton(m_OI.Control2, 3);
-    ConveyorIn.whileHeld(new ConveyorMaxInCMD(m_Conveyor));
-    ConveyorOut.whileHeld(new ConveyorMaxOutCMD(m_Conveyor));
+    ConveyorIn.whileHeld(new ConveyorInCMD(m_Conveyor));
+    ConveyorOut.whileHeld(new ConveyorOutCMD(m_Conveyor));
+
+    /*
+      Drive #2 controllers
+      Climbing: Moving the robot up 
+    */
+    //Left
+    JoystickButton ClimbUpLeft = new JoystickButton(m_OI.Control3, 4);
+    JoystickButton ClimbDownLeft = new JoystickButton(m_OI.Control3, 7);
+    //ClimbUpLeft.whileHeld(new, interruptible);
+
+    
+    //right
+    JoystickButton ClimbUpRight = new JoystickButton(m_OI.Control3, 4);
+    JoystickButton ClimbDownRight = new JoystickButton(m_OI.Control3, 7);
+
+
 
     /*
       Drive #2 controlls

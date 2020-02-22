@@ -33,9 +33,16 @@ public final class Constants {
 
     public static final int CONVEYOR = 13;
 
-    public static final int CLIMBER1MOTOR = 17;//CHANGE LATER
+    public static final int CLIMB_LEFT = 62;
 
-    public static final int HOOK = 17;
+    public static final int CLIMB_RIGHT = 62;
+
+    public static final int HOOK_LEFT = 17;
+
+    public static final int HOOK_RIGHT = 6201;
+
+    public static final int LIMITSWITCH = 0;
+
     
 
 }

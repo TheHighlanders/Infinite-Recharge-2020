@@ -32,15 +32,15 @@ public class Conveyor extends SubsystemBase {
 
   }
 
-  public void ConveyorMaxIN() {
-    conveyorMotor.set(-1);
+  public void ConveyorIN() {
+    conveyorMotor.set(-.25);
   }
 
-  public void ConveyorMaxOUT() {
+  public void ConveyorOUT() {
     conveyorMotor.set(1);
   }
   
-  public void ConveyorMaxSTOP(){
+  public void ConveyorSTOP(){
     conveyorMotor.set(0);
   }
   @Override

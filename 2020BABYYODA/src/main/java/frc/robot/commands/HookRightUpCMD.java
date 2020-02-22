@@ -6,19 +6,20 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import frc.robot.subsystems.Conveyor;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.subsystems.Hook;
+import edu.wpi.first.wpilibj.DigitalInput;
 
-public class ConveyorMaxInCMD extends CommandBase {
-  /**
-   * Creates a new ConveyorCMD.
-   */
-  private final Conveyor m_Conveyor;
+public class HookRightUpCMD extends CommandBase {
 
-  public ConveyorMaxInCMD(Conveyor conveyor_subsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_Conveyor = conveyor_subsystem;
-    addRequirements(m_Conveyor);
+  private final Hook m_Hook;
+  DigitalInput limitSwitch = new DigitalInput(Constants.LIMITSWITCH);
+
+  public HookRightUpCMD(Hook Hook_subsystem) {
+    m_Hook = Hook_subsystem;
+    addRequirements(m_Hook);
   }
 
   // Called when the command is initially scheduled.
@@ -29,13 +30,21 @@ public class ConveyorMaxInCMD extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   m_Conveyor.ConveyorMaxIN();
+    //if button is not pressed
+    if(limitSwitch.get() == true){
+      m_Hook.HookUpRight();
+    }
+
+    //if limit swtich was pressed
+    if(limitSwitch.get() == false){
+      m_Hook.HangerStopRight();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Conveyor.ConveyorMaxSTOP();
+    m_Hook.HangerStopRight();
   }
 
   // Returns true when the command should end.
