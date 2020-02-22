@@ -109,7 +109,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-
+    // Check network tables for data on goal location. Set indicator.
+    // Calculate the suggested shooting speed given the current goal location.
   }
 
   @Override

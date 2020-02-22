@@ -29,7 +29,7 @@ public class AlignCmd extends CommandBase {
 
     62 is a random number
   */
-  public double maxTurnSpeed = 62;
+  public double maxTurnSpeed = 30;
 
   /*
     where we want the robot be - where the robot is
