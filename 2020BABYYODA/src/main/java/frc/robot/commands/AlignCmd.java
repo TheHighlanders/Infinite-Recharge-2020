@@ -39,33 +39,28 @@ public class AlignCmd extends CommandBase {
 
   NetworkTableEntry goalCenterX;
   NetworkTableEntry goalCenterY;
-  double goalCenterX_b;
-  double goalCenterY_b;
+  double xValue;
+  double yValue;
 
 
   public AlignCmd(Drive drive_subsystem) {
     //getting Drive Train classes
     m_drive = drive_subsystem;
     addRequirements(m_drive);
-
-    NetworkTableInstance ntInst = NetworkTableInstance.getDefault();
-    NetworkTable visionTable = ntInst.getTable("visionTable");
-    goalCenterX = visionTable.getEntry("goalCenterX");
-    goalCenterY = visionTable.getEntry("goalCenterY");
-
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    /*
-      If the entry does not exist or is of different type, it will return the default value.
-      10000 is the default value
-      so that makes sense
-    */
-    goalCenterX_b = goalCenterX.getDouble(1000);
-    goalCenterY_b = goalCenterY.getDouble(1000);
+
+    NetworkTableInstance table = NetworkTableInstance.getDefault();
+    NetworkTableEntry ValueMiddleX = table.getEntry("Middle X");
+		NetworkTableEntry ValueMiddleY = table.getEntry("Middle Y");
+		this.xValue = ValueMiddleX.getDouble(0);
+    this.yValue= ValueMiddleY.getDouble(0);
+
   }
+
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
@@ -74,30 +69,29 @@ public class AlignCmd extends CommandBase {
         //run this again
         initialize();
     }
-      //once we figure out currentAngleOffset/
-      //math time: if the answer is greater than or less than the "okay" angle
-      if(goalCenterX_b >= maxTurnSpeed){
+      //if the answer is greater than or less than the "okay" angle
+      if(xValue >= maxTurnSpeed){
           //spin to the left at half speed
           Robot.driving.drivePower(0.50,-0.50);
       }
 
       //if the answer is greater than or equal to the answer, 
-      else if (goalCenterX_b <= maxTurnSpeed) {
+      else if (xValue <= maxTurnSpeed) {
         //spin to the right at half speed
         Robot.driving.drivePower(-0.50,0.50);
       }
     //if we found it
     else{
-      if(goalCenterX_b < Constants.GOAL_RIGHT_BOUND & goalCenterX_b > Constants.GOAL_RIGHT_BOUND){
+      if(xValue < Constants.GOAL_RIGHT_BOUND & xValue > Constants.GOAL_RIGHT_BOUND){
         DriverStation.reportWarning("It is aligned", false);
         Robot.driving.drivePower(0,0);
       }
       //x is greater than A then turn to the left
-      else if(goalCenterX_b < Constants.GOAL_LEFT_BOUND){
+      else if(xValue < Constants.GOAL_LEFT_BOUND){
         Robot.driving.drivePower(-0.15, 0.15);
       }
       //x is less than B then turn to the right
-      else if(goalCenterX_b > Constants.GOAL_RIGHT_BOUND){
+      else if(xValue > Constants.GOAL_RIGHT_BOUND){
         Robot.driving.drivePower(0.15, -0.15);
       }
     }      
