@@ -67,7 +67,7 @@ public class RobotContainer {
 
 
     /*
-      Drive #2 controllers
+      Driver #2 
       Moving the Intake Arm up and down
     */
     JoystickButton ArmUp = new JoystickButton(m_OI.Control3,6);
@@ -76,7 +76,7 @@ public class RobotContainer {
     ArmDown.whileHeld(new IntakeArmDownCMD(m_IntakeArm));
     
     /*
-      Drive #2 controllers
+      Driver #2 
       Intake in and out
     */
     JoystickButton IntakeIn = new JoystickButton(m_OI.Control2, 4);
@@ -85,7 +85,7 @@ public class RobotContainer {
     IntakeOUT.whileHeld(new IntakeOutCmd(m_IntakeBrush));
     
     /*
-      Drive #2 controllers
+      Driver #2
       Conveyor in and out
     */
     JoystickButton ConveyorIn = new JoystickButton(m_OI.Control2, 2);
@@ -94,9 +94,8 @@ public class RobotContainer {
     ConveyorOut.whileHeld(new ConveyorOutCMD(m_Conveyor));
 
     /*
-      Drive #2 controllers
-      Climbing: Moving the robot up
-      recheck numbers 
+      Driver #2 
+      Climbing: Moving the robot up 
     */
     //Left
     JoystickButton ClimbUpLeft = new JoystickButton(m_OI.Control3, 4);
@@ -108,11 +107,23 @@ public class RobotContainer {
     JoystickButton ClimbUpRight = new JoystickButton(m_OI.Control3, 4);
     JoystickButton ClimbDownRight = new JoystickButton(m_OI.Control3, 7);
     ClimbUpRight.whileHeld(new ClimbRightUpCMD(m_climber));
-    //ClimbDownRight.whileHeld(new ClimbRightDownCMD(m_climber));
-
+    ClimbDownRight.whileHeld(new ClimbRightDownCMD(m_climber));
 
     /*
-      Drive #2 controlls
+      Driver #2
+      Climbing: Moving up Hook and Down
+    */
+    JoystickButton HookLeftUp = new JoystickButton(m_OI.Control3,4);//change later
+    JoystickButton HookLeftDown = new JoystickButton(m_OI.Control3,4);//change later
+    JoystickButton HookRightUp = new JoystickButton(m_OI.Control3,4);//change later
+    JoystickButton HookRightDown = new JoystickButton(m_OI.Control3,4);//change later
+    HookLeftUp.whileHeld(new HookLeftUpCMD(m_hook));
+    HookLeftDown.whileHeld(new HookLeftDownCMD(m_hook));
+    HookRightUp.whileHeld(new HookRightUpCMD(m_hook));
+    HookRightDown.whileHeld(new HookRightDownCMD(m_hook));
+
+    /*
+      Driver #2 
       Shoot
     */
     JoystickButton Shoot = new JoystickButton(m_OI.Control2, 1);
