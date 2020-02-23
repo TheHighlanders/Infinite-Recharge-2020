@@ -36,8 +36,9 @@ public class Shooting extends SubsystemBase {
     shootingMotor.configNominalOutputReverse(0);
     shootingMotor.configPeakOutputForward(1);
     shootingMotor.configPeakOutputReverse(-1);
+    shootingMotor.setInverted(false);
 
-    shootingMotor.config_kF(0, .07);
+    shootingMotor.config_kF(0, .03);
     shootingMotor.config_kP(0, .05);
     shootingMotor.config_kI(0, 0);
     shootingMotor.config_kD(0, 0);
@@ -50,12 +51,12 @@ public class Shooting extends SubsystemBase {
     DriverStation.reportWarning("Bombs Away!" , false);
     DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
     // shootingMotor.set(ControlMode.PercentOutput, this.shootingSpeed/100);
-    shootingMotor.set(ControlMode.Velocity, this.shootingSpeed * 10);
+    shootingMotor.set(ControlMode.Velocity, this.shootingSpeed * 1000);
   }
 
   public void incrementShootSpeed()
   {
-    this.shootingSpeed = this.shootingSpeed + 10;
+    this.shootingSpeed = this.shootingSpeed + 1;
     if(this.shootingSpeed > 100000)
     {
       this.shootingSpeed = 1;
@@ -65,7 +66,7 @@ public class Shooting extends SubsystemBase {
 
   public void decrementShootSpeed()
   {
-    this.shootingSpeed = this.shootingSpeed - 10;
+    this.shootingSpeed = this.shootingSpeed - 1;
     if(this.shootingSpeed < -100000)
     {
       this.shootingSpeed = -1;
