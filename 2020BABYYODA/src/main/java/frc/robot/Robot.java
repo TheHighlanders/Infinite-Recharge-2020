@@ -26,10 +26,10 @@ public class Robot extends TimedRobot {
   public static final Drive driving = new Drive();
   
   private RobotContainer m_robotContainer;  
-  private final Shooting m_roboShooting = new Shooting();  
-  private final Drive m_robotDrive = new Drive();
-  private final Conveyor m_robotIntake = new Conveyor();
-  private final OI m_OI = new OI(); 
+  // private final Shooting m_roboShooting = new Shooting();  
+  // private final Drive m_robotDrive = new Drive();
+  // private final Conveyor m_robotIntake = new Conveyor();
+  // private final OI m_OI = new OI(); 
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
