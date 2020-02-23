@@ -7,20 +7,17 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.climber1;
+import frc.robot.subsystems.IntakeBrush;
 
-public class ClimbUpCMD extends CommandBase {
-  /**
-   * Creates a new ClimbUpCMD.
-   */
-  private final climber1 m_Climber1;
+public class IntakeInCMD extends CommandBase {
 
-  public ClimbUpCMD(climber1 climber1_subsystems) {
+  private final IntakeBrush m_IntakeBrush;
+
+  public IntakeInCMD(IntakeBrush Intake_Sub) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_Climber1 = climber1_subsystems;
-    addRequirements(m_Climber1);
+    m_IntakeBrush = Intake_Sub;
+    addRequirements(m_IntakeBrush);
   }
 
   // Called when the command is initially scheduled.
@@ -31,12 +28,13 @@ public class ClimbUpCMD extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Climber1.Up();
+    m_IntakeBrush.IntakeBrushIN();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_IntakeBrush.IntakeStop();
   }
 
   // Returns true when the command should end.

@@ -20,15 +20,15 @@ public class DecrementShootingSpeed extends CommandBase {
   private final Shooting m_Shooting;
 
 
-  public DecrementShootingSpeed(Shooting shooting_subsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public DecrementShootingSpeed(Shooting shooting_subsystem){
     m_Shooting = shooting_subsystem;
 
     addRequirements(m_Shooting);
     
   }
 
-  // Called when the command is initially scheduled.
+  // Called when the commentShootingSpeed(Shooting shooting_subsystem) {
+    // Use addRand is initially scheduled.
   @Override
   public void initialize() {
     m_Shooting.decrementShootSpeed();

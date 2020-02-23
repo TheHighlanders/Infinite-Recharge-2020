@@ -11,12 +11,13 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DriverStation;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 public class IntakeBrush extends SubsystemBase {
   /**
    * Creates a new IntakeBrush.
    */
-    public WPI_TalonSRX brush = new WPI_TalonSRX(Constants.INTAKE_BRUSH);
+    public WPI_VictorSPX brush = new WPI_VictorSPX(Constants.INTAKE);
     private double ramp = 0.2;
   public IntakeBrush() {
     brush.configOpenloopRamp(ramp,0);
@@ -25,11 +26,15 @@ public class IntakeBrush extends SubsystemBase {
   }
 
   public void IntakeBrushIN(){
-    brush.set(1);
+    brush.set(-1);
   }
 
   public void IntakeBrushOUT(){
-    brush.set(-1);
+    brush.set(1);
+  }
+
+  public void IntakeStop(){
+    brush.set(0);
   }
 
   @Override

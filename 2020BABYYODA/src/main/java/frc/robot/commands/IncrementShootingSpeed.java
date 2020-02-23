@@ -21,9 +21,7 @@ public class IncrementShootingSpeed extends CommandBase {
 
 
   public IncrementShootingSpeed(Shooting shooting_subsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
     m_Shooting = shooting_subsystem;
-    
     addRequirements(m_Shooting);
     
   }
