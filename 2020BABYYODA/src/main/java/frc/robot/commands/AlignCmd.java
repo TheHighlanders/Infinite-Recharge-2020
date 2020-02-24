@@ -11,6 +11,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.Drive;
@@ -52,6 +53,7 @@ public class AlignCmd extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    SmartDashboard.putBoolean("Aligned?", false);
 
     NetworkTableInstance table = NetworkTableInstance.getDefault();
     NetworkTableEntry ValueMiddleX = table.getEntry("Middle X");
@@ -85,6 +87,8 @@ public class AlignCmd extends CommandBase {
       if(xValue < Constants.GOAL_RIGHT_BOUND & xValue > Constants.GOAL_RIGHT_BOUND){
         DriverStation.reportWarning("It is aligned", false);
         Robot.driving.drivePower(0,0);
+        SmartDashboard.putBoolean("Aligned?", true);
+
       }
       //x is greater than A then turn to the left
       else if(xValue < Constants.GOAL_LEFT_BOUND){
