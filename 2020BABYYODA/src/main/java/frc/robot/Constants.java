@@ -16,21 +16,23 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
     public static final int XBOX_PORT = 0;
     public static final int CONTROL2_PORT = 2;
     public static final int CONTROL3_PORT = 3;
     
-    public static final int LEFT_WHEELS_1 = 21;
-    public static final int LEFT_WHEELS_2 = 30;
-    public static final int RIGHT_WHEELS_1 = 2;
-    public static final int RIGHT_WHEELS_2 = 12;
+    public static final int LEFT_WHEELS_1 = 51;//talon
+    public static final int LEFT_WHEELS_2 = 41;//victor
+    public static final int RIGHT_WHEELS_1 = 52;//talon
+    public static final int RIGHT_WHEELS_2 = 42;//victor
 
-    public static final int SHOOTER = 3;
+    public static final int SHOOTER = 42;
 
-    public static final int INTAKE_ARM = 6;
+    public static final int INTAKE_ARM = 52;
 
-    public static final int INTAKE = 31;
+    public static final int INTAKE = 54;
 
+    //random numbers since there are no motor controllers
     public static final int CONVEYOR = 13;
 
     public static final int CLIMB_LEFT = 62;
@@ -39,7 +41,7 @@ public final class Constants {
 
     public static final int HOOK_LEFT = 17;
 
-    public static final int HOOK_RIGHT = 6201;
+    public static final int HOOK_RIGHT = 62;
 
     public static final int LIMITSWITCH = 0;
 
