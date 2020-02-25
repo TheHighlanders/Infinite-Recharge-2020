@@ -10,12 +10,24 @@ package frc.robot.subsystems;
 import frc.robot.Constants;
 import frc.robot.OI;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+
+
+import edu.wpi.first.wpilibj.controller.PIDController;
+
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+
+import edu.wpi.first.wpilibj.DriverStation;
 
 public class Drive extends SubsystemBase {
 
@@ -29,7 +41,12 @@ public class Drive extends SubsystemBase {
 
   private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
+  public static double kI, kP, kD, kF;
+  private PIDController DrivePIDController;
+
   public Drive() {
+    gyro.calibrate();
+
     left1 = new WPI_TalonSRX(Constants.LEFT_WHEELS_1);
     left2 = new WPI_VictorSPX(Constants.LEFT_WHEELS_2);
     right1 = new WPI_TalonSRX(Constants.RIGHT_WHEELS_1);
@@ -48,15 +65,29 @@ public class Drive extends SubsystemBase {
     left1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
     right1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 
+    kP = 0; // Fill this in
+    kI = 0;
+    kD = 0;
+    kF = 0;
+
+    left1.config_kP(0, kP);
+    left1.config_kI(0, kI);
+    left1.config_kD(0, kD);
+    left1.config_kF(0, kF);
+
     xbox_io = new OI();
 
+    left2.follow(left1);
+    right2.follow(right1);
 
   }
   public void drivePower(double left_power, double right_power){
-    left1.set(left_power);
-    left2.set(left_power);
-    right1.set(right_power);
-    right2.set(left_power);
+
+    left1.set(ControlMode.PercentOutput, left_power); //Add encoders
+    // left2.set(left_power); no need since follow
+    right1.set(right_power); // Add Encoder
+    // right2.set(left_power); no need since follow
+
     // DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
 
   }
@@ -99,6 +130,7 @@ public class Drive extends SubsystemBase {
     return gyro.getAngle();
     
   }
+
   /**
 	 * Sets the drivetrain encoders back to 0 pulses
 	 * Only one message will print here
@@ -123,9 +155,17 @@ public class Drive extends SubsystemBase {
     return -((double) left1.getSensorCollection().getPulseWidthPosition() / 4096.0) * 6 * Math.PI;
   }
 
+  public void setPositionAUTO(double leftdistance){
+    left1.set(ControlMode.Position, leftdistance/Constants.INCHES_PER_ROTATION); // Only one encoder the others can't keep up
+    // right1.set(ControlMode.Position, rightdistance/Constants.INCHES_PER_ROTATION); 
+  }
+
+
   @Override
   public void periodic() {
+    DriverStation.reportWarning("Left PID: " + left1.getSelectedSensorPosition(), false);
 
+    // SmartDashboard.putNumber("PID Output", output);
 
     /*
     double leftYJoy = this.xbox_io.getXboxLeftY();

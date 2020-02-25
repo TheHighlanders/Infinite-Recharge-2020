@@ -35,7 +35,7 @@ public class RobotContainer {
   private final IntakeBrush m_IntakeBrush = new IntakeBrush();
 
   private Command m_autoCommand;
-  private final Vision m_Vision = new Vision(); 
+  private final Vision m_Vision = new Vision();
   
   /** private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -53,8 +53,10 @@ public class RobotContainer {
     m_robotDrive.setDefaultCommand(new TeleopDriveCMD(m_robotDrive, m_OI));
 
     DriverStation.reportWarning("Initialized",false);
-    m_autoCommand = new DrivePowerAUTO(m_robotDrive, 0);
-  
+
+    // m_autoCommand = new DriveEncoderAUTO(m_robotDrive, 10);
+    m_robotDrive.left1.setSelectedSensorPosition(0);
+
   }
 
   /**

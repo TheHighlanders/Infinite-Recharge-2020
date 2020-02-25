@@ -20,11 +20,11 @@ public final class Constants {
     public static final int XBOX_PORT = 0;
     public static final int CONTROL2_PORT = 2;
     public static final int CONTROL3_PORT = 3;
-    
+
     public static final int LEFT_WHEELS_1 = 51;//talon
-    public static final int LEFT_WHEELS_2 = 41;//victor
+    public static final int LEFT_WHEELS_2 = 41;//spx
     public static final int RIGHT_WHEELS_1 = 52;//talon
-    public static final int RIGHT_WHEELS_2 = 42;//victor
+    public static final int RIGHT_WHEELS_2 = 42;//spx
 
     public static final int SHOOTER = 42;
 
@@ -45,6 +45,7 @@ public final class Constants {
 
     public static final int LIMITSWITCH = 0;
 
-    
+    public static final int HOOK = 17;
 
+    public static final double INCHES_PER_ROTATION = 6*Math.PI;
 }
