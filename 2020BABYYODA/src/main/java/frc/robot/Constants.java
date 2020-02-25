@@ -20,22 +20,23 @@ public final class Constants {
     public static final int CONTROL1_PORT = 2;
     public static final int CONTROL2_PORT = 3;
     
-    public static final int LEFT_WHEELS_1 = 6;
-    public static final int LEFT_WHEELS_2 = 3;
-    public static final int RIGHT_WHEELS_1 = 21;
-    public static final int RIGHT_WHEELS_2 = 1;
+    public static final int LEFT_WHEELS_1 = 51;//talon
+    public static final int LEFT_WHEELS_2 = 41;//victor
+    public static final int RIGHT_WHEELS_1 = 52;//talon
+    public static final int RIGHT_WHEELS_2 = 42;//victor
 
-    public static final int SHOOTER = 3;
-    
+    public static final int SHOOTER = 42;
+
+    public static final int INTAKE_ARM = 52;
+
+    public static final int INTAKE = 54;
+
+    //does not have a motor controller
     public static final int HANGER1 = 17;
 
-    public static final int INTAKE = 13;
+    public static final int CONVEYOR = 13;
 
-    public static final int CLIMBER1MOTOR = 17;//change laters
-
-    public static final int INTAKE_AUTO = 1;
-
-    public static final int INTAKE_BRUSH = 14;
+    public static final int CLIMBER1MOTOR = 17;
     
     //the range that the goal has to be in so we can shoot
     public static final int GOAL_LEFT_BOUND = 62;//a

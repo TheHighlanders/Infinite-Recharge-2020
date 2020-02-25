@@ -15,7 +15,7 @@ public class IntakeArm extends SubsystemBase {
   /**
    * Creates a new IntakeAuto.
    */
-  private WPI_TalonSRX intakeArm = new WPI_TalonSRX(Constants.INTAKE_AUTO);
+  private WPI_TalonSRX intakeArm = new WPI_TalonSRX(Constants.INTAKE_ARM);
 
   public IntakeArm() {
 

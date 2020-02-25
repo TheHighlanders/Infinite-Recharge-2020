@@ -20,7 +20,7 @@ public class Conveyor extends SubsystemBase {
    * Creates a new Intake.
    */
 
-  private WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(Constants.INTAKE);
+  private WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(Constants.CONVEYOR);
   private double ramp = 0.2;
   public OI intake_io;
 
