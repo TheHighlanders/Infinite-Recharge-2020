@@ -20,8 +20,8 @@ import frc.robot.Constants;
 public class AlignCmd extends CommandBase {
   private final Drive m_drive;
 
-  NetworkTableEntry goalCenterX;
-  NetworkTableEntry goalCenterY;
+  NetworkTableEntry ValueMiddleX;
+  NetworkTableEntry ValueMiddleY;
   double xValue;
   double yValue;
 
@@ -40,17 +40,20 @@ public class AlignCmd extends CommandBase {
   public void initialize() {
     SmartDashboard.putBoolean("Aligned?", false);
 
-    NetworkTableInstance table = NetworkTableInstance.getDefault();
-    NetworkTableEntry ValueMiddleX = table.getEntry("Middle X");
-		NetworkTableEntry ValueMiddleY = table.getEntry("Middle Y");
-		this.xValue = ValueMiddleX.getDouble(0);
-    this.yValue= ValueMiddleY.getDouble(0);
+    NetworkTableInstance networkTables = NetworkTableInstance.getDefault();
+    NetworkTable table = networkTables.getTable("Test");
+    this.ValueMiddleX = table.getEntry("Middle X");
+		this.ValueMiddleY = table.getEntry("Middle Y");
+		
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    this.xValue = ValueMiddleX.getDouble(0);
+    this.yValue= ValueMiddleY.getDouble(0);
+    DriverStation.reportWarning("X: " + this.xValue + "   Middle: " + middleOfGoal, false);
       if(xValue >= middleOfGoal + 10){
           //spin to the left at half speed
           DriverStation.reportWarning("turn to left", false);
