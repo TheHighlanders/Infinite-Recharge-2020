@@ -18,31 +18,16 @@ import frc.robot.subsystems.Drive;
 import frc.robot.Constants;
 
 public class AlignCmd extends CommandBase {
-    private final Drive m_drive;
-  /*
-    did we do it? did we find it? 
-    if not, run everything again to find it and keep doing it
-  */
-  public boolean didWeFindIt;
-  /*
-    when the robot is allowed to spin at full speed
-    We don't wanna go to fast and overshoot
-
-    62 is a random number
-  */
-  public double maxTurnSpeed = 30;
-
-  /*
-    where we want the robot be - where the robot is
-  */
-  public double acceptedAngleOffset;
-
+  private final Drive m_drive;
 
   NetworkTableEntry goalCenterX;
   NetworkTableEntry goalCenterY;
   double xValue;
   double yValue;
 
+  double middleOfGoal = ((Constants.GOAL_LEFT_BOUND - Constants.GOAL_RIGHT_BOUND) / 2) + Constants.GOAL_LEFT_BOUND;
+
+  boolean isAligned = false;
 
   public AlignCmd(Drive drive_subsystem) {
     //getting Drive Train classes
@@ -66,43 +51,26 @@ public class AlignCmd extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //we didn't find it
-    if(didWeFindIt != true){
-        //run this again
-        initialize();
-    }
-      //if the answer is greater than or less than the "okay" angle
-      if(xValue >= maxTurnSpeed){
+      if(xValue >= middleOfGoal + 10){
           //spin to the left at half speed
+          DriverStation.reportWarning("turn to left", false);
           Robot.driving.drivePower(0.50,-0.50);
+          isAligned = false; 
       }
 
-      //if the answer is greater than or equal to the answer, 
-      else if (xValue <= maxTurnSpeed) {
+      else if (xValue <= middleOfGoal - 10) {
         //spin to the right at half speed
+        DriverStation.reportWarning("turn to right", false);
         Robot.driving.drivePower(-0.50,0.50);
+        isAligned = false; 
       }
-    //if we found it
-    else{
-      if(xValue < Constants.GOAL_RIGHT_BOUND & xValue > Constants.GOAL_RIGHT_BOUND){
-        DriverStation.reportWarning("It is aligned", false);
+      else{
         Robot.driving.drivePower(0,0);
-        SmartDashboard.putBoolean("Aligned?", true);
-
+        isAligned = true;
       }
-      //x is greater than A then turn to the left
-      else if(xValue < Constants.GOAL_LEFT_BOUND){
-        Robot.driving.drivePower(-0.15, 0.15);
-      }
-      //x is less than B then turn to the right
-      else if(xValue > Constants.GOAL_RIGHT_BOUND){
-        Robot.driving.drivePower(0.15, -0.15);
-      }
-    }      
   }
 
   // Called once the command ends or is interrupted.
-  //we done 
   @Override
   public void end(boolean interrupted) {
     
@@ -111,6 +79,7 @@ public class AlignCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isAligned;
+    //return false;
   }
 }
