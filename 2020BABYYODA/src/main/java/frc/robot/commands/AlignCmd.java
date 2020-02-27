@@ -30,7 +30,7 @@ public class AlignCmd extends CommandBase {
 
     62 is a random number
   */
-  public double maxTurnSpeed = 30;
+  public double maxTurnSpeed = 0.3;
 
   /*
     where we want the robot be - where the robot is
@@ -74,29 +74,33 @@ public class AlignCmd extends CommandBase {
       //if the answer is greater than or less than the "okay" angle
       if(xValue >= maxTurnSpeed){
           //spin to the left at half speed
-          Robot.driving.drivePower(0.50,-0.50);
+          DriverStation.reportWarning("spin to the left at half speed", false);
+         // Robot.driving.drivePower(0.10,-0.10);
       }
 
       //if the answer is greater than or equal to the answer, 
       else if (xValue <= maxTurnSpeed) {
         //spin to the right at half speed
-        Robot.driving.drivePower(-0.50,0.50);
+        DriverStation.reportWarning("spin to the right at half speed", false);
+       // Robot.driving.drivePower(-0.10,0.10);
       }
     //if we found it
     else{
       if(xValue < Constants.GOAL_RIGHT_BOUND & xValue > Constants.GOAL_RIGHT_BOUND){
         DriverStation.reportWarning("It is aligned", false);
-        Robot.driving.drivePower(0,0);
+       // Robot.driving.drivePower(0,0);
         SmartDashboard.putBoolean("Aligned?", true);
 
       }
       //x is greater than A then turn to the left
       else if(xValue < Constants.GOAL_LEFT_BOUND){
-        Robot.driving.drivePower(-0.15, 0.15);
+        DriverStation.reportWarning("spin sss half speed", false);
+        //Robot.driving.drivePower(-0.10, 0.10);
       }
       //x is less than B then turn to the right
       else if(xValue > Constants.GOAL_RIGHT_BOUND){
-        Robot.driving.drivePower(0.15, -0.15);
+        DriverStation.reportWarning("spin  half speed", false);
+        //Robot.driving.drivePower(0.10, -0.10);
       }
     }      
   }
