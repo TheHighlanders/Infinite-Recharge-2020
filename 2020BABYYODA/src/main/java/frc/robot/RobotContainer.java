@@ -50,7 +50,8 @@ public class RobotContainer {
     m_robotDrive.setDefaultCommand(new TeleopDriveCMD(m_robotDrive, m_OI));
 
     DriverStation.reportWarning("Initialized",false);
-    m_autoCommand = new DrivePowerAUTO(m_robotDrive);
+    //m_autoCommand = new DrivePowerAUTO(m_robotDrive);
+    m_autoCommand = new AlignCmd(m_robotDrive);
   
   }
 

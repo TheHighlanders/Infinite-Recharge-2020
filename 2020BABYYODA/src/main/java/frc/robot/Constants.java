@@ -20,10 +20,10 @@ public final class Constants {
     public static final int CONTROL1_PORT = 2;
     public static final int CONTROL2_PORT = 3;
     
-    public static final int LEFT_WHEELS_1 = 51;//talon
-    public static final int LEFT_WHEELS_2 = 41;//victor
-    public static final int RIGHT_WHEELS_1 = 52;//talon
-    public static final int RIGHT_WHEELS_2 = 42;//victor
+    public static final int LEFT_WHEELS_1 = 51;//victor 
+    public static final int LEFT_WHEELS_2 = 41;//talon
+    public static final int RIGHT_WHEELS_1 = 50;//victor 
+    public static final int RIGHT_WHEELS_2 = 44;//talon
 
     public static final int SHOOTER = 42;
 
@@ -39,9 +39,9 @@ public final class Constants {
     public static final int CLIMBER1MOTOR = 17;
     
     //the range that the goal has to be in so we can shoot
-    public static final int GOAL_LEFT_BOUND = 62;//a
+    public static final double GOAL_LEFT_BOUND = 141.0;//a
 
-    public static final int GOAL_RIGHT_BOUND = 1;//b
+    public static final double GOAL_RIGHT_BOUND = 200.0;//b
     
 
 }
