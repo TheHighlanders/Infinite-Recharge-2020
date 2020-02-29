@@ -45,11 +45,10 @@ public class Drive extends SubsystemBase {
   private PIDController DrivePIDController;
 
   public Drive() {
-
-    left1 = new WPI_TalonSRX(Constants.LEFT_WHEELS_2);
-    left2 = new WPI_VictorSPX(Constants.LEFT_WHEELS_1);
-    right1 = new WPI_TalonSRX(Constants.RIGHT_WHEELS_2);
-    right2 = new WPI_VictorSPX(Constants.RIGHT_WHEELS_1);
+    left1 = new WPI_TalonSRX(Constants.LEFT_WHEELS_1);
+    left2 = new WPI_VictorSPX(Constants.LEFT_WHEELS_2);
+    right1 = new WPI_TalonSRX(Constants.RIGHT_WHEELS_1);
+    right2 = new WPI_VictorSPX(Constants.RIGHT_WHEELS_2);
 
     left1.configOpenloopRamp(ramp,0);
     left2.configOpenloopRamp(ramp,0);

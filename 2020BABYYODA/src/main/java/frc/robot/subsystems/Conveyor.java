@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -18,7 +18,7 @@ public class Conveyor extends SubsystemBase {
    * Creates a new Intake.
    */
 
-  private WPI_VictorSPX conveyorMotor = new WPI_VictorSPX(Constants.CONVEYOR);
+  private WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(Constants.CONVEYOR);
   private double ramp = 0.2;
   public OI intake_io;
 
