@@ -20,11 +20,11 @@ public final class Constants {
     public static final int XBOX_PORT = 0;
     public static final int CONTROL2_PORT = 2;
     public static final int CONTROL3_PORT = 3;
-
-    public static final int LEFT_WHEELS_1 = 51;//talon
-    public static final int LEFT_WHEELS_2 = 41;//spx
-    public static final int RIGHT_WHEELS_1 = 52;//talon
-    public static final int RIGHT_WHEELS_2 = 42;//spx
+    
+    public static final int LEFT_WHEELS_1 = 41;//victor 
+    public static final int LEFT_WHEELS_2 = 51;//talon
+    public static final int RIGHT_WHEELS_1 = 44;//victor 
+    public static final int RIGHT_WHEELS_2 = 50;//talon
 
     public static final int SHOOTER = 42;
 
@@ -32,20 +32,28 @@ public final class Constants {
 
     public static final int INTAKE = 54;
 
-    //random numbers since there are no motor controllers
-    public static final int CONVEYOR = 13;
+    //does not have a motor controller
+    public static final int LEFT_CLIMBER = 17;
 
-    public static final int CLIMB_LEFT = 62;
+    public static final int RIGHT_CLIMBER = 17;
 
-    public static final int CLIMB_RIGHT = 62;
+    public static final int CONVEYOR = 43; 
 
-    public static final int HOOK_LEFT = 17;
+    public static final int CLIMBER1MOTOR = 17;
+    
+    //the range that the goal has to be in so we can shoot
+    public static final double GOAL_LEFT_BOUND = 141.0;//a
 
-    public static final int HOOK_RIGHT = 62;
+    public static final double GOAL_RIGHT_BOUND = 200.0;//b
 
-    public static final int LIMITSWITCH = 0;
 
-    public static final int HOOK = 17;
+    public static final int LEFT_HOOK = 40; 
+    public static final int RIGHT_HOOK = 99; //spx
+
+    public static final int LEFT_WINCH = 53;
+    public static final int RIGHT_WINCH = 55;
 
     public static final double INCHES_PER_ROTATION = 6*Math.PI;
+
+    public static final int LIMITSWITCH = 0;
 }

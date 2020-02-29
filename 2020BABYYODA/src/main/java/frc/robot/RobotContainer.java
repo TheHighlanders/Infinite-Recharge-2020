@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -15,6 +16,7 @@ import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 
 
 /**
@@ -33,9 +35,10 @@ public class RobotContainer {
   private final Shooting m_Shooting = new Shooting();
   private final IntakeArm m_IntakeArm = new IntakeArm();
   private final IntakeBrush m_IntakeBrush = new IntakeBrush();
-
   private Command m_autoCommand;
   private final Vision m_Vision = new Vision();
+  
+
   
   /** private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -54,9 +57,15 @@ public class RobotContainer {
 
     DriverStation.reportWarning("Initialized",false);
 
-    // m_autoCommand = new DriveEncoderAUTO(m_robotDrive, 10);
+    // m_autoCommand = new DriveDistanceEncoderAUTO(m_robotDrive, 10.0, 10.0);
+    m_autoCommand = new AlignCmd(m_robotDrive);
     m_robotDrive.left1.setSelectedSensorPosition(0);
 
+    //m_autoCommand = new DrivePowerAUTO(m_robotDrive);
+    // m_autoCommand = new Align?Cmd(m_robotDrive);
+
+    
+  
   }
 
   /**
@@ -66,30 +75,36 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
+    
+    // Xbox is Controller #1 (In Port 1)
+    // Left side of the Control Panel is Controller #3 (In Port 3)
+    // Right side of the Control Panel is Controller #2 (In Port 2)
 
     /*
-      Drive #2 controllers
-      Moving the Intake Arm up and down
+      Controller #3
+      Moving the Intake Arm up and down (Called Intake Up and Down on the Panel)
     */
+
     JoystickButton ArmUp = new JoystickButton(m_OI.Control3,6);
     JoystickButton ArmDown = new JoystickButton(m_OI.Control3,5);
     ArmUp.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
     ArmDown.whileHeld(new IntakeArmDownCMD(m_IntakeArm));
     
     /*
-      Drive #2 controllers
-      Intake in and out
+      Controller #2
+      Intake in and out (Called Intaker IN and OUT on the Panel)
     */
+
     JoystickButton IntakeIn = new JoystickButton(m_OI.Control2, 4);
     JoystickButton IntakeOUT = new JoystickButton(m_OI.Control2, 5);
     IntakeIn.whileHeld(new IntakeInCMD(m_IntakeBrush));
     IntakeOUT.whileHeld(new IntakeOutCmd(m_IntakeBrush));
     
     /*
-      Drive #2 controllers
+      Controller #2
       Conveyor in and out
     */
+
     JoystickButton ConveyorIn = new JoystickButton(m_OI.Control2, 2);
     JoystickButton ConveyorOut = new JoystickButton(m_OI.Control2, 3);
     ConveyorIn.whileHeld(new ConveyorInCMD(m_Conveyor));
@@ -110,29 +125,31 @@ public class RobotContainer {
     JoystickButton ClimbUpRight = new JoystickButton(m_OI.Control3, 4);
     JoystickButton ClimbDownRight = new JoystickButton(m_OI.Control3, 7);
     ClimbUpRight.whileHeld(new ClimbRightUpCMD(m_climber));
-    //ClimbDownRight.whileHeld(new ClimbRightDownCMD(m_climber));
+    ClimbDownRight.whileHeld(new ClimbRightDownCMD(m_climber));
 
 
     /*
-      Drive #2 controlls
+      Controller #2
       Shoot
     */
+
     JoystickButton Shoot = new JoystickButton(m_OI.Control2, 1);
     Shoot.whileHeld(new ShootingCMD(m_Shooting));
     
     
     /*
-      Drive #1 controll
+      Controller #1 Xbox
     */
 
     JoystickButton xboxA = new JoystickButton(m_OI.xbox,1);
     JoystickButton xboxB = new JoystickButton(m_OI.xbox,2);
     JoystickButton xboxC = new JoystickButton(m_OI.xbox,3);
+    JoystickButton xboxD = new JoystickButton(m_OI.xbox,4);
 
     xboxA.whileHeld(new ShootingCMD(m_Shooting));
-    xboxB.whenPressed(new IncrementShootingSpeed(m_Shooting));
-    xboxC.whenPressed(new DecrementShootingSpeed(m_Shooting));
-    xboxA.whenReleased(new ShootingEndCMD(m_Shooting));
+    xboxB.whileHeld(new ConveyorInCMD(m_Conveyor));
+    xboxC.whileHeld(new IntakeInCMD(m_IntakeBrush));
+    xboxD.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
 
   }
 

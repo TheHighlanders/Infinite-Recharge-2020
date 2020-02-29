@@ -19,7 +19,6 @@ public class OI {
     public XboxController xbox = new XboxController(Constants.XBOX_PORT);
     public Joystick Control2 = new Joystick(Constants.CONTROL2_PORT);    
     public Joystick Control3 = new Joystick(Constants.CONTROL3_PORT);
-
     /** Contructer */
 
     public OI() {

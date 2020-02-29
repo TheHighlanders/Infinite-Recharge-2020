@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -15,31 +15,31 @@ public class IntakeArm extends SubsystemBase {
   /**
    * Creates a new IntakeAuto.
    */
-  private WPI_TalonSRX intakeArm = new WPI_TalonSRX(Constants.INTAKE_ARM);
+  private WPI_VictorSPX intakeArm = new WPI_VictorSPX(Constants.INTAKE_ARM);
 
   public IntakeArm() {
 
   }
   public void ArmDown() {
-    intakeArm.set(0.5);
-    double armCurrent = intakeArm.getStatorCurrent();
-    DriverStation.reportWarning("Arm Current: " + armCurrent, false);
+    intakeArm.set(1);
+    // double armCurrent = intakeArm.getStatorCurrent();
+    // DriverStation.reportWarning("Arm Current: " + armCurrent, false);
     DriverStation.reportWarning("Arm down" , false);
 
   }
   
   public void ArmUp() {
     intakeArm.set(-1);
-    double armCurrent = intakeArm.getStatorCurrent();
-    DriverStation.reportWarning("Arm Current: " + armCurrent, false);
+    // double armCurrent = intakeArm.getStatorCurrent();
+    // DriverStation.reportWarning("Arm Current: " + armCurrent, false);
     DriverStation.reportWarning("Arm up" , false);
 
   }
 
   public void ArmStop(){
     intakeArm.set(0);
-    double armCurrent = intakeArm.getStatorCurrent();
-    DriverStation.reportWarning("Arm Current: " + armCurrent, false);
+    // double armCurrent = intakeArm.getStatorCurrent();
+    // DriverStation.reportWarning("Arm Current: " + armCurrent, false);
     DriverStation.reportWarning("Arm Stopped" , false);
 
   }

@@ -45,8 +45,6 @@ public class Drive extends SubsystemBase {
   private PIDController DrivePIDController;
 
   public Drive() {
-    gyro.calibrate();
-
     left1 = new WPI_TalonSRX(Constants.LEFT_WHEELS_1);
     left2 = new WPI_VictorSPX(Constants.LEFT_WHEELS_2);
     right1 = new WPI_TalonSRX(Constants.RIGHT_WHEELS_1);
@@ -62,18 +60,18 @@ public class Drive extends SubsystemBase {
     right1.setNeutralMode(NeutralMode.Coast);
     right2.setNeutralMode(NeutralMode.Coast);
 
-    left1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-    right1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+    // left1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+    // right1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 
-    kP = 0; // Fill this in
-    kI = 0;
-    kD = 0;
-    kF = 0;
+    // kP = 0; // Fill this in
+    // kI = 0;
+    // kD = 0;
+    // kF = 0;
 
-    left1.config_kP(0, kP);
-    left1.config_kI(0, kI);
-    left1.config_kD(0, kD);
-    left1.config_kF(0, kF);
+    // left1.config_kP(0, kP);
+    // left1.config_kI(0, kI);
+    // left1.config_kD(0, kD);
+    // left1.config_kF(0, kF);
 
     xbox_io = new OI();
 
@@ -83,11 +81,12 @@ public class Drive extends SubsystemBase {
   }
   public void drivePower(double left_power, double right_power){
 
-    left1.set(ControlMode.PercentOutput, left_power); //Add encoders
-    // left2.set(left_power); no need since follow
-    right1.set(right_power); // Add Encoder
-    // right2.set(left_power); no need since follow
+    // DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
 
+    left1.set(left_power);
+    left2.set(left_power);
+    right1.set(right_power);
+    right2.set(right_power);
     // DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
 
   }
@@ -137,8 +136,8 @@ public class Drive extends SubsystemBase {
 	 * Leave this at -3000?
 	 */
   public void setEncoders(int pulses){
-    left1.getSensorCollection().setPulseWidthPosition(pulses, 0);
-    right1.getSensorCollection().setPulseWidthPosition(pulses, 0);
+    // left1.getSensorCollection().setPulseWidthPosition(pulses, 0);
+    // right1.getSensorCollection().setPulseWidthPosition(pulses, 0);
 
   }
 
@@ -151,19 +150,19 @@ public class Drive extends SubsystemBase {
 	 * 
 	 */
   public double getDistanceTraveled() {
-    //DriverStation.reportWarning("Left:" + (-(left1.getSensorCollection().getPulseWidthPosition())) + " Right: " + right1.getSensorCollection().getPulseWidthPosition(), false);
+    DriverStation.reportWarning("Left:" + (-(left1.getSensorCollection().getPulseWidthPosition())) + " Right: " + right1.getSensorCollection().getPulseWidthPosition(), false);
     return -((double) left1.getSensorCollection().getPulseWidthPosition() / 4096.0) * 6 * Math.PI;
   }
 
-  public void setPositionAUTO(double leftdistance){
-    left1.set(ControlMode.Position, leftdistance/Constants.INCHES_PER_ROTATION); // Only one encoder the others can't keep up
-    // right1.set(ControlMode.Position, rightdistance/Constants.INCHES_PER_ROTATION); 
+  public void setPositionAUTO(double leftdistance, double rightdistance){
+    left1.set(ControlMode.Position, leftdistance/Constants.INCHES_PER_ROTATION);
+    right1.set(ControlMode.Position, rightdistance/Constants.INCHES_PER_ROTATION); 
   }
 
 
   @Override
   public void periodic() {
-    DriverStation.reportWarning("Left PID: " + left1.getSelectedSensorPosition(), false);
+    // DriverStation.reportWarning("Left PID: " + left1.getSelectedSensorPosition(), false);
 
     // SmartDashboard.putNumber("PID Output", output);
 
@@ -180,6 +179,6 @@ public class Drive extends SubsystemBase {
     DriverStation.reportWarning("Adjusted Left Y:" + " " + adjusted_leftYJoy + "and Adjusted Right Y: " + adjusted_rightYJoy , false);
 
     **/
-
+    getDistanceTraveled();
   }
 }
