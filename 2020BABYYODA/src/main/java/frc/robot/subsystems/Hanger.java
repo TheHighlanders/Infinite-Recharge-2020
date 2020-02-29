@@ -16,7 +16,7 @@ public class Hanger extends SubsystemBase {
   /**
    * Creates a new Hanger.
    */
-  private WPI_TalonSRX Hanger1 = new WPI_TalonSRX(Constants.HOOK);
+  private WPI_TalonSRX Hanger1 = new WPI_TalonSRX(Constants.LEFT_HOOK);
 
   public Hanger() {
 

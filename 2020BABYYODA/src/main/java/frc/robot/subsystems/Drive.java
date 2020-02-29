@@ -61,8 +61,8 @@ public class Drive extends SubsystemBase {
     right1.setNeutralMode(NeutralMode.Coast);
     right2.setNeutralMode(NeutralMode.Coast);
 
-    left1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-    right1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+    // left1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+    // right1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 
     // kP = 0; // Fill this in
     // kI = 0;
@@ -159,9 +159,9 @@ public class Drive extends SubsystemBase {
     return -((double) left1.getSensorCollection().getPulseWidthPosition() / 4096.0) * 6 * Math.PI;
   }
 
-  public void setPositionAUTO(double leftdistance){
-    left1.set(ControlMode.Position, leftdistance/Constants.INCHES_PER_ROTATION); // Only one encoder the others can't keep up
-    // right1.set(ControlMode.Position, rightdistance/Constants.INCHES_PER_ROTATION); 
+  public void setPositionAUTO(double leftdistance, double rightdistance){
+    left1.set(ControlMode.Position, leftdistance/Constants.INCHES_PER_ROTATION);
+    right1.set(ControlMode.Position, rightdistance/Constants.INCHES_PER_ROTATION); 
   }
 
 

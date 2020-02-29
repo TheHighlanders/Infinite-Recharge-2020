@@ -35,7 +35,11 @@ public final class Constants {
 
     public static final int CLIMBER1MOTOR = 17;//CHANGE LATER
 
-    public static final int HOOK = 17;
+    public static final int LEFT_HOOK = 40; 
+    public static final int RIGHT_HOOK = 43; //spx
+
+    public static final int LEFT_WINCH = 53;
+    public static final int RIGHT_WINCH = 55;
 
     public static final double INCHES_PER_ROTATION = 6*Math.PI;
 }

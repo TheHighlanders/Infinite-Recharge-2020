@@ -44,8 +44,9 @@ public class TeleopDriveCMD extends CommandBase {
   @Override
   public void execute() {
 
-    m_Drive.drivePower(-Math.pow(this.m_OI.getXboxLeftY(), 3)/1.25, Math.pow(this.m_OI.getXboxRightY(), 3)/1.25);
-    // DriverStation.reportWarning("Left Y:" + " " + m_OI.getXboxLeftY() + "and Right Y: " + m_OI.getXboxRightY() , false);
+    // m_Drive.drivePower(-Math.pow(this.m_OI.getXboxLeftY(), 3)/1.25, Math.pow(this.m_OI.getXboxRightY(), 3)/1.25);
+    m_Drive.drivePower(-this.m_OI.getXboxLeftY(), this.m_OI.getXboxRightY());
+    DriverStation.reportWarning("Left Y:" + " " + m_OI.getXboxLeftY() + "and Right Y: " + m_OI.getXboxRightY() , false);
 
 
   }
