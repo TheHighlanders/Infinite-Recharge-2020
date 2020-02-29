@@ -11,15 +11,25 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Hanger extends SubsystemBase {
   /**
    * Creates a new Hanger.
    */
   private WPI_TalonSRX Hanger1 = new WPI_TalonSRX(Constants.LEFT_HOOK);
+  private NetworkTableEntry magnetValue;
+  private DigitalInput magneticInput1;
 
   public Hanger() {
-
+    NetworkTableInstance networkTables = NetworkTableInstance.getDefault();
+    this.magneticInput1 = new DigitalInput(0);
+    NetworkTable table = networkTables.getTable("Test");
+    this.magnetValue = table.getEntry("magnet1");
+    this.magnetValue.setBoolean(false);
   }
 
   public void HangerUp(){
@@ -35,5 +45,11 @@ public class Hanger extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    boolean magnetStatus = this.magneticInput1.get();
+    if(magnetStatus)
+    {
+      DriverStation.reportWarning("Magnet Found", false);
+    }
+    this.magnetValue.setBoolean(magnetStatus);
   }
 }

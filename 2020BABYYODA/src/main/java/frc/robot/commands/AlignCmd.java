@@ -42,8 +42,8 @@ public class AlignCmd extends CommandBase {
 
     NetworkTableInstance networkTables = NetworkTableInstance.getDefault();
     NetworkTable table = networkTables.getTable("Test");
-    this.ValueMiddleX = table.getEntry("Middle X");
-		this.ValueMiddleY = table.getEntry("Middle Y");
+    this.ValueMiddleX = table.getEntry("centerX");
+		this.ValueMiddleY = table.getEntry("centerY");
 		
 
   }
@@ -53,18 +53,19 @@ public class AlignCmd extends CommandBase {
   public void execute() {
     this.xValue = ValueMiddleX.getDouble(0);
     this.yValue= ValueMiddleY.getDouble(0);
+    double speed = 0.2;
     DriverStation.reportWarning("X: " + this.xValue + "   Middle: " + middleOfGoal, false);
       if(xValue >= middleOfGoal + 10){
           //spin to the left at half speed
           DriverStation.reportWarning("turn to left", false);
-          Robot.driving.drivePower(0.50,-0.50);
+          Robot.driving.drivePower(speed,speed);
           isAligned = false; 
       }
 
       else if (xValue <= middleOfGoal - 10) {
         //spin to the right at half speed
         DriverStation.reportWarning("turn to right", false);
-        Robot.driving.drivePower(-0.50,0.50);
+        Robot.driving.drivePower(-speed,-speed);
         isAligned = false; 
       }
       else{
@@ -82,7 +83,7 @@ public class AlignCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return isAligned;
-    //return false;
+    // return isAligned;
+    return false;
   }
 }

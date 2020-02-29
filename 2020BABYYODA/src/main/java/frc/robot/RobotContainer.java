@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -15,6 +16,7 @@ import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 
 
 /**
@@ -32,8 +34,11 @@ public class RobotContainer {
   private final IntakeArm m_IntakeArm = new IntakeArm();
   private final IntakeBrush m_IntakeBrush = new IntakeBrush();
   private final Conveyor m_Conveyor = new Conveyor();
+  private final Hanger m_Hanger = new Hanger();
   private Command m_autoCommand;
   private final Vision m_Vision = new Vision();
+  
+
   
   /** private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -58,6 +63,8 @@ public class RobotContainer {
 
     //m_autoCommand = new DrivePowerAUTO(m_robotDrive);
     // m_autoCommand = new Align?Cmd(m_robotDrive);
+
+    
   
   }
 
@@ -119,11 +126,12 @@ public class RobotContainer {
     JoystickButton xboxA = new JoystickButton(m_OI.xbox,1);
     JoystickButton xboxB = new JoystickButton(m_OI.xbox,2);
     JoystickButton xboxC = new JoystickButton(m_OI.xbox,3);
+    JoystickButton xboxD = new JoystickButton(m_OI.xbox,4);
 
     xboxA.whileHeld(new ShootingCMD(m_Shooting));
-    xboxB.whenPressed(new IncrementShootingSpeed(m_Shooting));
-    xboxC.whenPressed(new DecrementShootingSpeed(m_Shooting));
-    xboxA.whenReleased(new ShootingEndCMD(m_Shooting));
+    xboxB.whileHeld(new ConveyorMaxInCMD(m_Conveyor));
+    xboxC.whileHeld(new IntakeInCMD(m_IntakeBrush));
+    xboxD.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
 
   }
 

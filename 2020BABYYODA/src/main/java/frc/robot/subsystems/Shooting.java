@@ -30,6 +30,7 @@ public class Shooting extends SubsystemBase {
     private final NetworkTableInstance inst = NetworkTableInstance.getDefault();
     private NetworkTable table;
     private NetworkTableEntry range;
+    private NetworkTableEntry isAligned;
     private double[] rangeValuesForAverage;
     private static int numValuesToAverage = 5;
     private int nextIndex = 0;
@@ -51,10 +52,14 @@ public class Shooting extends SubsystemBase {
     shootingMotor.config_kP(0, .05);
     shootingMotor.config_kI(0, 0);
     shootingMotor.config_kD(0, 0);
+
+    this.table = inst.getTable("Test");
+    this.range = table.getEntry("Range");
+    this.isAligned = table.getEntry("IsAligned");
     
     shooting_io = new OI();
 
-    this.shootingSpeed = -100;
+    this.shootingSpeed = -85;
     
   }
 
@@ -72,22 +77,22 @@ public class Shooting extends SubsystemBase {
 
   public void incrementShootSpeed()
   {
-    this.shootingSpeed = this.shootingSpeed + 1;
+    this.shootingSpeed = this.shootingSpeed + 5;
     if(this.shootingSpeed > 100000)
     {
       this.shootingSpeed = 1;
     }
-    //DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
+    DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
   }
 
   public void decrementShootSpeed()
   {
-    this.shootingSpeed = this.shootingSpeed - 1;
+    this.shootingSpeed = this.shootingSpeed - 5;
     if(this.shootingSpeed < -100000)
     {
       this.shootingSpeed = -1;
     }
-    //DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
+    DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
   }
 
   public void ShootingStop(){
@@ -107,8 +112,7 @@ public class Shooting extends SubsystemBase {
     int position = shootingMotor.getSelectedSensorPosition();
     int velocity = shootingMotor.getSelectedSensorVelocity();
     DriverStation.reportWarning("Position: " + position + " Velocity: " + velocity, false);
-    this.table = inst.getTable("Test");
-		this.range = table.getEntry("Range");
+    this.isAligned.setBoolean(true);
     if(this.range != null)
     {
       try {
