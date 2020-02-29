@@ -55,6 +55,9 @@ public class RobotContainer {
     m_autoCommand = new DriveDistanceEncoderAUTO(m_robotDrive, 10.0, 10.0);
     m_robotDrive.left1.setSelectedSensorPosition(0);
 
+    //m_autoCommand = new DrivePowerAUTO(m_robotDrive);
+    // m_autoCommand = new Align?Cmd(m_robotDrive);
+  
   }
 
   /**
@@ -70,10 +73,10 @@ public class RobotContainer {
       Drive #2 controllers
       Moving the Intake Arm up and down
     */
-    JoystickButton ArmUp = new JoystickButton(m_OI.Control3,6);
-    JoystickButton ArmDown = new JoystickButton(m_OI.Control3,5);
-    ArmUp.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
-    ArmDown.whileHeld(new IntakeArmDownCMD(m_IntakeArm));
+    // JoystickButton ArmUp = new JoystickButton(m_OI.Control3,6);
+    // JoystickButton ArmDown = new JoystickButton(m_OI.Control3,5);
+    // ArmUp.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
+    // ArmDown.whileHeld(new IntakeArmDownCMD(m_IntakeArm));
     
     /*
       Drive #2 controllers
