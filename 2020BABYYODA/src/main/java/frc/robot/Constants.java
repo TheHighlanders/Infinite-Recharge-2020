@@ -20,10 +20,10 @@ public final class Constants {
     public static final int CONTROL2_PORT = 2;
     public static final int CONTROL3_PORT = 3;
 
-    public static final int LEFT_WHEELS_1 = 51;//talon
-    public static final int LEFT_WHEELS_2 = 41;//spx
-    public static final int RIGHT_WHEELS_1 = 52;//talon
-    public static final int RIGHT_WHEELS_2 = 44;//spx
+    public static final int LEFT_WHEELS_1 = 51;//victor
+    public static final int LEFT_WHEELS_2 = 41;//talon
+    public static final int RIGHT_WHEELS_1 = 50;//victor
+    public static final int RIGHT_WHEELS_2 = 44;//talon
 
     public static final int SHOOTER = 42;
 

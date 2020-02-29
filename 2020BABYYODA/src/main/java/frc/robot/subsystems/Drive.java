@@ -45,12 +45,11 @@ public class Drive extends SubsystemBase {
   private PIDController DrivePIDController;
 
   public Drive() {
-    gyro.calibrate();
 
-    left1 = new WPI_TalonSRX(Constants.LEFT_WHEELS_1);
-    left2 = new WPI_VictorSPX(Constants.LEFT_WHEELS_2);
-    right1 = new WPI_TalonSRX(Constants.RIGHT_WHEELS_1);
-    right2 = new WPI_VictorSPX(Constants.RIGHT_WHEELS_2);
+    left1 = new WPI_TalonSRX(Constants.LEFT_WHEELS_2);
+    left2 = new WPI_VictorSPX(Constants.LEFT_WHEELS_1);
+    right1 = new WPI_TalonSRX(Constants.RIGHT_WHEELS_2);
+    right2 = new WPI_VictorSPX(Constants.RIGHT_WHEELS_1);
 
     left1.configOpenloopRamp(ramp,0);
     left2.configOpenloopRamp(ramp,0);
@@ -83,11 +82,18 @@ public class Drive extends SubsystemBase {
   }
   public void drivePower(double left_power, double right_power){
 
-    left1.set(left_power); //Add encoders
+    // left1.set(ControlMode.PercentOutput, left_power); //Add encoders
     // left2.set(left_power); no need since follow
-    right1.set(right_power); // Add Encoder
+    // right1.set(right_power); // Add Encoder
     // right2.set(left_power); no need since follow
+
+    // DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
+    left1.set(left_power);
+    left2.set(left_power);
+    right1.set(right_power);
+    right2.set(right_power);
     DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
+
   }
   public void stopPower(){
    drivePower(0,0); 
@@ -135,8 +141,8 @@ public class Drive extends SubsystemBase {
 	 * Leave this at -3000?
 	 */
   public void setEncoders(int pulses){
-    left1.getSensorCollection().setPulseWidthPosition(pulses, 0);
-    right1.getSensorCollection().setPulseWidthPosition(pulses, 0);
+    // left1.getSensorCollection().setPulseWidthPosition(pulses, 0);
+    // right1.getSensorCollection().setPulseWidthPosition(pulses, 0);
 
   }
 
@@ -150,7 +156,8 @@ public class Drive extends SubsystemBase {
 	 */
   public double getDistanceTraveled() {
     //DriverStation.reportWarning("Left:" + (-(left1.getSensorCollection().getPulseWidthPosition())) + " Right: " + right1.getSensorCollection().getPulseWidthPosition(), false);
-    return -((double) left1.getSensorCollection().getPulseWidthPosition() / 4096.0) * 6 * Math.PI;
+    // return -((double) left1.getSensorCollection().getPulseWidthPosition() / 4096.0) * 6 * Math.PI;
+    return 0.0;
   }
 
   public void setPositionAUTO(double leftdistance, double rightdistance){
