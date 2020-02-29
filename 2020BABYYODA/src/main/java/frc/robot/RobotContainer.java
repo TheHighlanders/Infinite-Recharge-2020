@@ -67,45 +67,52 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
+    
+    // Xbox is Controller #1 (In Port 1)
+    // Left side of the Control Panel is Controller #3 (In Port 3)
+    // Right side of the Control Panel is Controller #2 (In Port 2)
 
     /*
-      Drive #2 controllers
-      Moving the Intake Arm up and down
+      Controller #3
+      Moving the Intake Arm up and down (Called Intake Up and Down on the Panel)
     */
-    // JoystickButton ArmUp = new JoystickButton(m_OI.Control3,6);
-    // JoystickButton ArmDown = new JoystickButton(m_OI.Control3,5);
-    // ArmUp.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
-    // ArmDown.whileHeld(new IntakeArmDownCMD(m_IntakeArm));
+
+    JoystickButton ArmUp = new JoystickButton(m_OI.Control3,6);
+    JoystickButton ArmDown = new JoystickButton(m_OI.Control3,5);
+    ArmUp.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
+    ArmDown.whileHeld(new IntakeArmDownCMD(m_IntakeArm));
     
     /*
-      Drive #2 controllers
-      Intake in and out
+      Controller #2
+      Intake in and out (Called Intaker IN and OUT on the Panel)
     */
+
     JoystickButton IntakeIn = new JoystickButton(m_OI.Control2, 4);
     JoystickButton IntakeOUT = new JoystickButton(m_OI.Control2, 5);
     IntakeIn.whileHeld(new IntakeInCMD(m_IntakeBrush));
     IntakeOUT.whileHeld(new IntakeOutCmd(m_IntakeBrush));
     
     /*
-      Drive #2 controllers
+      Controller #2
       Conveyor in and out
     */
+
     JoystickButton ConveyorIn = new JoystickButton(m_OI.Control2, 2);
     JoystickButton ConveyorOut = new JoystickButton(m_OI.Control2, 3);
     ConveyorIn.whileHeld(new ConveyorMaxInCMD(m_Conveyor));
     ConveyorOut.whileHeld(new ConveyorMaxOutCMD(m_Conveyor));
 
     /*
-      Drive #2 controlls
+      Controller #2
       Shoot
     */
+
     JoystickButton Shoot = new JoystickButton(m_OI.Control2, 1);
     Shoot.whileHeld(new ShootingCMD(m_Shooting));
     
     
     /*
-      Drive #1 controll
+      Controller #1 Xbox
     */
 
     JoystickButton xboxA = new JoystickButton(m_OI.xbox,1);
