@@ -31,12 +31,12 @@ public class HookRightUpCMD extends CommandBase {
   @Override
   public void execute() {
     //if button is not pressed
-    if(limitSwitch.get() == true){
+    if(limitSwitch.get() == false){
       m_Hook.HookUpRight();
     }
 
     //if limit swtich was pressed
-    if(limitSwitch.get() == false){
+    if(limitSwitch.get() == true){
       m_Hook.HangerStopRight();
     }
   }

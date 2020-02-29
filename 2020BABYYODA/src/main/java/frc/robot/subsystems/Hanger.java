@@ -33,12 +33,12 @@ public class Hanger extends SubsystemBase {
   }
 
   public void HangerUp(){
-    Hanger1.set(0.1);
+    Hanger1.set(0.5);
     DriverStation.reportWarning("Hanger Up", false);
   }
 
   public void HangerDown(){
-    Hanger1.set(0.1);
+    Hanger1.set(-0.3);
     DriverStation.reportWarning("Hanger down", false);
   }
 

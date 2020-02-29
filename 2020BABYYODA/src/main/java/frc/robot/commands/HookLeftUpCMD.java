@@ -37,12 +37,14 @@ public class HookLeftUpCMD extends CommandBase {
   @Override
   public void execute() {
     //if limit switch was not pressed
-    if(limitSwitch.get() == true){
+    DriverStation.reportWarning("EXECUTE", false);
+    if(limitSwitch.get() == false){
       //move left not right 
+      DriverStation.reportWarning("Hook left up", false);
       m_Hook.HookUpLeft();
     }
      //if limit switch was pressed
-    if(limitSwitch.get() == false){
+    if(limitSwitch.get() == true){
       m_Hook.HookStopLeft();
     }
   }

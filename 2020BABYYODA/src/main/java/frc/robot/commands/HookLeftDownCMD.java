@@ -17,7 +17,6 @@ public class HookLeftDownCMD extends CommandBase {
   private final Hook m_Hook;
 
   public HookLeftDownCMD(Hook hook_subsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
     m_Hook = hook_subsystem;
     addRequirements(hook_subsystem);
   }

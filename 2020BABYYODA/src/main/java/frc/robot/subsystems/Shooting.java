@@ -111,7 +111,7 @@ public class Shooting extends SubsystemBase {
     }
     int position = shootingMotor.getSelectedSensorPosition();
     int velocity = shootingMotor.getSelectedSensorVelocity();
-    DriverStation.reportWarning("Position: " + position + " Velocity: " + velocity, false);
+   // DriverStation.reportWarning("Position: " + position + " Velocity: " + velocity, false);
     this.isAligned.setBoolean(true);
     if(this.range != null)
     {

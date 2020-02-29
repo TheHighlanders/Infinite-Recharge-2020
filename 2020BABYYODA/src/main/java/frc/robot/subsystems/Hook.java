@@ -9,22 +9,17 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DriverStation;
 
 public class Hook extends SubsystemBase {
 
-  private WPI_TalonSRX HookLeft = new WPI_TalonSRX(Constants.HOOK_LEFT);
-  private WPI_TalonSRX HookRight = new WPI_TalonSRX(Constants.HOOK_RIGHT);
+  private WPI_VictorSPX HookLeft = new WPI_VictorSPX(Constants.LEFT_HOOK);
+  private WPI_TalonSRX HookRight = new WPI_TalonSRX(Constants.RIGHT_HOOK);
 
   public Hook() {
-
-  }
-
-  public void HookPower(double Hook_left_power, double Hook_right_power){
-    HookLeft.set(Hook_left_power);
-    HookRight.set(Hook_right_power);
-    DriverStation.reportWarning("Left Y:" + " " + Hook_left_power + "and Right Y: " + Hook_right_power , false);
 
   }
 
@@ -32,14 +27,17 @@ public class Hook extends SubsystemBase {
     Hanging for the Left Side
   */
   public void HookUpLeft(){
-    HookLeft.set(0.3);
+    DriverStation.reportWarning("Left hook Up", false);
+    HookLeft.set(0.5);
   }
   
   public void HookDownLeft(){
-    HookLeft.set(-0.3);
+    DriverStation.reportWarning("Left hook Down", false);
+    HookLeft.set(-0.5);
   }
   
   public void HookStopLeft(){
+    DriverStation.reportWarning("Left hook Stop", false);
     HookLeft.set(0);
   }
 

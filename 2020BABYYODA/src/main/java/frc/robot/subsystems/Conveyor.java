@@ -33,7 +33,7 @@ public class Conveyor extends SubsystemBase {
   }
 
   public void ConveyorIN() {
-    conveyorMotor.set(-.25);
+    conveyorMotor.set(-.5);
   }
 
   public void ConveyorOUT() {

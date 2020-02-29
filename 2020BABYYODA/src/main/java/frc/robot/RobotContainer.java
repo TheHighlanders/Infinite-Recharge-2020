@@ -8,8 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.ADXL345_SPI.AllAxes;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.*;
@@ -57,15 +59,10 @@ public class RobotContainer {
 
     DriverStation.reportWarning("Initialized",false);
 
-    // m_autoCommand = new DriveDistanceEncoderAUTO(m_robotDrive, 10.0, 10.0);
-    m_autoCommand = new AlignCmd(m_robotDrive);
     m_robotDrive.left1.setSelectedSensorPosition(0);
 
-    //m_autoCommand = new DrivePowerAUTO(m_robotDrive);
-    // m_autoCommand = new Align?Cmd(m_robotDrive);
-
+    m_autoCommand = new AutoCMDGroup();
     
-  
   }
 
   /**
@@ -76,6 +73,9 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     
+    Joystick joystick2 = new Joystick(Constants.CONTROL2_PORT);
+    Joystick joystick3 = new Joystick(Constants.CONTROL3_PORT);
+
     // Xbox is Controller #1 (In Port 1)
     // Left side of the Control Panel is Controller #3 (In Port 3)
     // Right side of the Control Panel is Controller #2 (In Port 2)
@@ -116,16 +116,20 @@ public class RobotContainer {
       recheck numbers 
     */
     //Left
-    JoystickButton ClimbUpLeft = new JoystickButton(m_OI.Control3, 4);
-    JoystickButton ClimbDownLeft = new JoystickButton(m_OI.Control3, 7);
-    ClimbUpLeft.whileHeld(new ClimbLeftUpCMD(m_climber));
-    ClimbDownLeft.whileHeld(new ClimbLeftDownCMD(m_climber));
     
+    // JoystickButton ClimbLeft = new JoystickButton(m_OI.Control3, 1);
+    // JoystickButton ClimbRight = new JoystickButton(m_OI.Control3, 5);
+
     //Right
-    JoystickButton ClimbUpRight = new JoystickButton(m_OI.Control3, 4);
+/*   JoystickButton ClimbUpRight = new JoystickButton(m_OI.Control3, 4);
     JoystickButton ClimbDownRight = new JoystickButton(m_OI.Control3, 7);
     ClimbUpRight.whileHeld(new ClimbRightUpCMD(m_climber));
-    ClimbDownRight.whileHeld(new ClimbRightDownCMD(m_climber));
+    ClimbDownRight.whileHeld(new ClimbRightDownCMD(m_climber)); 
+ */
+    JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,4);
+    HookUpLeft.whileHeld(new HookLeftUpCMD(m_hook));
+    JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,7);
+    HookDownLeft.whileHeld(new HookLeftDownCMD(m_hook));
 
 
     /*
@@ -150,6 +154,8 @@ public class RobotContainer {
     xboxB.whileHeld(new ConveyorInCMD(m_Conveyor));
     xboxC.whileHeld(new IntakeInCMD(m_IntakeBrush));
     xboxD.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
+
+
 
   }
 

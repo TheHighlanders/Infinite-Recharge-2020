@@ -9,13 +9,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
+import edu.wpi.first.wpilibj.Joystick;
 
-public class ClimbLeftDownCMD extends CommandBase {
-
-  private final Climber m_climber;
-
-  public ClimbLeftDownCMD(Climber Climb_subsystem) {
+public class ClimbCMD extends CommandBase {
+  
+  private final Climber m_climber; 
+  private final Joystick joystick;
+  public ClimbCMD(Climber Climb_subsystem, Joystick joystick) {
     m_climber = Climb_subsystem;
+    this.joystick = joystick;
     addRequirements(Climb_subsystem);
   }
 
@@ -27,13 +29,17 @@ public class ClimbLeftDownCMD extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_climber.ClimbDownLeft();
+    if (joystick.getY()>0){
+      m_climber.ClimbUpLeft();
+    }
+    if (joystick.getY()<0){
+      m_climber.ClimbDownLeft();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_climber.ClimbStopLeft();
   }
 
   // Returns true when the command should end.
