@@ -54,6 +54,7 @@ public class Shooting extends SubsystemBase {
     
     shooting_io = new OI();
 
+    this.shootingSpeed = -100;
     
   }
 

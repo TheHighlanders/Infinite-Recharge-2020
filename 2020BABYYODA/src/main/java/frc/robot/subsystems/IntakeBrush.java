@@ -17,7 +17,7 @@ public class IntakeBrush extends SubsystemBase {
   /**
    * Creates a new IntakeBrush.
    */
-    public WPI_TalonSRX brush = new WPI_TalonSRX(Constants.INTAKE);
+    public WPI_VictorSPX brush = new WPI_VictorSPX(Constants.INTAKE);
     private double ramp = 0.2;
   public IntakeBrush() {
     brush.configOpenloopRamp(ramp,0);

@@ -52,7 +52,8 @@ public class RobotContainer {
 
     DriverStation.reportWarning("Initialized",false);
 
-    m_autoCommand = new DriveDistanceEncoderAUTO(m_robotDrive, 10.0, 10.0);
+    // m_autoCommand = new DriveDistanceEncoderAUTO(m_robotDrive, 10.0, 10.0);
+    m_autoCommand = new AlignCmd(m_robotDrive);
     m_robotDrive.left1.setSelectedSensorPosition(0);
 
     //m_autoCommand = new DrivePowerAUTO(m_robotDrive);
