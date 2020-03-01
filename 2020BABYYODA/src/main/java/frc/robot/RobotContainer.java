@@ -141,11 +141,13 @@ public class RobotContainer {
     JoystickButton xboxB = new JoystickButton(m_OI.xbox,2);
     JoystickButton xboxC = new JoystickButton(m_OI.xbox,3);
     JoystickButton xboxD = new JoystickButton(m_OI.xbox,4);
+    JoystickButton xboxLeftTrigger = new JoystickButton(m_OI.xbox, 5);
 
     xboxA.whileHeld(new ShootingCMD(m_Shooting));
     xboxB.whileHeld(new ConveyorInCMD(m_Conveyor));
     xboxC.whileHeld(new IntakeInCMD(m_IntakeBrush));
     xboxD.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
+    xboxLeftTrigger.whileHeld(new AlignCmd(m_robotDrive));
 
   }
 

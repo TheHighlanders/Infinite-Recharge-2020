@@ -48,4 +48,6 @@ public final class Constants {
     public static final double INCHES_PER_ROTATION = 6*Math.PI;
 
     public static final int LIMITSWITCH = 0;
+
+    public static final double CENTER_TARGET = 175;
 }

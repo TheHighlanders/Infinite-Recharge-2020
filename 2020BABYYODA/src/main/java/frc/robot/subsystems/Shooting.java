@@ -31,6 +31,7 @@ public class Shooting extends SubsystemBase {
     private NetworkTable table;
     private NetworkTableEntry range;
     private NetworkTableEntry isAligned;
+    private NetworkTableEntry centerX;
     private double[] rangeValuesForAverage;
     private static int numValuesToAverage = 5;
     private int nextIndex = 0;
@@ -56,6 +57,7 @@ public class Shooting extends SubsystemBase {
     this.table = inst.getTable("Test");
     this.range = table.getEntry("Range");
     this.isAligned = table.getEntry("IsAligned");
+    this.centerX = table.getEntry("centerX");
     
     shooting_io = new OI();
 
@@ -112,7 +114,17 @@ public class Shooting extends SubsystemBase {
     int position = shootingMotor.getSelectedSensorPosition();
     int velocity = shootingMotor.getSelectedSensorVelocity();
    // DriverStation.reportWarning("Position: " + position + " Velocity: " + velocity, false);
-    this.isAligned.setBoolean(true);
+   
+    double currentCenter = this.centerX.getDouble(0);
+    if(currentCenter < Constants.CENTER_TARGET + 2 && currentCenter > Constants.CENTER_TARGET - 2)
+    {
+      this.isAligned.setBoolean(true);
+    }
+    else
+    {
+      this.isAligned.setBoolean(false);
+    }
+    
     if(this.range != null)
     {
       try {

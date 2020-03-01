@@ -27,9 +27,10 @@ public class AlignCmd extends CommandBase {
 
   double middleOfGoal = 175;
 
-  double kP = 0.005;
+  double kP = 0.0008;
   double kI = 0.0001;
-  double maxSpeed = 0.25;
+  double maxSpeed = 0.6;
+  double minSpeed = 0.25;
  // double integral = 0.0;
 
   boolean isAligned = false;
@@ -61,26 +62,29 @@ public class AlignCmd extends CommandBase {
     double error = xValue - middleOfGoal;
     double proptional = Math.abs(error * kP);
     //integral += error * kI;
-    double speed = 0.19;//Math.min(proptional,maxSpeed);
+    
+    double speed = Math.min(Math.max(proptional, minSpeed),maxSpeed);
+    
+    // double speed = 0.2;
     DriverStation.reportWarning("Speed " + speed, false);
-    //double speed = 0.2;
+    
     DriverStation.reportWarning("X: " + this.xValue + "   Middle: " + middleOfGoal, false);
       if(xValue >= middleOfGoal + 2){
           //spin to the left at half speed
           DriverStation.reportWarning("turn to left", false);
-          Robot.driving.drivePower(speed,speed);
+          this.m_drive.drivePower(speed,speed);
           isAligned = false; 
       }
 
       else if (xValue <= middleOfGoal - 2) {
         //spin to the right at half speed
         DriverStation.reportWarning("turn to right", false);
-        Robot.driving.drivePower(-speed,-speed);
+        this.m_drive.drivePower(-speed,-speed);
         isAligned = false; 
       }
       
       else{
-        Robot.driving.drivePower(0,0);
+        this.m_drive.drivePower(0,0);
         //integral = 0;
         isAligned = true;
       }
@@ -95,7 +99,7 @@ public class AlignCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    //return isAligned;
-    return false;
+    return isAligned;
+    // return false;
   }
 }

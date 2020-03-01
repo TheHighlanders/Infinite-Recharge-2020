@@ -53,9 +53,9 @@ public class Drive extends SubsystemBase {
 
   public void drivePower(double left_power, double right_power){
     left1.set(left_power);
-    left2.set(left_power);
+    //left2.set(left_power);
     right1.set(right_power);
-    right2.set(right_power);
+    //right2.set(right_power);
     // DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
   }
 
