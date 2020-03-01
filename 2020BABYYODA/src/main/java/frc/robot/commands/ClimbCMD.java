@@ -33,22 +33,28 @@ public class ClimbCMD extends CommandBase {
   public void execute() {
     if(this.isLeft)
     {
-    if (joystick.getY()>0){
-      m_climber.ClimbUpLeft();
-    }
-    if (joystick.getY()<0){
-      m_climber.ClimbDownLeft();
-    }
+      if (joystick.getY()>.5){
+        m_climber.ClimbUpLeft();
+      }
+      else if (joystick.getY()<-.5){
+        m_climber.ClimbDownLeft();
+      }
+      else {
+        m_climber.ClimbStopLeft();
+      }
   }
   else {
-    {
-      if (joystick.getY()>0){
+    
+      if (joystick.getY()>.5){
         m_climber.ClimbUpRight();
       }
-      if (joystick.getY()<0){
+      else if (joystick.getY()<-.5){
         m_climber.ClimbDownRight();
       }
-  }
+      else {
+        m_climber.ClimbStopRight();
+      }
+    }
   }
 
   // Called once the command ends or is interrupted.

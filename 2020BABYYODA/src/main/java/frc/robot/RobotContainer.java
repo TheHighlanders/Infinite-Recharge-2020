@@ -108,13 +108,9 @@ public class RobotContainer {
       Climbing: Moving the robot up
     */
      
-    //Left
+    // Initialize buttons. This is actually being controlled in the climber subsystem.
     JoystickButton ClimbLeft = new JoystickButton(m_OI.Control3, 1);
     JoystickButton ClimbRight = new JoystickButton(m_OI.Control3, 5);
-
-    //Right
-    ClimbLeft.whileHeld(new ClimbCMD(m_climber, m_OI.Control2, true));
-    ClimbRight.whileHeld(new ClimbCMD(m_climber, m_OI.Control3, false)); 
     
 
     JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,4);
