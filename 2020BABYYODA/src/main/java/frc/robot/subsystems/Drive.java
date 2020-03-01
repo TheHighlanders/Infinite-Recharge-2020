@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -25,7 +26,11 @@ public class Drive extends SubsystemBase {
   private double ramp = 0.2;
   public OI xbox_io;
 
+  private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+
   public Drive() {
+    gyro.calibrate();
+
     left1 = new WPI_TalonSRX(Constants.LEFT_WHEELS_1);
     left2 = new WPI_VictorSPX(Constants.LEFT_WHEELS_2);
     right1 = new WPI_TalonSRX(Constants.RIGHT_WHEELS_1);
@@ -63,6 +68,13 @@ public class Drive extends SubsystemBase {
    drivePower(0,0); 
   }
 
+  public Double getHeading(){
+    return gyro.getAngle();
+  }
+
+  public void resetHeading(){
+    gyro.reset();
+  }
 
   /**
 	 * Sets the drivetrain encoders back to 0 pulses
