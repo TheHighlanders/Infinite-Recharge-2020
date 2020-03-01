@@ -22,18 +22,20 @@ public class AlignCmd extends CommandBase {
 
   NetworkTableEntry ValueMiddleX;
   NetworkTableEntry ValueMiddleY;
+  NetworkTableEntry ValueIsAligned;
   double xValue;
   double yValue;
+  boolean isAligned = false;
 
   double middleOfGoal = 175;
 
-  double kP = 0.0008;
+  double kP = 0.001;
   double kI = 0.0001;
   double maxSpeed = 0.6;
-  double minSpeed = 0.25;
- // double integral = 0.0;
+  double minSpeed = 0.2;
+ 
 
-  boolean isAligned = false;
+  
 
   public AlignCmd(Drive drive_subsystem) {
     //getting Drive Train classes
@@ -44,12 +46,11 @@ public class AlignCmd extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    SmartDashboard.putBoolean("Aligned?", false);
-
     NetworkTableInstance networkTables = NetworkTableInstance.getDefault();
     NetworkTable table = networkTables.getTable("Test");
     this.ValueMiddleX = table.getEntry("centerX");
-		this.ValueMiddleY = table.getEntry("centerY");
+    this.ValueMiddleY = table.getEntry("centerY");
+    this.ValueIsAligned = table.getEntry("IsAligned");
 		
 
   }
@@ -59,6 +60,11 @@ public class AlignCmd extends CommandBase {
   public void execute() {
     this.xValue = ValueMiddleX.getDouble(0);
     this.yValue = ValueMiddleY.getDouble(0);
+    this.isAligned = ValueIsAligned.getBoolean(false);
+    if(this.isAligned)
+    {
+      return;
+    }
     double error = xValue - middleOfGoal;
     double proptional = Math.abs(error * kP);
     //integral += error * kI;
@@ -73,20 +79,20 @@ public class AlignCmd extends CommandBase {
           //spin to the left at half speed
           DriverStation.reportWarning("turn to left", false);
           this.m_drive.drivePower(speed,speed);
-          isAligned = false; 
+          // isAligned = false; 
       }
 
       else if (xValue <= middleOfGoal - 2) {
         //spin to the right at half speed
         DriverStation.reportWarning("turn to right", false);
         this.m_drive.drivePower(-speed,-speed);
-        isAligned = false; 
+        // isAligned = false; 
       }
       
       else{
         this.m_drive.drivePower(0,0);
         //integral = 0;
-        isAligned = true;
+        // isAligned = true;
       }
   }
 
@@ -99,7 +105,7 @@ public class AlignCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return isAligned;
+    return this.isAligned;
     // return false;
   }
 }

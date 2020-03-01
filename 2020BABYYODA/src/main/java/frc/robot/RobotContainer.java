@@ -28,7 +28,7 @@ public class RobotContainer {
   private final OI m_OI = new OI();
   private final Hook m_hook = new Hook();
   private final Drive m_robotDrive = new Drive();
-  //private final Climber m_climber = new Climber();
+  private final Climber m_climber = new Climber();
   private final Conveyor m_Conveyor = new Conveyor();
   private final Shooting m_Shooting = new Shooting();
   private final IntakeArm m_IntakeArm = new IntakeArm();
@@ -107,17 +107,15 @@ public class RobotContainer {
       Drive #2 controllers
       Climbing: Moving the robot up
     */
-     /*
+     
     //Left
     JoystickButton ClimbLeft = new JoystickButton(m_OI.Control3, 1);
     JoystickButton ClimbRight = new JoystickButton(m_OI.Control3, 5);
 
     //Right
-    JoystickButton ClimbUpRight = new JoystickButton(m_OI.Control3, 4);
-    JoystickButton ClimbDownRight = new JoystickButton(m_OI.Control3, 7);
-    ClimbUpRight.whileHeld(new ClimbRightUpCMD(m_climber));
-    ClimbDownRight.whileHeld(new ClimbRightDownCMD(m_climber)); 
-    */
+    ClimbLeft.whileHeld(new ClimbCMD(m_climber, m_OI.Control2, true));
+    ClimbRight.whileHeld(new ClimbCMD(m_climber, m_OI.Control3, false)); 
+    
 
     JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,4);
     HookUpLeft.whileHeld(new HookLeftUpCMD(m_hook));
@@ -131,6 +129,8 @@ public class RobotContainer {
 
     JoystickButton Shoot = new JoystickButton(m_OI.Control2, 1);
     Shoot.whileHeld(new ShootingCMD(m_Shooting));
+    JoystickButton ShootReverse = new JoystickButton(m_OI.Control2, 6);
+    ShootReverse.whileHeld(new ShootingReverseCMD(m_Shooting));
     
     
     /*

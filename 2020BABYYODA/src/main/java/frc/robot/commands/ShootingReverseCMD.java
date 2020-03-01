@@ -8,52 +8,34 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Climber;
-import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.subsystems.Shooting;
 
-public class ClimbCMD extends CommandBase {
-  
-  private final Climber m_climber; 
-  private final Joystick joystick;
-  private boolean isLeft = false;
-  public ClimbCMD(Climber Climb_subsystem, Joystick joystick, boolean isLeft) {
-    m_climber = Climb_subsystem;
-    this.joystick = joystick;
-    this.isLeft = isLeft;
-    addRequirements(Climb_subsystem);
+public class ShootingReverseCMD extends CommandBase {
+  private final Shooting m_Shooting;
+
+
+  public ShootingReverseCMD(Shooting shooting_subsystem) {
+    m_Shooting = shooting_subsystem;
+    addRequirements(m_Shooting);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(this.isLeft)
-    {
-    if (joystick.getY()>0){
-      m_climber.ClimbUpLeft();
-    }
-    if (joystick.getY()<0){
-      m_climber.ClimbDownLeft();
-    }
-  }
-  else {
-    {
-      if (joystick.getY()>0){
-        m_climber.ClimbUpRight();
-      }
-      if (joystick.getY()<0){
-        m_climber.ClimbDownRight();
-      }
-  }
+    m_Shooting.ShootingReverse();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_Shooting.ShootingStop();
+    
   }
 
   // Returns true when the command should end.

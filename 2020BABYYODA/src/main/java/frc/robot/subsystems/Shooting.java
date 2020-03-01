@@ -65,6 +65,10 @@ public class Shooting extends SubsystemBase {
     
   }
 
+  public void ShootingReverse(){
+    shootingMotor.set(-this.shootingSpeed);
+  }
+
   public void ShootingLaunch(){
     
     //DriverStation.reportWarning("Bombs Away!" , false);
