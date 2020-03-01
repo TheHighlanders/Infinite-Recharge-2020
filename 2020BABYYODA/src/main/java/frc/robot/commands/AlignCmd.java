@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.Drive;
-import frc.robot.Constants;
+
 
 public class AlignCmd extends CommandBase {
   private final Drive m_drive;
@@ -25,7 +25,12 @@ public class AlignCmd extends CommandBase {
   double xValue;
   double yValue;
 
-  double middleOfGoal = ((Constants.GOAL_LEFT_BOUND - Constants.GOAL_RIGHT_BOUND) / 2) + Constants.GOAL_LEFT_BOUND;
+  double middleOfGoal = 175;
+
+  double kP = 0.005;
+  double kI = 0.0001;
+  double maxSpeed = 0.25;
+ // double integral = 0.0;
 
   boolean isAligned = false;
 
@@ -52,24 +57,31 @@ public class AlignCmd extends CommandBase {
   @Override
   public void execute() {
     this.xValue = ValueMiddleX.getDouble(0);
-    this.yValue= ValueMiddleY.getDouble(0);
-    double speed = 0.2;
+    this.yValue = ValueMiddleY.getDouble(0);
+    double error = xValue - middleOfGoal;
+    double proptional = Math.abs(error * kP);
+    //integral += error * kI;
+    double speed = 0.19;//Math.min(proptional,maxSpeed);
+    DriverStation.reportWarning("Speed " + speed, false);
+    //double speed = 0.2;
     DriverStation.reportWarning("X: " + this.xValue + "   Middle: " + middleOfGoal, false);
-      if(xValue >= middleOfGoal + 10){
+      if(xValue >= middleOfGoal + 2){
           //spin to the left at half speed
           DriverStation.reportWarning("turn to left", false);
           Robot.driving.drivePower(speed,speed);
           isAligned = false; 
       }
 
-      else if (xValue <= middleOfGoal - 10) {
+      else if (xValue <= middleOfGoal - 2) {
         //spin to the right at half speed
         DriverStation.reportWarning("turn to right", false);
         Robot.driving.drivePower(-speed,-speed);
         isAligned = false; 
       }
+      
       else{
         Robot.driving.drivePower(0,0);
+        //integral = 0;
         isAligned = true;
       }
   }
@@ -83,7 +95,7 @@ public class AlignCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // return isAligned;
+    //return isAligned;
     return false;
   }
 }

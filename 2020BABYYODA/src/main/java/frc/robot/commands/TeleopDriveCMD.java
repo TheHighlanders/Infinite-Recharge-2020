@@ -24,20 +24,18 @@ public class TeleopDriveCMD extends CommandBase {
   private final Drive m_Drive;
   private final OI m_OI;
 
-
   public TeleopDriveCMD(Drive drive_subsystem, OI xbox_oi) {
 
     m_Drive = drive_subsystem;
     m_OI = xbox_oi;
 
     addRequirements(m_Drive);
-
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -48,12 +46,12 @@ public class TeleopDriveCMD extends CommandBase {
     m_Drive.drivePower(-this.m_OI.getXboxLeftY(), this.m_OI.getXboxRightY());
     DriverStation.reportWarning("Left Y:" + " " + m_OI.getXboxLeftY() + "and Right Y: " + m_OI.getXboxRightY() , false);
 
-
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    
   }
 
   // Returns true when the command should end.

@@ -7,30 +7,16 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.Constants;
-import frc.robot.OI;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-
-
-import edu.wpi.first.wpilibj.controller.PIDController;
-
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-
-import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+import frc.robot.OI;
 
 public class Drive extends SubsystemBase {
-
   public WPI_TalonSRX left1;
   public WPI_VictorSPX left2;
   public WPI_TalonSRX right1;
@@ -38,11 +24,6 @@ public class Drive extends SubsystemBase {
 
   private double ramp = 0.2;
   public OI xbox_io;
-
-  private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-
-  public static double kI, kP, kD, kF;
-  private PIDController DrivePIDController;
 
   public Drive() {
     left1 = new WPI_TalonSRX(Constants.LEFT_WHEELS_1);
@@ -63,72 +44,25 @@ public class Drive extends SubsystemBase {
     // left1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
     // right1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 
-    // kP = 0; // Fill this in
-    // kI = 0;
-    // kD = 0;
-    // kF = 0;
-
-    // left1.config_kP(0, kP);
-    // left1.config_kI(0, kI);
-    // left1.config_kD(0, kD);
-    // left1.config_kF(0, kF);
-
     xbox_io = new OI();
 
     left2.follow(left1);
     right2.follow(right1);
 
   }
+
   public void drivePower(double left_power, double right_power){
-
-    // DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
-
     left1.set(left_power);
     left2.set(left_power);
     right1.set(right_power);
     right2.set(right_power);
     // DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
-
   }
+
   public void stopPower(){
    drivePower(0,0); 
   }
 
-      /**
-	 * Calibrates gyro (takes 5 seconds while robot does nothing) Do this when
-	 * robot first turns on.
-	 */
-  public void calibrateGyro() {
-    	
-    gyro.calibrate();
-    
-  }
-  public void resetGyro() {
-    	
-    gyro.reset();
-    
-  }
-    /**
-	 * @return the current rate of turning in degrees per second
-	 */
-  public double getGyroRate() {
-    	
-    return gyro.getRate();
-    
-  }
-  
-  /**
-   * 
-   * @return gets an approximation of the gyro angle since reset was last
-   *         called from an accumulation using the FPGA. Will accumulate error
-   *         over time.
-   * 
-   */
-  public double getGyroAngle() {
-    
-    return gyro.getAngle();
-    
-  }
 
   /**
 	 * Sets the drivetrain encoders back to 0 pulses
@@ -141,7 +75,6 @@ public class Drive extends SubsystemBase {
 
   }
 
-      
   /**
 	 * 
 	 * @return gets an approximation of the distance traveled in inches

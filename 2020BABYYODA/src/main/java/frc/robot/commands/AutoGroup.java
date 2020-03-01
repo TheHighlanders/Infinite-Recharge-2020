@@ -7,26 +7,31 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.*;
+
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class AutoCMDGroup extends SequentialCommandGroup {
+public class AutoGroup extends ParallelCommandGroup {
   /**
-   * Creates a new AutoCMDGroup.
+   * Creates a new ParrelelAutoGroup.
    */
-  private final static Drive m_Drive = new Drive();
 
-  public AutoCMDGroup() {
-    
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
-    super(
-      new AlignCmd(m_Drive),
-      
-      new DriveDistanceEncoderAUTO(m_Drive, 10.0, 10.0)
+  public AutoGroup(Drive m_Drive, Shooting m_Shooting, Conveyor m_Conveyor) {
+   
+    new ParallelCommandGroup(
+      new ShootingCMD(m_Shooting),
+
+      new SequentialCommandGroup(
+        new AlignCmd(m_Drive),
+        new ConveyorInCMD(m_Conveyor)
+
+      ).andThen()
 
     );
+    
   }
 }

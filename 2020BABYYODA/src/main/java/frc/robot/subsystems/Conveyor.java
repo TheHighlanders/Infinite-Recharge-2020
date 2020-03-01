@@ -14,17 +14,12 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.OI;
 
 public class Conveyor extends SubsystemBase {
-  /**
-   * Creates a new Intake.
-   */
-
   private WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(Constants.CONVEYOR);
   private double ramp = 0.2;
   public OI intake_io;
 
   
   public Conveyor() {
-
     conveyorMotor.configOpenloopRamp(ramp,0);
     conveyorMotor.setNeutralMode(NeutralMode.Brake);
 
@@ -43,6 +38,7 @@ public class Conveyor extends SubsystemBase {
   public void ConveyorSTOP(){
     conveyorMotor.set(0);
   }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

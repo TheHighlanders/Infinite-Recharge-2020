@@ -9,18 +9,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooting;
-import frc.robot.Robot;
-
 
 public class ShootingCMD extends CommandBase {
-  /**
-   * Creates a new ShootingCommand.
-   */
   private final Shooting m_Shooting;
 
 
   public ShootingCMD(Shooting shooting_subsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
     m_Shooting = shooting_subsystem;
     addRequirements(m_Shooting);
   }

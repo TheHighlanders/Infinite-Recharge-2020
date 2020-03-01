@@ -8,40 +8,45 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooting;
+import edu.wpi.first.wpilibj.Timer;
 
-
-public class ShootingEndCMD extends CommandBase {
-
-  private final Shooting m_Shooting;
-
-
-  public ShootingEndCMD(Shooting shooting_subsystem) {
-    m_Shooting = shooting_subsystem;
-    addRequirements(m_Shooting);
+public class Halt extends CommandBase {
+  /**
+   * Creates a new Timer.
+   */
+  private Timer timer = new Timer();
+  private boolean done;
+  private double timelimit;
+  public Halt(Double timelimit) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.timelimit = timelimit;
+    done = false;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Shooting.ShootingStop();
+    done = false;
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    if (timer.get() > timelimit) {  
+      done = true;
+    } 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return done;
   }
 }

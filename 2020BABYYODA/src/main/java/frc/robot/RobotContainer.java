@@ -8,12 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.ADXL345_SPI.AllAxes;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -32,13 +28,13 @@ public class RobotContainer {
   private final OI m_OI = new OI();
   private final Hook m_hook = new Hook();
   private final Drive m_robotDrive = new Drive();
-  private final Climber m_climber = new Climber();
+  //private final Climber m_climber = new Climber();
   private final Conveyor m_Conveyor = new Conveyor();
   private final Shooting m_Shooting = new Shooting();
   private final IntakeArm m_IntakeArm = new IntakeArm();
   private final IntakeBrush m_IntakeBrush = new IntakeBrush();
   private Command m_autoCommand;
-  private final Vision m_Vision = new Vision();
+ // private final Vision m_Vision = new Vision();
   
 
   
@@ -54,14 +50,14 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
    configureButtonBindings();
+   m_autoCommand = new AlignCmd(m_robotDrive);
+   //m_autoCommand = new AutoGroup(m_robotDrive, m_Shooting, m_Conveyor);
     
     m_robotDrive.setDefaultCommand(new TeleopDriveCMD(m_robotDrive, m_OI));
 
     DriverStation.reportWarning("Initialized",false);
 
     m_robotDrive.left1.setSelectedSensorPosition(0);
-
-    m_autoCommand = new AutoCMDGroup();
     
   }
 
@@ -73,8 +69,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     
-    Joystick joystick2 = new Joystick(Constants.CONTROL2_PORT);
-    Joystick joystick3 = new Joystick(Constants.CONTROL3_PORT);
+    //Joystick joystick2 = new Joystick(Constants.CONTROL2_PORT);
+    //Joystick joystick3 = new Joystick(Constants.CONTROL3_PORT);
 
     // Xbox is Controller #1 (In Port 1)
     // Left side of the Control Panel is Controller #3 (In Port 3)
@@ -84,7 +80,6 @@ public class RobotContainer {
       Controller #3
       Moving the Intake Arm up and down (Called Intake Up and Down on the Panel)
     */
-
     JoystickButton ArmUp = new JoystickButton(m_OI.Control3,6);
     JoystickButton ArmDown = new JoystickButton(m_OI.Control3,5);
     ArmUp.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
@@ -94,7 +89,6 @@ public class RobotContainer {
       Controller #2
       Intake in and out (Called Intaker IN and OUT on the Panel)
     */
-
     JoystickButton IntakeIn = new JoystickButton(m_OI.Control2, 4);
     JoystickButton IntakeOUT = new JoystickButton(m_OI.Control2, 5);
     IntakeIn.whileHeld(new IntakeInCMD(m_IntakeBrush));
@@ -104,7 +98,6 @@ public class RobotContainer {
       Controller #2
       Conveyor in and out
     */
-
     JoystickButton ConveyorIn = new JoystickButton(m_OI.Control2, 2);
     JoystickButton ConveyorOut = new JoystickButton(m_OI.Control2, 3);
     ConveyorIn.whileHeld(new ConveyorInCMD(m_Conveyor));
@@ -113,24 +106,23 @@ public class RobotContainer {
     /*
       Drive #2 controllers
       Climbing: Moving the robot up
-      recheck numbers 
     */
+     /*
     //Left
-    
-    // JoystickButton ClimbLeft = new JoystickButton(m_OI.Control3, 1);
-    // JoystickButton ClimbRight = new JoystickButton(m_OI.Control3, 5);
+    JoystickButton ClimbLeft = new JoystickButton(m_OI.Control3, 1);
+    JoystickButton ClimbRight = new JoystickButton(m_OI.Control3, 5);
 
     //Right
-/*   JoystickButton ClimbUpRight = new JoystickButton(m_OI.Control3, 4);
+    JoystickButton ClimbUpRight = new JoystickButton(m_OI.Control3, 4);
     JoystickButton ClimbDownRight = new JoystickButton(m_OI.Control3, 7);
     ClimbUpRight.whileHeld(new ClimbRightUpCMD(m_climber));
     ClimbDownRight.whileHeld(new ClimbRightDownCMD(m_climber)); 
- */
+    */
+
     JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,4);
     HookUpLeft.whileHeld(new HookLeftUpCMD(m_hook));
     JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,7);
     HookDownLeft.whileHeld(new HookLeftDownCMD(m_hook));
-
 
     /*
       Controller #2
@@ -154,8 +146,6 @@ public class RobotContainer {
     xboxB.whileHeld(new ConveyorInCMD(m_Conveyor));
     xboxC.whileHeld(new IntakeInCMD(m_IntakeBrush));
     xboxD.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
-
-
 
   }
 

@@ -10,13 +10,9 @@ import frc.robot.subsystems.Conveyor;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ConveyorInCMD extends CommandBase {
-  /**
-   * Creates a new ConveyorCMD.
-   */
   private final Conveyor m_Conveyor;
 
   public ConveyorInCMD(Conveyor conveyor_subsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
     m_Conveyor = conveyor_subsystem;
     addRequirements(m_Conveyor);
   }
@@ -24,6 +20,7 @@ public class ConveyorInCMD extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.

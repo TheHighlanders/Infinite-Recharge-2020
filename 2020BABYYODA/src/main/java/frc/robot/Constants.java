@@ -32,16 +32,11 @@ public final class Constants {
 
     public static final int INTAKE = 54;
 
-    //does not have a motor controller
     public static final int LEFT_HOOK = 40; 
     public static final int RIGHT_HOOK = 43; //spx
 
     public static final int LEFT_WINCH = 53;
     public static final int RIGHT_WINCH = 55;
-
-    public static final int LEFT_CLIMBER = 17;
-
-    public static final int RIGHT_CLIMBER = 17;
 
     public static final int CONVEYOR = 43; 
 
