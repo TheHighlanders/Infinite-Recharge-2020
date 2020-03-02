@@ -50,4 +50,6 @@ public final class Constants {
     public static final int LIMITSWITCH = 0;
 
     public static final double CENTER_TARGET = 175;
+
+    public static final double GOAL_ERROR = 10;
 }

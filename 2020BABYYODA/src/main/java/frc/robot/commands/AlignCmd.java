@@ -10,10 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+import frc.robot.Constants;
 import frc.robot.subsystems.Drive;
 
 
@@ -29,11 +28,12 @@ public class AlignCmd extends CommandBase {
 
   double middleOfGoal = 175;
 
-  double kP = 0.001;
+  double kP = 0.0005;
   double kI = 0.0001;
   double maxSpeed = 0.6;
-  double minSpeed = 0.2;
+  double minSpeed = 0.37;
  
+
 
   
 
@@ -60,7 +60,7 @@ public class AlignCmd extends CommandBase {
   public void execute() {
     this.xValue = ValueMiddleX.getDouble(0);
     this.yValue = ValueMiddleY.getDouble(0);
-    this.isAligned = ValueIsAligned.getBoolean(false);
+    this.isAligned = ValueIsAligned.getBoolean(true);
     if(this.isAligned)
     {
       return;
@@ -69,22 +69,22 @@ public class AlignCmd extends CommandBase {
     double proptional = Math.abs(error * kP);
     //integral += error * kI;
     
-    double speed = Math.min(Math.max(proptional, minSpeed),maxSpeed);
+    //double speed =  minSpeed;//Math.min(Math.max(proptional, minSpeed),maxSpeed);
     
-    // double speed = 0.2;
-    DriverStation.reportWarning("Speed " + speed, false);
+    double speed = 0.3;
+    // DriverStation.reportWarning("Speed " + speed, false);
     
-    DriverStation.reportWarning("X: " + this.xValue + "   Middle: " + middleOfGoal, false);
-      if(xValue >= middleOfGoal + 2){
+    // DriverStation.reportWarning("X: " + this.xValue + "   Middle: " + middleOfGoal, false);
+      if(xValue > middleOfGoal + Constants.GOAL_ERROR){
           //spin to the left at half speed
-          DriverStation.reportWarning("turn to left", false);
+          // DriverStation.reportWarning("turn to left", false);
           this.m_drive.drivePower(speed,speed);
           // isAligned = false; 
       }
 
-      else if (xValue <= middleOfGoal - 2) {
+      else if (xValue < middleOfGoal - Constants.GOAL_ERROR) {
         //spin to the right at half speed
-        DriverStation.reportWarning("turn to right", false);
+        // DriverStation.reportWarning("turn to right", false);
         this.m_drive.drivePower(-speed,-speed);
         // isAligned = false; 
       }

@@ -61,7 +61,7 @@ public class Shooting extends SubsystemBase {
     
     shooting_io = new OI();
 
-    this.shootingSpeed = -65;//85
+    this.shootingSpeed = -72;//85
     
   }
 
@@ -120,7 +120,7 @@ public class Shooting extends SubsystemBase {
    // DriverStation.reportWarning("Position: " + position + " Velocity: " + velocity, false);
    
     double currentCenter = this.centerX.getDouble(0);
-    if(currentCenter < Constants.CENTER_TARGET + 2 && currentCenter > Constants.CENTER_TARGET - 2)
+    if(currentCenter < Constants.CENTER_TARGET + Constants.GOAL_ERROR && currentCenter > Constants.CENTER_TARGET - Constants.GOAL_ERROR)
     {
       this.isAligned.setBoolean(true);
     }

@@ -112,7 +112,6 @@ public class RobotContainer {
     JoystickButton ClimbLeft = new JoystickButton(m_OI.Control3, 1);
     JoystickButton ClimbRight = new JoystickButton(m_OI.Control3, 5);
     
-
     JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,4);
     HookUpLeft.whileHeld(new HookLeftUpCMD(m_hook));
     JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,7);
@@ -122,7 +121,6 @@ public class RobotContainer {
       Controller #2
       Shoot
     */
-
     JoystickButton Shoot = new JoystickButton(m_OI.Control2, 1);
     Shoot.whileHeld(new ShootingCMD(m_Shooting));
     JoystickButton ShootReverse = new JoystickButton(m_OI.Control2, 6);
@@ -132,7 +130,6 @@ public class RobotContainer {
     /*
       Controller #1 Xbox
     */
-
     JoystickButton xboxA = new JoystickButton(m_OI.xbox,1);
     JoystickButton xboxB = new JoystickButton(m_OI.xbox,2);
     JoystickButton xboxC = new JoystickButton(m_OI.xbox,3);
