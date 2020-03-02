@@ -25,8 +25,9 @@ public class Shooting extends SubsystemBase {
     private final WPI_TalonSRX shootingMotor = new WPI_TalonSRX(Constants.SHOOTER);
     private final double ramp = 0.2;
     public OI shooting_io;
-    private double shootingSpeed = 0;
-    
+    public double shootingSpeedPercent = 0;
+    public double shootingSpeedVelocity = 0;
+
     private final NetworkTableInstance inst = NetworkTableInstance.getDefault();
     private NetworkTable table;
     private NetworkTableEntry range;
@@ -37,6 +38,7 @@ public class Shooting extends SubsystemBase {
     private int nextIndex = 0;
     private double averageRange;
 
+    private final WPI_TalonSRX stopper = new WPI_TalonSRX(Constants.STOPPER);
 
   public Shooting() {
 
@@ -61,12 +63,13 @@ public class Shooting extends SubsystemBase {
     
     shooting_io = new OI();
 
-    this.shootingSpeed = -72;//85
+    this.shootingSpeedPercent = -65;//85
+    this.shootingSpeedVelocity = -30000;
     
   }
 
   public void ShootingReverse(){
-    shootingMotor.set(-this.shootingSpeed);
+    shootingMotor.set(-this.shootingSpeedVelocity);
   }
 
   public void ShootingLaunch(){
@@ -78,27 +81,29 @@ public class Shooting extends SubsystemBase {
 
     final double setpoint = 210 - 1.03 * averageRange + 0.00189 * Math.pow(averageRange, 2);
     DriverStation.reportWarning("Range: " + this.averageRange + "Setpoint: " + setpoint, false);
-    shootingMotor.set(ControlMode.PercentOutput, this.shootingSpeed/100);
+    // Enable line below for percentage output control.
+    // shootingMotor.set(ControlMode.PercentOutput, this.shootingSpeed/100);
+    shootingMotor.set(ControlMode.Velocity, this.shootingSpeedVelocity);
   }
 
   public void incrementShootSpeed()
   {
-    this.shootingSpeed = this.shootingSpeed + 5;
-    if(this.shootingSpeed > 100000)
-    {
-      this.shootingSpeed = 1;
-    }
-    DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
+    // this.shootingSpeed = this.shootingSpeed + 5;
+    // if(this.shootingSpeed > 100000)
+    // {
+    //   this.shootingSpeed = 1;
+    // }
+    // DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
   }
 
   public void decrementShootSpeed()
   {
-    this.shootingSpeed = this.shootingSpeed - 5;
-    if(this.shootingSpeed < -100000)
-    {
-      this.shootingSpeed = -1;
-    }
-    DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
+    // this.shootingSpeed = this.shootingSpeed - 5;
+    // if(this.shootingSpeed < -100000)
+    // {
+    //   this.shootingSpeed = -1;
+    // }
+    // DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
   }
 
   public void ShootingStop(){
@@ -107,6 +112,13 @@ public class Shooting extends SubsystemBase {
     shootingMotor.set(ControlMode.PercentOutput, 0);
   }
 
+  public void Loose(){
+    stopper.set(1.0);
+  }
+
+  public int returnVelocity(){
+    return shootingMotor.getSelectedSensorVelocity();
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
