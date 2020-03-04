@@ -50,8 +50,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
    configureButtonBindings();
-   m_autoCommand = new AlignCmd(m_robotDrive);
-   //m_autoCommand = new AutoGroup(m_robotDrive, m_Shooting, m_Conveyor);
+   // m_autoCommand = new AlignCmd(m_robotDrive);
+    // m_autoCommand = new AutoGroup("Back",m_robotDrive, m_Shooting, m_Conveyor, m_IntakeBrush);
+
+    m_autoCommand = new RotateAUTO(m_robotDrive, 10);
     
     m_robotDrive.setDefaultCommand(new TeleopDriveCMD(m_robotDrive, m_OI));
 

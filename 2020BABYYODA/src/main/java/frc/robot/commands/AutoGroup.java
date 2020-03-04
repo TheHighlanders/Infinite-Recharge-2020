@@ -29,43 +29,28 @@ public class AutoGroup extends SequentialCommandGroup {
      addCommands(
         new ParallelDeadlineGroup(
           new SequentialCommandGroup(
-            new AlignCmd(m_Drive).withTimeout(10.0),
-            new ParallelCommandGroup(new ConveyorInCMD(m_Conveyor).withTimeout(4.0), new LooseCMD(m_Shooting).withTimeout(4.0))),
-          new ShootingCMD(m_Shooting)),
-        new ParallelDeadlineGroup(new DriveDistanceEncoderAUTO(m_Drive, -15.0, -10.0), new IntakeInCMD(m_IntakeBrush)),
-        new ParallelDeadlineGroup(new DriveDistanceEncoderAUTO(m_Drive, -100.0, -100.0), new IntakeInCMD(m_IntakeBrush))
-
-
-      );
-
-
-
-      case "M":
-      addCommands(
-        new ParallelDeadlineGroup(
-          new SequentialCommandGroup(
-            new AlignCmd(m_Drive).withTimeout(10.0),
-            new ParallelCommandGroup(new ConveyorInCMD(m_Conveyor).withTimeout(4.0), new LooseCMD(m_Shooting).withTimeout(4.0))),
-          new ShootingCMD(m_Shooting)),
-        new ParallelDeadlineGroup(new DriveDistanceEncoderAUTO(m_Drive, -15.0, -10.0), new IntakeInCMD(m_IntakeBrush)),
-        new ParallelDeadlineGroup(new DriveDistanceEncoderAUTO(m_Drive, -100.0, -100.0), new IntakeInCMD(m_IntakeBrush))
-
-
-      );
-
-
-
-
-      case "R":
-      addCommands(
-        new ParallelDeadlineGroup(
-          new SequentialCommandGroup(
-            new AlignCmd(m_Drive),
+            new AlignCmd(m_Drive).withTimeout(1.0),
             new ConveyorInCMD(m_Conveyor).withTimeout(4.0)),
           new ShootingCMD(m_Shooting)),
+        new ParallelDeadlineGroup(new DriveDistanceEncoderAUTO(m_Drive, -15.0, -10.0), new IntakeInCMD(m_IntakeBrush)),
+        new ParallelDeadlineGroup(new DriveDistanceEncoderAUTO(m_Drive, -100.0, -100.0), new IntakeInCMD(m_IntakeBrush))
 
-        new DriveDistanceEncoderAUTO(m_Drive, -10.0, -10.0));
-      
+
+      );
+
+
+      // addCommands(                       Loose CMD needs to be of another subsystem
+      //   new ParallelDeadlineGroup(
+      //     new SequentialCommandGroup(
+      //       new AlignCmd(m_Drive).withTimeout(10.0),
+      //       new ParallelCommandGroup(new ConveyorInCMD(m_Conveyor).withTimeout(4.0), new LooseCMD(m_Shooting).withTimeout(4.0))),
+      //     new ShootingCMD(m_Shooting)),
+      //   new ParallelDeadlineGroup(new DriveDistanceEncoderAUTO(m_Drive, -15.0, -10.0), new IntakeInCMD(m_IntakeBrush)),
+      //   new ParallelDeadlineGroup(new DriveDistanceEncoderAUTO(m_Drive, -100.0, -100.0), new IntakeInCMD(m_IntakeBrush))
+      // );
+
+
+
 
 
       default:

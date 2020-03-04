@@ -12,8 +12,10 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.kauailabs.navx.frc.AHRS;
+
 import frc.robot.Constants;
 import frc.robot.OI;
 
@@ -26,10 +28,11 @@ public class Drive extends SubsystemBase {
   private double ramp = 0.2;
   public OI xbox_io;
 
-  private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+  //private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+  private AHRS imu = new AHRS(); 
 
   public Drive() {
-    gyro.calibrate();
+    //gyro.calibrate();
 
     left1 = new WPI_TalonSRX(Constants.LEFT_WHEELS_1);
     left2 = new WPI_VictorSPX(Constants.LEFT_WHEELS_2);
@@ -68,12 +71,12 @@ public class Drive extends SubsystemBase {
    drivePower(0,0); 
   }
 
-  public Double getHeading(){
-    return gyro.getAngle();
+  public float getHeading(){
+    return imu.getYaw();
   }
 
   public void resetHeading(){
-    gyro.reset();
+    imu.zeroYaw();
   }
 
   /**
@@ -107,23 +110,7 @@ public class Drive extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // DriverStation.reportWarning("Left PID: " + left1.getSelectedSensorPosition(), false);
-
-    // SmartDashboard.putNumber("PID Output", output);
-
-    /*
-    double leftYJoy = this.xbox_io.getXboxLeftY();
-    double rightYJoy = this.xbox_io.getXboxRightY();
-
-    double adjusted_leftYJoy = -Math.pow(leftYJoy,3);
-    double adjusted_rightYJoy = Math.pow(rightYJoy,3);
-
-    drivePower(adjusted_leftYJoy, adjusted_rightYJoy);
-    
-    DriverStation.reportWarning("Left Y:" + " " + leftYJoy + "and Right Y: " + rightYJoy , false);
-    DriverStation.reportWarning("Adjusted Left Y:" + " " + adjusted_leftYJoy + "and Adjusted Right Y: " + adjusted_rightYJoy , false);
-
-    **/
-    getDistanceTraveled();
+    // DriverStation.reportError("RPY: " + imu.getRoll() + ", " + imu.getPitch() + ", " + imu.getYaw(), false);
+    // getDistanceTraveled();
   }
 }
