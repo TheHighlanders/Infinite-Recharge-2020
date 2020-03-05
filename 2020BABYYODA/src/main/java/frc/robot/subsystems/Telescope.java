@@ -14,12 +14,12 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DriverStation;
 
-public class Hook extends SubsystemBase {
+public class Telescope extends SubsystemBase {
 
   private WPI_VictorSPX HookLeft = new WPI_VictorSPX(Constants.LEFT_HOOK);
   private WPI_TalonSRX HookRight = new WPI_TalonSRX(Constants.RIGHT_HOOK);
 
-  public Hook() {
+  public Telescope() {
 
   }
 
@@ -52,7 +52,7 @@ public class Hook extends SubsystemBase {
     HookRight.set(-0.3);
   }
 
-  public void HangerStopRight(){
+  public void HookStopRight(){
     HookRight.set(0);
   }
 

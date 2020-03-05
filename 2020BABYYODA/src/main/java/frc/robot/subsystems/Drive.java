@@ -32,7 +32,6 @@ public class Drive extends SubsystemBase {
   private AHRS imu = new AHRS(); 
 
   public Drive() {
-    //gyro.calibrate();
 
     left1 = new WPI_TalonSRX(Constants.LEFT_WHEELS_1);
     left2 = new WPI_VictorSPX(Constants.LEFT_WHEELS_2);
@@ -102,9 +101,9 @@ public class Drive extends SubsystemBase {
     return -((double) left1.getSensorCollection().getPulseWidthPosition() / 4096.0) * 6 * Math.PI;
   }
 
-  public void setPositionAUTO(double leftdistance, double rightdistance){
-    left1.set(ControlMode.Position, leftdistance/Constants.INCHES_PER_ROTATION);
-    right1.set(ControlMode.Position, rightdistance/Constants.INCHES_PER_ROTATION); 
+  public void setPositionAUTO(double distance){
+    left1.set(ControlMode.Position, distance/Constants.INCHES_PER_ROTATION);
+    right1.set(ControlMode.Position, distance/Constants.INCHES_PER_ROTATION); 
   }
 
 

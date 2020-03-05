@@ -38,8 +38,6 @@ public class Shooting extends SubsystemBase {
     private int nextIndex = 0;
     private double averageRange;
 
-    private final WPI_TalonSRX stopper = new WPI_TalonSRX(Constants.STOPPER);
-
   public Shooting() {
 
     shootingMotor.configFactoryDefault();
@@ -112,9 +110,6 @@ public class Shooting extends SubsystemBase {
     shootingMotor.set(ControlMode.PercentOutput, 0);
   }
 
-  public void Loose(){
-    stopper.set(1.0);
-  }
 
   public int returnVelocity(){
     return shootingMotor.getSelectedSensorVelocity();

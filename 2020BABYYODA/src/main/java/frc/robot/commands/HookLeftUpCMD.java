@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Hook;
+import frc.robot.subsystems.Telescope;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 
@@ -19,10 +19,10 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 public class HookLeftUpCMD extends CommandBase {
 
-  private final Hook m_Hook;
-  DigitalInput limitSwitch = new DigitalInput(Constants.LIMITSWITCH);
+  private final Telescope m_Hook;
+  DigitalInput limitSwitch = new DigitalInput(4);
 
-  public HookLeftUpCMD(Hook Hook_subsystem) {
+  public HookLeftUpCMD(Telescope Hook_subsystem) {
     m_Hook = Hook_subsystem;
     addRequirements(m_Hook);
   }

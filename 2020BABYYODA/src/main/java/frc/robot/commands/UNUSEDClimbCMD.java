@@ -8,27 +8,53 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooting;
+import frc.robot.subsystems.Climber;
+import edu.wpi.first.wpilibj.Joystick;
 
-public class LooseCMD extends CommandBase {
-
-  private final Shooting m_Shooting;
-
-  public LooseCMD(Shooting m_Shooting) {
-    this.m_Shooting = m_Shooting;
-    addRequirements(m_Shooting);
+public class UNUSEDClimbCMD extends CommandBase {
+  
+  private final Climber m_climber; 
+  private final Joystick joystick;
+  private boolean isLeft = false;
+  public UNUSEDClimbCMD(Climber Climb_subsystem, Joystick joystick, boolean isLeft) {
+    m_climber = Climb_subsystem;
+    this.joystick = joystick;
+    this.isLeft = isLeft;
+    addRequirements(Climb_subsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Shooting.Loose();
+    if(this.isLeft)
+    {
+      if (joystick.getY()>.5){
+        m_climber.ClimbUpLeft();
+      }
+      else if (joystick.getY()<-.5){
+        m_climber.ClimbDownLeft();
+      }
+      else {
+        m_climber.ClimbStopLeft();
+      }
+  }
+  else {
+    
+      if (joystick.getY()>.5){
+        m_climber.ClimbUpRight();
+      }
+      else if (joystick.getY()<-.5){
+        m_climber.ClimbDownRight();
+      }
+      else {
+        m_climber.ClimbStopRight();
+      }
+    }
   }
 
   // Called once the command ends or is interrupted.

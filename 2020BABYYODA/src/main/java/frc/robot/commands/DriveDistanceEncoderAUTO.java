@@ -7,28 +7,39 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Drive;
 
 public class DriveDistanceEncoderAUTO extends CommandBase {
   /**
    * Creates a new DriveByDistance.
    */
-  public final Drive m_Drive;
-  public Double leftdist;
-  public Double rightdist;
 
-  public DriveDistanceEncoderAUTO(Drive drive_subsystem, Double leftdist, Double rightdist) {
+  private final Drive m_Drive;
+
+  private Double distance;
+
+  private WPI_TalonSRX left, right;
+
+
+  public DriveDistanceEncoderAUTO(Drive drive_subsystem, Double distance) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_Drive = drive_subsystem;
-    leftdist = this.leftdist;
-    rightdist = this.rightdist;
+    this.left = m_Drive.left1;
+    this.right = m_Drive.right1;
+    distance = this.distance;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Drive.setPositionAUTO(leftdist, rightdist);
+    left.setSelectedSensorPosition(0);
+    right.setSelectedSensorPosition(0);
+    m_Drive.setPositionAUTO(distance);
   }
   
   // Called every time the scheduler runs while the command is scheduled.
@@ -45,6 +56,8 @@ public class DriveDistanceEncoderAUTO extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+
+    return  Math.abs((left.getSelectedSensorPosition() / 4096 * 2) * Constants.INCHES_PER_ROTATION) >= distance - 8
+    || Math.abs((right.getSelectedSensorPosition() / 4096 * 2) * Constants.INCHES_PER_ROTATION) >= distance - 8;
   }
 }

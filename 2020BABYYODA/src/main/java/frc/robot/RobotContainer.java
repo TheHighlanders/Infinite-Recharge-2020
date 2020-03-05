@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final OI m_OI = new OI();
-  private final Hook m_hook = new Hook();
+  private final Telescope m_hook = new Telescope();
   private final Drive m_robotDrive = new Drive();
   private final Climber m_climber = new Climber();
   private final Conveyor m_Conveyor = new Conveyor();
@@ -53,7 +53,7 @@ public class RobotContainer {
    // m_autoCommand = new AlignCmd(m_robotDrive);
     // m_autoCommand = new AutoGroup("Back",m_robotDrive, m_Shooting, m_Conveyor, m_IntakeBrush);
 
-    m_autoCommand = new RotateAUTO(m_robotDrive, 10);
+    m_autoCommand = new AutoGroup("Back", m_robotDrive, m_Shooting, m_Conveyor, m_IntakeBrush);
     
     m_robotDrive.setDefaultCommand(new TeleopDriveCMD(m_robotDrive, m_OI));
 
@@ -114,10 +114,14 @@ public class RobotContainer {
     JoystickButton ClimbLeft = new JoystickButton(m_OI.Control3, 1);
     JoystickButton ClimbRight = new JoystickButton(m_OI.Control3, 5);
     
-    JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,4);
-    HookUpLeft.whileHeld(new HookLeftUpCMD(m_hook));
-    JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,7);
-    HookDownLeft.whileHeld(new HookLeftDownCMD(m_hook));
+    // JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,4);
+    // HookUpLeft.whileHeld(new HookLeftUpCMD(m_hook));
+    // JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,7);
+    // HookDownLeft.whileHeld(new HookLeftDownCMD(m_hook));
+    JoystickButton HookUpRight = new JoystickButton(m_OI.Control3,2);
+    HookUpRight.whileHeld(new HookRightUpCMD(m_hook));
+    JoystickButton HookDownRight = new JoystickButton(m_OI.Control3,1);
+    HookDownRight.whileHeld(new HookRightDownCMD(m_hook));
 
     /*
       Controller #2

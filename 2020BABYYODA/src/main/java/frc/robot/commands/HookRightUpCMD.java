@@ -9,15 +9,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Hook;
+import frc.robot.subsystems.Telescope;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class HookRightUpCMD extends CommandBase {
 
-  private final Hook m_Hook;
-  DigitalInput limitSwitch = new DigitalInput(Constants.LIMITSWITCH);
+  private final Telescope m_Hook;
+  private DigitalInput limitSwitch = new DigitalInput(Constants.RIGHT_LIMIT_SWITCH);
+  private boolean done = false;
 
-  public HookRightUpCMD(Hook Hook_subsystem) {
+  public HookRightUpCMD(Telescope Hook_subsystem) {
     m_Hook = Hook_subsystem;
     addRequirements(m_Hook);
   }
@@ -25,6 +26,7 @@ public class HookRightUpCMD extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    this.done = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,19 +39,20 @@ public class HookRightUpCMD extends CommandBase {
 
     //if limit swtich was pressed
     if(limitSwitch.get() == true){
-      m_Hook.HangerStopRight();
+      m_Hook.HookStopRight();
+      this.done = true;
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Hook.HangerStopRight();
+    m_Hook.HookStopRight();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return this.done;
   }
 }

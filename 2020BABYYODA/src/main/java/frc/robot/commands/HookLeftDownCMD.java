@@ -8,14 +8,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Hook;
+import frc.robot.subsystems.Telescope;
 
 public class HookLeftDownCMD extends CommandBase {
 
-  private final Hook m_Hook;
+  private final Telescope m_Telescope;
 
-  public HookLeftDownCMD(Hook hook_subsystem) {
-    m_Hook = hook_subsystem;
+  public HookLeftDownCMD(Telescope hook_subsystem) {
+    m_Telescope = hook_subsystem;
     addRequirements(hook_subsystem);
   }
 
@@ -27,13 +27,13 @@ public class HookLeftDownCMD extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Hook.HookDownLeft();
+    m_Telescope.HookDownLeft();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Hook.HookStopLeft();
+    m_Telescope.HookStopLeft();
   }
 
   // Returns true when the command should end.

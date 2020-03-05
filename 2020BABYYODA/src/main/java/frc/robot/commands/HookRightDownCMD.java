@@ -9,14 +9,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Hook;
+import frc.robot.subsystems.Telescope;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class HookRightDownCMD extends CommandBase {
-  private final Hook m_Hook;
-  DigitalInput limitSwitch = new DigitalInput(Constants.LIMITSWITCH);
+  private final Telescope m_Hook;
 
-  public HookRightDownCMD(Hook Hook_subsystem) {
+  public HookRightDownCMD(Telescope Hook_subsystem) {
     m_Hook = Hook_subsystem;
     addRequirements(m_Hook);
   }
@@ -35,7 +34,7 @@ public class HookRightDownCMD extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Hook.HookDownRight();
+    m_Hook.HookStopRight();
   }
 
   // Returns true when the command should end.

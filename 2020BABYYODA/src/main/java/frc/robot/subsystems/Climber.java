@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,11 +21,13 @@ public class Climber extends SubsystemBase {
 
   private WPI_VictorSPX climbRightMotor = new WPI_VictorSPX(Constants.RIGHT_WINCH);
 
+  // private DigitalInput magInput;
+
   Joystick rightJoystick = new Joystick(Constants.CONTROL2_PORT);
   Joystick leftJoystick = new Joystick(Constants.CONTROL3_PORT);
 
   public Climber() {
-
+    // this.magInput = new DigitalInput(0);
   }
 
   /*
@@ -61,8 +64,10 @@ public class Climber extends SubsystemBase {
 
   public void periodic() {
     // This method will be called once per scheduler run
-    DriverStation.reportWarning("Joystick 2: " + rightJoystick.getY(),false);
-    DriverStation.reportWarning("Joystick 3: " + leftJoystick.getY(),false);
+    // DriverStation.reportWarning("Joystick 2: " + rightJoystick.getY(),false);
+    // DriverStation.reportWarning("Joystick 3: " + leftJoystick.getY(),false);
+    // boolean magStatus = this.magInput.get();
+    // DriverStation.reportWarning("Mag: " + magStatus,false);
 
     if (leftJoystick.getY()<-0.5){
       ClimbUpLeft();

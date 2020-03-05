@@ -27,7 +27,7 @@ public final class Constants {
     public static final int RIGHT_WHEELS_2 = 50;//talon
 
     public static final int SHOOTER = 42;
-    public static final int STOPPER = 99;
+    public static final int DOOR = 99;
 
     public static final int INTAKE_ARM = 52;
 
@@ -39,7 +39,7 @@ public final class Constants {
     public static final int LEFT_WINCH = 53;
     public static final int RIGHT_WINCH = 55;
 
-    public static final int CONVEYOR = 43; 
+    public static final int CONVEYOR = 23; 
 
     //the range that the goal has to be in so we can shoot
     public static final double GOAL_LEFT_BOUND = 141.0;//a
@@ -48,7 +48,11 @@ public final class Constants {
 
     public static final double INCHES_PER_ROTATION = 6*Math.PI;
 
-    public static final int LIMITSWITCH = 0;
+    public static final double GEAR_INCHES = 1*Math.PI;
+
+    public static final int LEFT_LIMIT_SWITCH = 1;
+
+    public static final int RIGHT_LIMIT_SWITCH = 0;
 
     public static final double CENTER_TARGET = 175;
 
