@@ -8,9 +8,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+
+import edu.wpi.first.wpilibj.DriverStation;
 
 import frc.robot.Constants;
 
@@ -21,16 +23,17 @@ public class Door extends SubsystemBase {
   /**
    * Creates a new IntakeBrush.
    */
-    public WPI_VictorSPX door = new WPI_VictorSPX(Constants.INTAKE);
+    public WPI_TalonSRX door = new WPI_TalonSRX(Constants.DOOR);
     
     private double ramp = 0.2;
 
   public Door() {
+    door.configFactoryDefault();
 
     door.configOpenloopRamp(ramp,0);
     door.setNeutralMode(NeutralMode.Brake);
 
-    door.configFactoryDefault();
+    
     door.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 1000);
 
     door.setSelectedSensorPosition(0);
@@ -41,8 +44,9 @@ public class Door extends SubsystemBase {
   }
 
   public void DoorOpen(){
-    if (DoorPos() < 1000){
-      door.set(ControlMode.Position, 10/Constants.GEAR_INCHES);
+    if (DoorPos() < 1000){      
+      DriverStation.reportError("Door Open", false);
+      door.set(ControlMode.Position, 40/Constants.GEAR_INCHES);
     }
 
 
@@ -50,6 +54,7 @@ public class Door extends SubsystemBase {
 
   public void DoorClose(){
     if (DoorPos() > 3000){
+      DriverStation.reportError("Door Closed", false);
       door.set(ControlMode.Position, -10/Constants.GEAR_INCHES);
     }
   }
@@ -57,5 +62,6 @@ public class Door extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    DriverStation.reportError("Door PID: " + door.getSelectedSensorPosition(), false);
   }
 }

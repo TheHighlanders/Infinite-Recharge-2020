@@ -26,8 +26,8 @@ public final class Constants {
     public static final int RIGHT_WHEELS_1 = 44;//victor 
     public static final int RIGHT_WHEELS_2 = 50;//talon
 
-    public static final int SHOOTER = 42;
-    public static final int DOOR = 99;
+    public static final int SHOOTER = 45;
+    public static final int DOOR = 42;
 
     public static final int INTAKE_ARM = 52;
 

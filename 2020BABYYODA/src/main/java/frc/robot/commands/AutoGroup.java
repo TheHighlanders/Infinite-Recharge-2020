@@ -21,7 +21,7 @@ public class AutoGroup extends SequentialCommandGroup {
    * Creates a new ParrelelAutoGroup.
    */
   private String selection;
-  public AutoGroup(String selection, Drive m_Drive, Shooting m_Shooting, Conveyor m_Conveyor, IntakeBrush m_IntakeBrush) {
+  public AutoGroup(String selection, Drive m_Drive, Shooting m_Shooting, Conveyor m_Conveyor, IntakeBrush m_IntakeBrush, Door m_Door) {
    this.selection = selection;
 
    switch (selection) {
@@ -30,7 +30,8 @@ public class AutoGroup extends SequentialCommandGroup {
         new ParallelDeadlineGroup(
           new SequentialCommandGroup(
             new AlignCmd(m_Drive).withTimeout(1.0),
-            new ConveyorInCMD(m_Conveyor).withTimeout(4.0)),
+            new ParallelDeadlineGroup(new ConveyorInCMD(m_Conveyor).withTimeout(4.0),new DoorUpCMD(m_Door)),
+            new DoorDownCMD(m_Door).withTimeout(0.5)),
           new ShootingCMD(m_Shooting)),
         new RotateToPosAUTO(m_Drive, -30.0),
         new ParallelDeadlineGroup(new DriveDistanceEncoderAUTO(m_Drive, -100.0), new IntakeInCMD(m_IntakeBrush))

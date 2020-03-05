@@ -33,6 +33,7 @@ public class RobotContainer {
   private final Shooting m_Shooting = new Shooting();
   private final IntakeArm m_IntakeArm = new IntakeArm();
   private final IntakeBrush m_IntakeBrush = new IntakeBrush();
+  private final Door m_Door = new Door();
   private Command m_autoCommand;
  // private final Vision m_Vision = new Vision();
   
@@ -53,7 +54,7 @@ public class RobotContainer {
    // m_autoCommand = new AlignCmd(m_robotDrive);
     // m_autoCommand = new AutoGroup("Back",m_robotDrive, m_Shooting, m_Conveyor, m_IntakeBrush);
 
-    m_autoCommand = new AutoGroup("Back", m_robotDrive, m_Shooting, m_Conveyor, m_IntakeBrush);
+    m_autoCommand = new AutoGroup("Back", m_robotDrive, m_Shooting, m_Conveyor, m_IntakeBrush, m_Door);
     
     m_robotDrive.setDefaultCommand(new TeleopDriveCMD(m_robotDrive, m_OI));
 
@@ -140,13 +141,16 @@ public class RobotContainer {
     JoystickButton xboxB = new JoystickButton(m_OI.xbox,2);
     JoystickButton xboxC = new JoystickButton(m_OI.xbox,3);
     JoystickButton xboxD = new JoystickButton(m_OI.xbox,4);
-    JoystickButton xboxLeftTrigger = new JoystickButton(m_OI.xbox, 5);
+    JoystickButton xboxLeftBumper = new JoystickButton(m_OI.xbox, 5);
+    JoystickButton xboxRightBumper = new JoystickButton(m_OI.xbox, 6);
 
     xboxA.whileHeld(new ShootingCMD(m_Shooting));
     xboxB.whileHeld(new ConveyorInCMD(m_Conveyor));
     xboxC.whileHeld(new IntakeInCMD(m_IntakeBrush));
     xboxD.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
-    xboxLeftTrigger.whileHeld(new AlignCmd(m_robotDrive));
+
+    xboxLeftBumper.whenPressed(new DoorDownCMD(m_Door));
+    xboxRightBumper.whenPressed(new DoorUpCMD(m_Door));
 
   }
 
