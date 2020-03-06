@@ -26,8 +26,8 @@ public final class Constants {
     public static final int RIGHT_WHEELS_1 = 44;//victor 
     public static final int RIGHT_WHEELS_2 = 50;//talon
 
-    public static final int SHOOTER = 45;
-    public static final int DOOR = 42;
+    public static final int SHOOTER = 42;
+    public static final int DOOR = 45;
 
     public static final int INTAKE_ARM = 52;
 
@@ -39,7 +39,7 @@ public final class Constants {
     public static final int LEFT_WINCH = 53;
     public static final int RIGHT_WINCH = 55;
 
-    public static final int CONVEYOR = 23; 
+    public static final int CONVEYOR = 46; 
 
     //the range that the goal has to be in so we can shoot
     public static final double GOAL_LEFT_BOUND = 141.0;//a
@@ -57,4 +57,31 @@ public final class Constants {
     public static final double CENTER_TARGET = 175;
 
     public static final double GOAL_ERROR = 10;
+
+    // Button Constants
+    // Control 3
+    public static final int ARM_UP_BUTTON = 6;
+    public static final int ARM_DOWN_BUTTON = 5;
+    public static final int CLIMB_UP_LEFT = 1;
+    public static final int CLIMB_UP_RIGHT = 9;
+    public static final int CLIMB_DOWN_LEFT = 8;
+    public static final int CLIMB_DOWN_RIGHT = 7;
+    public static final int TELESCOPE_UP_RIGHT = 2;
+    public static final int TELESCOPE_DOWN_RIGHT = 1;
+    public static final int TELESCOPE_UP_LEFT = 2;
+    public static final int TELESCOPE_DOWN_LEFT = 7;
+    public static final int BALANCE = 11;
+
+    // Control 2
+    public static final int INTAKE_IN_BUTTON = 4;
+    public static final int INTAKE_OUT_BUTTON = 5;
+    public static final int CONVERYOR_IN_BUTTON = 2;
+    public static final int CONVERYOR_OUT_BUTTON = 3;
+    public static final int SHOOT_BUTTON = 1;
+    public static final int RED_BUTTON = 1;
+    public static final int YELLOW_BUTTON = 1;
+    public static final int GREEN_BUTTON = 1;
+    public static final int BLUE_BUTTON = 1;
+
+
 }

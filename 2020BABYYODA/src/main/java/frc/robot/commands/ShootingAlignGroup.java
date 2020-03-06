@@ -26,8 +26,8 @@ public class ShootingAlignGroup extends ParallelCommandGroup {
       new IntakeInCMD(m_IntakeBrush),
       new SequentialCommandGroup(
         new AlignCmd(m_Drive),
-        new ParallelCommandGroup( // new LooseCMD(m_Shooting), 
-            new ConveyorInCMD(m_Conveyor))
+        new ParallelCommandGroup(
+            new ConveyorInCMD(m_Conveyor, -0.9))
         )
 
     );

@@ -32,9 +32,10 @@ public class Door extends SubsystemBase {
 
     door.configOpenloopRamp(ramp,0);
     door.setNeutralMode(NeutralMode.Brake);
-
     
     door.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 1000);
+    door.configPeakOutputForward(1);
+    door.config_kP(0,5);
 
     door.setSelectedSensorPosition(0);
 
@@ -44,19 +45,13 @@ public class Door extends SubsystemBase {
   }
 
   public void DoorOpen(){
-    if (DoorPos() < 1000){      
-      DriverStation.reportError("Door Open", false);
-      door.set(ControlMode.Position, 40/Constants.GEAR_INCHES);
-    }
-
-
+    double distancetomove = 44.4*(5/Constants.GEAR_INCHES);
+    DriverStation.reportError("Target Height: " + distancetomove, false);
+    door.set(ControlMode.Position, 4*44.4*(5/Constants.GEAR_INCHES));
   }
 
   public void DoorClose(){
-    if (DoorPos() > 3000){
-      DriverStation.reportError("Door Closed", false);
-      door.set(ControlMode.Position, -10/Constants.GEAR_INCHES);
-    }
+    door.set(ControlMode.Position, 0);
   }
 
   @Override

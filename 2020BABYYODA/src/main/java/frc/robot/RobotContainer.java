@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final OI m_OI = new OI();
-  private final Telescope m_hook = new Telescope();
+  private final Telescope m_telescope = new Telescope();
   private final Drive m_robotDrive = new Drive();
   private final Climber m_climber = new Climber();
   private final Conveyor m_Conveyor = new Conveyor();
@@ -61,6 +61,10 @@ public class RobotContainer {
     DriverStation.reportWarning("Initialized",false);
 
     m_robotDrive.left1.setSelectedSensorPosition(0);
+
+    new SetSpeedDecrease(m_Shooting, m_OI);
+    new SetSpeedAdd(m_Shooting, m_OI);
+    
     
   }
 
@@ -83,8 +87,8 @@ public class RobotContainer {
       Controller #3
       Moving the Intake Arm up and down (Called Intake Up and Down on the Panel)
     */
-    JoystickButton ArmUp = new JoystickButton(m_OI.Control3,6);
-    JoystickButton ArmDown = new JoystickButton(m_OI.Control3,5);
+    JoystickButton ArmUp = new JoystickButton(m_OI.Control3,Constants.ARM_UP_BUTTON);
+    JoystickButton ArmDown = new JoystickButton(m_OI.Control3,Constants.ARM_DOWN_BUTTON);
     ArmUp.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
     ArmDown.whileHeld(new IntakeArmDownCMD(m_IntakeArm));
     
@@ -92,8 +96,8 @@ public class RobotContainer {
       Controller #2
       Intake in and out (Called Intaker IN and OUT on the Panel)
     */
-    JoystickButton IntakeIn = new JoystickButton(m_OI.Control2, 4);
-    JoystickButton IntakeOUT = new JoystickButton(m_OI.Control2, 5);
+    JoystickButton IntakeIn = new JoystickButton(m_OI.Control2, Constants.INTAKE_IN_BUTTON);
+    JoystickButton IntakeOUT = new JoystickButton(m_OI.Control2, Constants.INTAKE_OUT_BUTTON);
     IntakeIn.whileHeld(new IntakeInCMD(m_IntakeBrush));
     IntakeOUT.whileHeld(new IntakeOutCmd(m_IntakeBrush));
     
@@ -101,9 +105,9 @@ public class RobotContainer {
       Controller #2
       Conveyor in and out
     */
-    JoystickButton ConveyorIn = new JoystickButton(m_OI.Control2, 2);
-    JoystickButton ConveyorOut = new JoystickButton(m_OI.Control2, 3);
-    ConveyorIn.whileHeld(new ConveyorInCMD(m_Conveyor));
+    JoystickButton ConveyorIn = new JoystickButton(m_OI.Control2, Constants.CONVERYOR_IN_BUTTON);
+    JoystickButton ConveyorOut = new JoystickButton(m_OI.Control2, Constants.CONVERYOR_OUT_BUTTON);
+    ConveyorIn.whileHeld(new ConveyorInCMD(m_Conveyor, -0.5));
     ConveyorOut.whileHeld(new ConveyorOutCMD(m_Conveyor));
 
     /*
@@ -112,28 +116,48 @@ public class RobotContainer {
     */
      
     // Initialize buttons. This is actually being controlled in the climber subsystem.
-    JoystickButton ClimbLeft = new JoystickButton(m_OI.Control3, 1);
-    JoystickButton ClimbRight = new JoystickButton(m_OI.Control3, 5);
+    // JoystickButton ClimbLeft = new JoystickButton(m_OI.Control3, 1);
+    // JoystickButton ClimbRight = new JoystickButton(m_OI.Control3, 5);
+
+    JoystickButton ClimbUpLeft = new JoystickButton(m_OI.Control2, Constants.CLIMB_UP_LEFT);
+    ClimbUpLeft.whileHeld(new ClimberUpLeft(m_climber));
+    JoystickButton ClimbUpRight = new JoystickButton(m_OI.Control2, Constants.CLIMB_UP_RIGHT);
+    ClimbUpRight.whileHeld(new ClimberUpRight(m_climber));
+    JoystickButton ClimbDownLeft = new JoystickButton(m_OI.Control2, Constants.CLIMB_DOWN_LEFT);
+    ClimbDownLeft.whileHeld(new ClimberDownLeft(m_climber));
+    JoystickButton ClimbDownRight = new JoystickButton(m_OI.Control2, Constants.CLIMB_DOWN_RIGHT);
+    ClimbDownRight.whileHeld(new ClimberDownRight(m_climber));
+
     
-    // JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,4);
-    // HookUpLeft.whileHeld(new HookLeftUpCMD(m_hook));
-    // JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,7);
-    // HookDownLeft.whileHeld(new HookLeftDownCMD(m_hook));
-    JoystickButton HookUpRight = new JoystickButton(m_OI.Control3,2);
-    HookUpRight.whileHeld(new HookRightUpCMD(m_hook));
-    JoystickButton HookDownRight = new JoystickButton(m_OI.Control3,1);
-    HookDownRight.whileHeld(new HookRightDownCMD(m_hook));
+    JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
+    HookUpLeft.whileHeld(new HookLeftUpCMD(m_telescope));
+    JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_LEFT);
+    HookDownLeft.whileHeld(new HookLeftDownCMD(m_telescope));
+    JoystickButton HookUpRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
+    HookUpRight.whileHeld(new HookRightUpCMD(m_telescope));
+    JoystickButton HookDownRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_RIGHT);
+    HookDownRight.whileHeld(new HookRightDownCMD(m_telescope));
 
     /*
       Controller #2
       Shoot
     */
-    JoystickButton Shoot = new JoystickButton(m_OI.Control2, 1);
+    JoystickButton Shoot = new JoystickButton(m_OI.Control2, Constants.SHOOT_BUTTON);
     Shoot.whileHeld(new ShootingCMD(m_Shooting));
-    JoystickButton ShootReverse = new JoystickButton(m_OI.Control2, 6);
-    ShootReverse.whileHeld(new ShootingReverseCMD(m_Shooting));
+    // JoystickButton ShootReverse = new JoystickButton(m_OI.Control2, 6);
+    // ShootReverse.whileHeld(new ShootingReverseCMD(m_Shooting));
+    
+    JoystickButton red = new JoystickButton(m_OI.Control2, Constants.RED_BUTTON);
+    red.whenPressed(new SetShootingSpeed(m_Shooting, .75 * -30000));
+    JoystickButton yellow = new JoystickButton(m_OI.Control2, Constants.YELLOW_BUTTON);
+    yellow.whenPressed(new SetShootingSpeed(m_Shooting, .8 * -30000));
+    JoystickButton green = new JoystickButton(m_OI.Control2, Constants.GREEN_BUTTON);
+    green.whenPressed(new SetShootingSpeed(m_Shooting, .95 * -30000));
+    JoystickButton blue = new JoystickButton(m_OI.Control2, Constants.BLUE_BUTTON);
+    blue.whenPressed(new SetShootingSpeed(m_Shooting, 1 * -30000));
     
     
+
     /*
       Controller #1 Xbox
     */
@@ -144,8 +168,9 @@ public class RobotContainer {
     JoystickButton xboxLeftBumper = new JoystickButton(m_OI.xbox, 5);
     JoystickButton xboxRightBumper = new JoystickButton(m_OI.xbox, 6);
 
-    xboxA.whileHeld(new ShootingCMD(m_Shooting));
-    xboxB.whileHeld(new ConveyorInCMD(m_Conveyor));
+    // xboxA.whileHeld(new ShootingCMD(m_Shooting));
+    xboxA.whileHeld(new ShootingGroup(m_Shooting, m_Conveyor, m_IntakeBrush, m_Door));
+    xboxB.whileHeld(new ConveyorInCMD(m_Conveyor, -0.5));
     xboxC.whileHeld(new IntakeInCMD(m_IntakeBrush));
     xboxD.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
 

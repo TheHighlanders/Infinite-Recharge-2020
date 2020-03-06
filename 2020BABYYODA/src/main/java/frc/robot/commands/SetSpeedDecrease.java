@@ -6,35 +6,42 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import frc.robot.subsystems.Conveyor;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ConveyorInCMD extends CommandBase {
-  private final Conveyor m_Conveyor;
-  private double speed;
+import frc.robot.OI;
+import frc.robot.subsystems.Shooting;
 
-  public ConveyorInCMD(Conveyor conveyor_subsystem, double speed) {
-    m_Conveyor = conveyor_subsystem;
-    this.speed = speed;
-    addRequirements(m_Conveyor);
+public class SetSpeedDecrease extends CommandBase {
+  /**
+   * Creates a new SetSpeedDecrease.
+   */
+
+  private final Shooting m_Shooting;
+  private final OI m_OI;
+
+  public SetSpeedDecrease(Shooting m_Shooting, OI m_OI) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.m_Shooting = m_Shooting;
+    this.m_OI = m_OI;
+    addRequirements(m_Shooting);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   m_Conveyor.ConveyorIN(this.speed);
+    m_Shooting.SetSpeedDecrease(m_OI.getXboxLeftTrigger());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Conveyor.ConveyorSTOP();
   }
 
   // Returns true when the command should end.

@@ -6,35 +6,44 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import frc.robot.subsystems.Conveyor;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Telescope;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 
-public class ConveyorInCMD extends CommandBase {
-  private final Conveyor m_Conveyor;
-  private double speed;
+/*
+  Climbs Left Down
+*/
 
-  public ConveyorInCMD(Conveyor conveyor_subsystem, double speed) {
-    m_Conveyor = conveyor_subsystem;
-    this.speed = speed;
-    addRequirements(m_Conveyor);
+public class ClimberUpLeft extends CommandBase {
+
+  private final Climber m_climber;
+
+  public ClimberUpLeft(Climber m_climber) {
+    this.m_climber = m_climber;
+    addRequirements(m_climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   m_Conveyor.ConveyorIN(this.speed);
+    //if limit switch was not pressed
+    // DriverStation.reportWarning("EXECUTE", false);
+    m_climber.ClimbUpLeft();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Conveyor.ConveyorSTOP();
+    m_climber.ClimbStopLeft();
   }
 
   // Returns true when the command should end.

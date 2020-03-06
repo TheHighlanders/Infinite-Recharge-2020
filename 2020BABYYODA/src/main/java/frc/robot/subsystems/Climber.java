@@ -69,24 +69,24 @@ public class Climber extends SubsystemBase {
     // boolean magStatus = this.magInput.get();
     // DriverStation.reportWarning("Mag: " + magStatus,false);
 
-    if (leftJoystick.getY()<-0.5){
-      ClimbUpLeft();
-    }
-    else if (leftJoystick.getY()>0.5){
-      ClimbDownLeft();
-    }
-    else{
-      ClimbStopLeft();
-    }
-    if (rightJoystick.getY()>0.5){
-      ClimbUpRight();
-    }
-    else if (rightJoystick.getY()<-0.5){
-      ClimbDownRight();
-    }
-    else{
-      ClimbStopRight();
-    }
+    // if (leftJoystick.getY()<-0.5){
+    //   ClimbUpLeft();
+    // }
+    // else if (leftJoystick.getY()>0.5){
+    //   ClimbDownLeft();
+    // }
+    // else{
+    //   ClimbStopLeft();
+    // }
+    // if (rightJoystick.getY()>0.5){
+    //   ClimbUpRight();
+    // }
+    // else if (rightJoystick.getY()<-0.5){
+    //   ClimbDownRight();
+    // }
+    // else{
+    //   ClimbStopRight();
+    // }
   }
 
 }

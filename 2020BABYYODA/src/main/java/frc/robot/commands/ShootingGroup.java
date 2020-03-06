@@ -19,14 +19,13 @@ public class ShootingGroup extends ParallelCommandGroup {
   /**
    * Creates a new ShootingGroup.
    */
-  public ShootingGroup(Shooting m_Shooting, Conveyor m_Conveyor, IntakeBrush m_IntakeBrush) {
+  public ShootingGroup(Shooting m_Shooting, Conveyor m_Conveyor, IntakeBrush m_IntakeBrush, Door m_Door) {
     addCommands(
       new ShootingCMD(m_Shooting),
       new IntakeInCMD(m_IntakeBrush),
       new SequentialCommandGroup(
-        new ShootingisAccelerated(m_Shooting),
-        new ParallelCommandGroup(// new LooseCMD(m_Shooting), 
-          new ConveyorInCMD(m_Conveyor))
+        new Halt(1.0),
+        new ParallelCommandGroup(new ConveyorInCMD(m_Conveyor, -0.9), new DoorUpCMD(m_Door))         
         )
 
     );

@@ -102,8 +102,8 @@ public class Drive extends SubsystemBase {
   }
 
   public void setPositionAUTO(double distance){
-    left1.set(ControlMode.Position, distance/Constants.INCHES_PER_ROTATION);
-    right1.set(ControlMode.Position, distance/Constants.INCHES_PER_ROTATION); 
+    left1.set(ControlMode.Position, 4096*distance/Constants.INCHES_PER_ROTATION);
+    right1.set(ControlMode.Position, 4096*distance/Constants.INCHES_PER_ROTATION); 
   }
 
 

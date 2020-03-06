@@ -27,6 +27,7 @@ public class Shooting extends SubsystemBase {
     public OI shooting_io;
     public double shootingSpeedPercent = 0;
     public double shootingSpeedVelocity = 0;
+    public double shootingSpeedVelocityDefault = -3000; 
 
     private final NetworkTableInstance inst = NetworkTableInstance.getDefault();
     private NetworkTable table;
@@ -83,6 +84,22 @@ public class Shooting extends SubsystemBase {
     // shootingMotor.set(ControlMode.PercentOutput, this.shootingSpeed/100);
     shootingMotor.set(ControlMode.Velocity, this.shootingSpeedVelocity);
   }
+
+  public void SetSpeedAdd(Double input){
+    this.shootingSpeedVelocity = this.shootingSpeedVelocityDefault-input;
+  }
+
+  public void SetSpeedDecrease(Double input){
+    this.shootingSpeedVelocity = this.shootingSpeedVelocityDefault+input;
+  }
+
+  public void SetSpeed(double newSpeed)
+  {
+    this.shootingSpeedVelocity = newSpeed;
+  }
+
+
+
 
   public void incrementShootSpeed()
   {
