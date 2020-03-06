@@ -60,28 +60,31 @@ public final class Constants {
 
     // Button Constants
     // Control 3
+    // Control 1 on driver statoin
     public static final int ARM_UP_BUTTON = 6;
-    public static final int ARM_DOWN_BUTTON = 5;
-    public static final int CLIMB_UP_LEFT = 1;
-    public static final int CLIMB_UP_RIGHT = 9;
-    public static final int CLIMB_DOWN_LEFT = 8;
-    public static final int CLIMB_DOWN_RIGHT = 7;
-    public static final int TELESCOPE_UP_RIGHT = 2;
-    public static final int TELESCOPE_DOWN_RIGHT = 1;
-    public static final int TELESCOPE_UP_LEFT = 2;
-    public static final int TELESCOPE_DOWN_LEFT = 7;
-    public static final int BALANCE = 11;
+    public static final int ARM_DOWN_BUTTON = 7;
+    public static final int TELESCOPE_UP_LEFT = 9;
+    public static final int TELESCOPE_DOWN_LEFT = 8;
+    public static final int TELESCOPE_UP_RIGHT = 11;
+    public static final int TELESCOPE_DOWN_RIGHT = 10;
+    public static final int BALANCE = 1;
+    public static final int WHITE_BUTTON = 5;
+    public static final int BLUE_BUTTON = 4;
+    public static final int WHITE_BUTTON_2 = 2;
+    public static final int RED_BUTTON = 3;
 
     // Control 2
+    public static final int CLIMB_UP_LEFT = 8;
+    public static final int CLIMB_UP_RIGHT = 6;
+    public static final int CLIMB_DOWN_LEFT = 9;
+    public static final int CLIMB_DOWN_RIGHT = 7;
+    public static final int SHOOT_BUTTON = 4;
     public static final int INTAKE_IN_BUTTON = 4;
-    public static final int INTAKE_OUT_BUTTON = 5;
+    public static final int INTAKE_OUT_BUTTON = 1;
     public static final int CONVERYOR_IN_BUTTON = 2;
     public static final int CONVERYOR_OUT_BUTTON = 3;
-    public static final int SHOOT_BUTTON = 1;
-    public static final int RED_BUTTON = 1;
-    public static final int YELLOW_BUTTON = 1;
-    public static final int GREEN_BUTTON = 1;
-    public static final int BLUE_BUTTON = 1;
+    
+   
 
 
 }
