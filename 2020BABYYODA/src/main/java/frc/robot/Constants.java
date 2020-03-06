@@ -18,8 +18,8 @@ package frc.robot;
 public final class Constants {
 
     public static final int XBOX_PORT = 0;
-    public static final int CONTROL2_PORT = 1;
-    public static final int CONTROL3_PORT = 2;
+    public static final int CONTROL2_PORT = 2;
+    public static final int CONTROL3_PORT = 1;
     
     public static final int LEFT_WHEELS_1 = 41;//victor 
     public static final int LEFT_WHEELS_2 = 51;//talon
@@ -78,10 +78,10 @@ public final class Constants {
     public static final int CLIMB_UP_RIGHT = 6;
     public static final int CLIMB_DOWN_LEFT = 9;
     public static final int CLIMB_DOWN_RIGHT = 7;
-    public static final int SHOOT_BUTTON = 4;
-    public static final int INTAKE_IN_BUTTON = 4;
+    public static final int SHOOT_BUTTON = 5;
+    public static final int INTAKE_IN_BUTTON = 2;
     public static final int INTAKE_OUT_BUTTON = 1;
-    public static final int CONVERYOR_IN_BUTTON = 2;
+    public static final int CONVERYOR_IN_BUTTON = 4;
     public static final int CONVERYOR_OUT_BUTTON = 3;
     
    

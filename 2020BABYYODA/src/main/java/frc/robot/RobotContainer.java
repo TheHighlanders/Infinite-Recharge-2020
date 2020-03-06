@@ -134,9 +134,9 @@ public class RobotContainer {
     JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
     HookUpLeft.whileHeld(new HookLeftUpCMD(m_telescopeLeft));
     JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_LEFT);
-    HookDownLeft.whileHeld(new HookLeftDownCMD(m_telescopeRight));
-    JoystickButton HookUpRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
-    HookUpRight.whileHeld(new HookRightUpCMD(m_telescopeLeft));
+    HookDownLeft.whileHeld(new HookLeftDownCMD(m_telescopeLeft));
+    JoystickButton HookUpRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_RIGHT);
+    HookUpRight.whileHeld(new HookRightUpCMD(m_telescopeRight));
     JoystickButton HookDownRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_RIGHT);
     HookDownRight.whileHeld(new HookRightDownCMD(m_telescopeRight));
 
@@ -149,13 +149,13 @@ public class RobotContainer {
     // JoystickButton ShootReverse = new JoystickButton(m_OI.Control2, 6);
     // ShootReverse.whileHeld(new ShootingReverseCMD(m_Shooting));
     
-    JoystickButton red = new JoystickButton(m_OI.Control2, Constants.RED_BUTTON);
+    JoystickButton red = new JoystickButton(m_OI.Control2, Constants.WHITE_BUTTON);
     red.whenPressed(new SetShootingSpeed(m_Shooting, .75 * -30000));
-    JoystickButton yellow = new JoystickButton(m_OI.Control2, Constants.YELLOW_BUTTON);
+    JoystickButton yellow = new JoystickButton(m_OI.Control2, Constants.BLUE_BUTTON);
     yellow.whenPressed(new SetShootingSpeed(m_Shooting, .8 * -30000));
-    JoystickButton green = new JoystickButton(m_OI.Control2, Constants.GREEN_BUTTON);
+    JoystickButton green = new JoystickButton(m_OI.Control2, Constants.WHITE_BUTTON_2);
     green.whenPressed(new SetShootingSpeed(m_Shooting, .95 * -30000));
-    JoystickButton blue = new JoystickButton(m_OI.Control2, Constants.BLUE_BUTTON);
+    JoystickButton blue = new JoystickButton(m_OI.Control2, Constants.RED_BUTTON);
     blue.whenPressed(new SetShootingSpeed(m_Shooting, 1 * -30000));
     
     
@@ -175,10 +175,10 @@ public class RobotContainer {
     // xboxB.whileHeld(new ConveyorInCMD(m_Conveyor, -0.5));
     // xboxC.whileHeld(new IntakeInCMD(m_IntakeBrush));
     // xboxD.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
-    xboxA.whileHeld(new HookLeftUpCMD(m_telescopeLeft));
-    xboxB.whileHeld(new HookRightUpCMD(m_telescopeRight));
-    xboxC.whileHeld(new HookLeftDownCMD(m_telescopeLeft));
-    xboxD.whileHeld(new HookRightDownCMD(m_telescopeRight));
+    // xboxA.whileHeld(new HookLeftUpCMD(m_telescopeLeft));
+    // xboxB.whileHeld(new HookRightUpCMD(m_telescopeRight));
+    // xboxC.whileHeld(new HookLeftDownCMD(m_telescopeLeft));
+    // xboxD.whileHeld(new HookRightDownCMD(m_telescopeRight));
 
     xboxLeftBumper.whenPressed(new DoorDownCMD(m_Door));
     xboxRightBumper.whenPressed(new DoorUpCMD(m_Door));
