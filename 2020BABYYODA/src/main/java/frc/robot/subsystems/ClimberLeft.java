@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Climber extends SubsystemBase {
+public class ClimberLeft extends SubsystemBase {
   
   private WPI_VictorSPX climbLeftMotor;
   private WPI_VictorSPX climbRightMotor;
@@ -28,7 +28,7 @@ public class Climber extends SubsystemBase {
   Joystick leftJoystick = new Joystick(Constants.CONTROL3_PORT);
   private boolean isLeft;
 
-  public Climber(boolean isLeft) {
+  public ClimberLeft(boolean isLeft) {
     this.isLeft = isLeft;
     if(this.isLeft)
     {
