@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Telescope;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 
 public class HookRightUpCMD extends CommandBase {
 
@@ -33,6 +34,8 @@ public class HookRightUpCMD extends CommandBase {
   @Override
   public void execute() {
     //if button is not pressed
+    boolean switchIsGood = limitSwitch.get() == true;
+    DriverStation.reportWarning("Sensor Status: " + switchIsGood, false);
     if(limitSwitch.get() == false){
       m_Hook.HookUpRight();
     }

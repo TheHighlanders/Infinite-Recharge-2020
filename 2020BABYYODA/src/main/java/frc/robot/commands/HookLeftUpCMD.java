@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 public class HookLeftUpCMD extends CommandBase {
 
   private final Telescope m_Hook;
-  DigitalInput limitSwitch = new DigitalInput(4);
+  DigitalInput limitSwitch = new DigitalInput(Constants.LEFT_LIMIT_SWITCH);
 
   public HookLeftUpCMD(Telescope Hook_subsystem) {
     m_Hook = Hook_subsystem;
@@ -36,7 +36,8 @@ public class HookLeftUpCMD extends CommandBase {
   @Override
   public void execute() {
     //if limit switch was not pressed
-    DriverStation.reportWarning("EXECUTE", false);
+    boolean switchIsGood = limitSwitch.get() == true;
+    DriverStation.reportWarning("Sensor Status: " + switchIsGood, false);
     if(limitSwitch.get() == false){
       //move left not right 
       DriverStation.reportWarning("Hook left up", false);

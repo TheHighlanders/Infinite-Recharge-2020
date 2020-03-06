@@ -50,9 +50,9 @@ public final class Constants {
 
     public static final double GEAR_INCHES = 1*Math.PI;
 
-    public static final int LEFT_LIMIT_SWITCH = 1;
+    public static final int LEFT_LIMIT_SWITCH = 0;
 
-    public static final int RIGHT_LIMIT_SWITCH = 0;
+    public static final int RIGHT_LIMIT_SWITCH = 1;
 
     public static final double CENTER_TARGET = 175;
 

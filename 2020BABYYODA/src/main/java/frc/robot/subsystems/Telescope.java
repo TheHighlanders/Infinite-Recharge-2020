@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 public class Telescope extends SubsystemBase {
 
-  private WPI_VictorSPX HookLeft = new WPI_VictorSPX(Constants.LEFT_HOOK);
+  private WPI_TalonSRX HookLeft = new WPI_TalonSRX(Constants.LEFT_HOOK);
   private WPI_TalonSRX HookRight = new WPI_TalonSRX(Constants.RIGHT_HOOK);
 
   public Telescope() {
@@ -28,12 +28,12 @@ public class Telescope extends SubsystemBase {
   */
   public void HookUpLeft(){
     DriverStation.reportWarning("Left hook Up", false);
-    HookLeft.set(0.5);
+    HookLeft.set(-0.25);
   }
   
   public void HookDownLeft(){
     DriverStation.reportWarning("Left hook Down", false);
-    HookLeft.set(-0.5);
+    HookLeft.set(0.25);
   }
   
   public void HookStopLeft(){
@@ -45,11 +45,11 @@ public class Telescope extends SubsystemBase {
     Hanging for the Right Side
   */
   public void HookUpRight(){
-    HookRight.set(0.3);
+    HookRight.set(0.25);
   }
 
   public void HookDownRight(){
-    HookRight.set(-0.3);
+    HookRight.set(-0.25);
   }
 
   public void HookStopRight(){

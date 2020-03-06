@@ -129,14 +129,14 @@ public class RobotContainer {
     ClimbDownRight.whileHeld(new ClimberDownRight(m_climber));
 
     
-    JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
-    HookUpLeft.whileHeld(new HookLeftUpCMD(m_telescope));
-    JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_LEFT);
-    HookDownLeft.whileHeld(new HookLeftDownCMD(m_telescope));
-    JoystickButton HookUpRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
-    HookUpRight.whileHeld(new HookRightUpCMD(m_telescope));
-    JoystickButton HookDownRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_RIGHT);
-    HookDownRight.whileHeld(new HookRightDownCMD(m_telescope));
+    // JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
+    // HookUpLeft.whileHeld(new HookLeftUpCMD(m_telescope));
+    // JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_LEFT);
+    // HookDownLeft.whileHeld(new HookLeftDownCMD(m_telescope));
+    // JoystickButton HookUpRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
+    // HookUpRight.whileHeld(new HookRightUpCMD(m_telescope));
+    // JoystickButton HookDownRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_RIGHT);
+    // HookDownRight.whileHeld(new HookRightDownCMD(m_telescope));
 
     /*
       Controller #2
@@ -169,10 +169,14 @@ public class RobotContainer {
     JoystickButton xboxRightBumper = new JoystickButton(m_OI.xbox, 6);
 
     // xboxA.whileHeld(new ShootingCMD(m_Shooting));
-    xboxA.whileHeld(new ShootingGroup(m_Shooting, m_Conveyor, m_IntakeBrush, m_Door));
-    xboxB.whileHeld(new ConveyorInCMD(m_Conveyor, -0.5));
-    xboxC.whileHeld(new IntakeInCMD(m_IntakeBrush));
-    xboxD.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
+    // xboxA.whileHeld(new ShootingGroup(m_Shooting, m_Conveyor, m_IntakeBrush, m_Door));
+    // xboxB.whileHeld(new ConveyorInCMD(m_Conveyor, -0.5));
+    // xboxC.whileHeld(new IntakeInCMD(m_IntakeBrush));
+    // xboxD.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
+    xboxA.whileHeld(new HookLeftUpCMD(m_telescope));
+    xboxB.whileHeld(new HookRightUpCMD(m_telescope));
+    xboxC.whileHeld(new HookLeftDownCMD(m_telescope));
+    xboxD.whileHeld(new HookRightDownCMD(m_telescope));
 
     xboxLeftBumper.whenPressed(new DoorDownCMD(m_Door));
     xboxRightBumper.whenPressed(new DoorUpCMD(m_Door));
