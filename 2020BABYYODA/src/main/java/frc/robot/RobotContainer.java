@@ -131,14 +131,14 @@ public class RobotContainer {
     ClimbDownRight.whileHeld(new ClimberDownRight(m_climberRight));
 
     
-    // JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
-    // HookUpLeft.whileHeld(new HookLeftUpCMD(m_telescope));
-    // JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_LEFT);
-    // HookDownLeft.whileHeld(new HookLeftDownCMD(m_telescope));
-    // JoystickButton HookUpRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
-    // HookUpRight.whileHeld(new HookRightUpCMD(m_telescope));
-    // JoystickButton HookDownRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_RIGHT);
-    // HookDownRight.whileHeld(new HookRightDownCMD(m_telescope));
+    JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
+    HookUpLeft.whileHeld(new HookLeftUpCMD(m_telescopeLeft));
+    JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_LEFT);
+    HookDownLeft.whileHeld(new HookLeftDownCMD(m_telescopeRight));
+    JoystickButton HookUpRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
+    HookUpRight.whileHeld(new HookRightUpCMD(m_telescopeLeft));
+    JoystickButton HookDownRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_RIGHT);
+    HookDownRight.whileHeld(new HookRightDownCMD(m_telescopeRight));
 
     /*
       Controller #2
