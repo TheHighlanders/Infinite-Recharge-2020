@@ -22,20 +22,25 @@ public class AlignCmd extends CommandBase {
   NetworkTableEntry ValueMiddleX;
   NetworkTableEntry ValueMiddleY;
   NetworkTableEntry ValueIsAligned;
+  NetworkTableEntry updateCounterEntry;
+  NetworkTableEntry range;
+
   double xValue;
   double yValue;
   boolean isAligned = false;
+  
+  private int stableCount;
+  private boolean done = false;
 
   double middleOfGoal = 175;
 
-  double kP = 0.0005;
-  double kI = 0.0001;
+  double perviousUpdateCounter = 0;
+  double targetAngle = 0;
+
+  double kP = 0.006;
   double maxSpeed = 0.6;
-  double minSpeed = 0.37;
+  double minSpeed = 0.23;
  
-
-
-  
 
   public AlignCmd(Drive drive_subsystem) {
     //getting Drive Train classes
@@ -51,49 +56,78 @@ public class AlignCmd extends CommandBase {
     this.ValueMiddleX = table.getEntry("centerX");
     this.ValueMiddleY = table.getEntry("centerY");
     this.ValueIsAligned = table.getEntry("IsAligned");
-		
-
+    this.updateCounterEntry = table.getEntry("Update Counter");
+    this.range = table.getEntry("Range");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    this.xValue = ValueMiddleX.getDouble(0);
-    this.yValue = ValueMiddleY.getDouble(0);
-    this.isAligned = ValueIsAligned.getBoolean(true);
-    if(this.isAligned)
-    {
-      return;
-    }
-    double error = xValue - middleOfGoal;
-    double proptional = Math.abs(error * kP);
-    //integral += error * kI;
-    
-    //double speed =  minSpeed;//Math.min(Math.max(proptional, minSpeed),maxSpeed);
-    
-    double speed = 0.3;
-    // DriverStation.reportWarning("Speed " + speed, false);
-    
-    // DriverStation.reportWarning("X: " + this.xValue + "   Middle: " + middleOfGoal, false);
+    double updateCounter = updateCounterEntry.getDouble(0);
+
+    if(this.perviousUpdateCounter != updateCounter){
+      this.xValue = ValueMiddleX.getDouble(0);
+      this.yValue = ValueMiddleY.getDouble(0);
+      this.isAligned = ValueIsAligned.getBoolean(true);
+      double newRangeValue = this.range.getDouble(0);
+
       if(xValue > middleOfGoal + Constants.GOAL_ERROR){
-          //spin to the left at half speed
-          // DriverStation.reportWarning("turn to left", false);
-          this.m_drive.drivePower(speed,speed);
-          // isAligned = false; 
+        this.targetAngle =+ 1;
+        /*
+        just keep this commented out
+        double angle = newRangeValue /(middleOfGoal - xValue);
+        this.targetAngle = Math.sin(angle);
+        */
+
+      }
+      //🌓
+      else if (xValue < middleOfGoal - Constants.GOAL_ERROR){
+        this.targetAngle =- 1; 
+         /*
+         this too
+        double angle = newRangeValue /(middleOfGoal - xValue);
+        this.targetAngle = Math.sin(angle);
+        */
       }
 
-      else if (xValue < middleOfGoal - Constants.GOAL_ERROR) {
-        //spin to the right at half speed
-        // DriverStation.reportWarning("turn to right", false);
-        this.m_drive.drivePower(-speed,-speed);
-        // isAligned = false; 
+    }
+    this.perviousUpdateCounter = updateCounter;
+
+    double currentAngle = m_drive.getHeading();
+
+    double error = this.targetAngle - currentAngle;
+    if(error > 180)
+    {
+      error -= 360;
+    }
+    else if(error < -180)
+    {
+      error += 360;
+    }
+    
+    double setpoint = kP * error;
+    double sign = (setpoint < 0) ? -1 : 1;
+    double abs = Math.abs(setpoint);
+    if(abs > maxSpeed){
+      setpoint = sign*maxSpeed;
+    }
+    else if(abs < minSpeed)
+    {
+      setpoint = sign*minSpeed;
+    }
+
+    if(Math.abs(error) < 1)
+    {
+      this.m_drive.drivePower(0, 0);
+      this.stableCount++;
+      if(this.stableCount > 10)
+      {
+        this.done = true;
       }
-      
-      else{
-        this.m_drive.drivePower(0,0);
-        //integral = 0;
-        // isAligned = true;
-      }
+      return;
+    }
+    this.stableCount = 0;
+    this.m_drive.drivePower(setpoint, setpoint);    
   }
 
   // Called once the command ends or is interrupted.
