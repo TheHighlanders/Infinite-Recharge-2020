@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.ClimberLeft;
 import frc.robot.subsystems.Telescope;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -20,9 +20,9 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 public class ClimberUpLeft extends CommandBase {
 
-  private final Climber m_climber;
+  private final ClimberLeft m_climber;
 
-  public ClimberUpLeft(Climber m_climber) {
+  public ClimberUpLeft(ClimberLeft m_climber) {
     this.m_climber = m_climber;
     addRequirements(m_climber);
   }

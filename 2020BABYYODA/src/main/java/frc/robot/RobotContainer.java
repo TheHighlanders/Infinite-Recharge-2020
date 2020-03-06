@@ -26,9 +26,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final OI m_OI = new OI();
-  private final Telescope m_telescope = new Telescope();
+  private final Telescope m_telescopeLeft = new Telescope(true);
+  private final Telescope m_telescopeRight = new Telescope(false);
   private final Drive m_robotDrive = new Drive();
-  private final Climber m_climber = new Climber();
+  private final ClimberLeft m_climberLeft = new ClimberLeft(true);
+  private final Climber m_climberRight = new Climber(false);
   private final Conveyor m_Conveyor = new Conveyor();
   private final Shooting m_Shooting = new Shooting();
   private final IntakeArm m_IntakeArm = new IntakeArm();
@@ -120,23 +122,23 @@ public class RobotContainer {
     // JoystickButton ClimbRight = new JoystickButton(m_OI.Control3, 5);
 
     JoystickButton ClimbUpLeft = new JoystickButton(m_OI.Control2, Constants.CLIMB_UP_LEFT);
-    ClimbUpLeft.whileHeld(new ClimberUpLeft(m_climber));
+    ClimbUpLeft.whileHeld(new ClimberUpLeft(m_climberLeft));
     JoystickButton ClimbUpRight = new JoystickButton(m_OI.Control2, Constants.CLIMB_UP_RIGHT);
-    ClimbUpRight.whileHeld(new ClimberUpRight(m_climber));
+    ClimbUpRight.whileHeld(new ClimberUpRight(m_climberRight));
     JoystickButton ClimbDownLeft = new JoystickButton(m_OI.Control2, Constants.CLIMB_DOWN_LEFT);
-    ClimbDownLeft.whileHeld(new ClimberDownLeft(m_climber));
+    ClimbDownLeft.whileHeld(new ClimberDownLeft(m_climberLeft));
     JoystickButton ClimbDownRight = new JoystickButton(m_OI.Control2, Constants.CLIMB_DOWN_RIGHT);
-    ClimbDownRight.whileHeld(new ClimberDownRight(m_climber));
+    ClimbDownRight.whileHeld(new ClimberDownRight(m_climberRight));
 
     
-    // JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
-    // HookUpLeft.whileHeld(new HookLeftUpCMD(m_telescope));
-    // JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_LEFT);
-    // HookDownLeft.whileHeld(new HookLeftDownCMD(m_telescope));
-    // JoystickButton HookUpRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
-    // HookUpRight.whileHeld(new HookRightUpCMD(m_telescope));
-    // JoystickButton HookDownRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_RIGHT);
-    // HookDownRight.whileHeld(new HookRightDownCMD(m_telescope));
+    JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
+    HookUpLeft.whileHeld(new HookLeftUpCMD(m_telescopeLeft));
+    JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_LEFT);
+    HookDownLeft.whileHeld(new HookLeftDownCMD(m_telescopeRight));
+    JoystickButton HookUpRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
+    HookUpRight.whileHeld(new HookRightUpCMD(m_telescopeLeft));
+    JoystickButton HookDownRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_RIGHT);
+    HookDownRight.whileHeld(new HookRightDownCMD(m_telescopeRight));
 
     /*
       Controller #2
@@ -173,10 +175,10 @@ public class RobotContainer {
     // xboxB.whileHeld(new ConveyorInCMD(m_Conveyor, -0.5));
     // xboxC.whileHeld(new IntakeInCMD(m_IntakeBrush));
     // xboxD.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
-    xboxA.whileHeld(new HookLeftUpCMD(m_telescope));
-    xboxB.whileHeld(new HookRightUpCMD(m_telescope));
-    xboxC.whileHeld(new HookLeftDownCMD(m_telescope));
-    xboxD.whileHeld(new HookRightDownCMD(m_telescope));
+    xboxA.whileHeld(new HookLeftUpCMD(m_telescopeLeft));
+    xboxB.whileHeld(new HookRightUpCMD(m_telescopeRight));
+    xboxC.whileHeld(new HookLeftDownCMD(m_telescopeLeft));
+    xboxD.whileHeld(new HookRightDownCMD(m_telescopeRight));
 
     xboxLeftBumper.whenPressed(new DoorDownCMD(m_Door));
     xboxRightBumper.whenPressed(new DoorUpCMD(m_Door));

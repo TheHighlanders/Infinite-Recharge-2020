@@ -14,13 +14,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DriverStation;
 
-public class Telescope extends SubsystemBase {
+public class TelescopeLeft extends SubsystemBase {
 
   private WPI_TalonSRX HookLeft;
   private WPI_TalonSRX HookRight;
   private boolean isLeft;
 
-  public Telescope(boolean isLeft) {
+  public TelescopeLeft(boolean isLeft) {
     this.isLeft = isLeft;
     if(this.isLeft)
     {
