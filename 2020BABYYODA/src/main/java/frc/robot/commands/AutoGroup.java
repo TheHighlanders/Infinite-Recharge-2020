@@ -29,12 +29,13 @@ public class AutoGroup extends SequentialCommandGroup {
      addCommands(
         new ParallelDeadlineGroup(
           new SequentialCommandGroup(
-            new AlignCmd(m_Drive).withTimeout(1.0),
+            //new AlignCmd(m_Drive).withTimeout(1.0),
+            new Halt(3.0),
             new ParallelDeadlineGroup(new ConveyorInCMD(m_Conveyor, -0.9).withTimeout(4.0),new DoorUpCMD(m_Door)),
             new DoorDownCMD(m_Door).withTimeout(0.5)),
           new ShootingCMD(m_Shooting)),
-        new RotateToPosAUTO(m_Drive, -30.0),
-        new ParallelDeadlineGroup(new DriveDistanceEncoderAUTO(m_Drive, -100.0), new IntakeInCMD(m_IntakeBrush))
+        new RotateToPosAUTO(m_Drive, 180.0).withTimeout(5.0),
+        new ParallelDeadlineGroup(new DriveDistanceEncoderAUTO(m_Drive, -1000.0), new IntakeInCMD(m_IntakeBrush))
 
 
       );
