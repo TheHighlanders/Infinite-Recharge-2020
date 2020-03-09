@@ -5,13 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Shooting;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.subsystems.*;
+import frc.robot.commands.*;
 import frc.robot.commands.Conveyor.*;
 import frc.robot.commands.Door.*;
 import frc.robot.commands.Drive.*;
@@ -22,35 +23,23 @@ import frc.robot.commands.Shooting.*;
 import frc.robot.commands.Telescope.*;
 import frc.robot.commands.Vision.*;
 
-
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class AutoGroup extends SequentialCommandGroup {
+public class ShootingGroup extends ParallelCommandGroup {
   /**
-   * Creates a new ParrelelAutoGroup.
+   * Creates a new ShootingGroup.
    */
-  private String selection;
-  public AutoGroup(String selection, Drive m_Drive, Shooting m_Shooting, Conveyor m_Conveyor, IntakeBrush m_IntakeBrush, Door m_Door) {
-   this.selection = selection;
+  public ShootingGroup(Shooting m_Shooting, Conveyor m_Conveyor, IntakeBrush m_IntakeBrush, Door m_Door) {
+    addCommands(
+      new ShootingCMD(m_Shooting),
+      new IntakeInCMD(m_IntakeBrush),
+      new SequentialCommandGroup(
+        new Halt(1.0),
+        new ParallelCommandGroup(new ConveyorInCMD(m_Conveyor, -0.9), new DoorUpCMD(m_Door))         
+        )
 
-   switch (selection) {
-     case "Back": // Back up into the trench run
-     addCommands(
-        new ParallelDeadlineGroup(
-          new SequentialCommandGroup(
-            //new AlignCmd(m_Drive).withTimeout(1.0),
-            new Halt(3.0),
-            new ParallelDeadlineGroup(new ConveyorInCMD(m_Conveyor, -0.9).withTimeout(4.0),new DoorUpCMD(m_Door)),
-            new DoorDownCMD(m_Door).withTimeout(0.5)),
-          new ShootingCMD(m_Shooting)),
-        new RotateToPosAUTO(m_Drive, 180.0).withTimeout(5.0),
-        new ParallelDeadlineGroup(new DriveDistanceEncoderAUTO(m_Drive, -1000.0), new IntakeInCMD(m_IntakeBrush))
-
-
-      );
-   }
-
+    );
     
   }
 }

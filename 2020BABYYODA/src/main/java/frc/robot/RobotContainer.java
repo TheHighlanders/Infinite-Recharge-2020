@@ -10,12 +10,21 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.*;
-import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
+import frc.robot.subsystems.*;
+import frc.robot.commands.*;
 
+import frc.robot.commands.Conveyor.*;
+import frc.robot.commands.Door.*;
+import frc.robot.commands.Drive.*;
+import frc.robot.commands.Hook.*;
+import frc.robot.commands.IntakeArm.*;
+import frc.robot.commands.IntakeBrush.*;
+import frc.robot.commands.Shooting.*;
+import frc.robot.commands.Telescope.*;
+import frc.robot.commands.Vision.*;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -25,10 +34,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+
   private final OI m_OI = new OI();
   private final Telescope m_telescopeLeft = new Telescope(true);
   private final Telescope m_telescopeRight = new Telescope(false);
-  private final Drive m_robotDrive = new Drive();
+  private final Drive m_Drive = new Drive();
   private final ClimberLeft m_climberLeft = new ClimberLeft(true);
   private final Climber m_climberRight = new Climber(false);
   private final Conveyor m_Conveyor = new Conveyor();
@@ -39,33 +49,30 @@ public class RobotContainer {
   private Command m_autoCommand;
  // private final Vision m_Vision = new Vision();
   
-
-  
-  /** private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
-*/
+ 
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    // Configure the button bindings
-   configureButtonBindings();
-   // m_autoCommand = new AlignCmd(m_robotDrive);
-    // m_autoCommand = new AutoGroup("Back",m_robotDrive, m_Shooting, m_Conveyor, m_IntakeBrush);
-
-    m_autoCommand = new AutoGroup("Back", m_robotDrive, m_Shooting, m_Conveyor, m_IntakeBrush, m_Door);
     
-    m_robotDrive.setDefaultCommand(new TeleopDriveCMD(m_robotDrive, m_OI));
-
     DriverStation.reportWarning("Initialized",false);
 
-    m_robotDrive.left1.setSelectedSensorPosition(0);
+    // Configure the button bindings
+    configureButtonBindings();
 
-    new SetSpeedDecrease(m_Shooting, m_OI);
-    new SetSpeedAdd(m_Shooting, m_OI);
+    // Configure Auto Commands
+    // m_autoCommand = new AlignCmd(m_Drive);
+    m_autoCommand = new AutoGroup("Back", m_Drive, m_Shooting, m_Conveyor, m_IntakeBrush, m_Door);
+    
+    // Configure Commands
+
+    m_Drive.setDefaultCommand(new TeleopDriveCMD(m_Drive, m_OI));
+    
+    // Configure Sensors
+
+    m_Drive.left1.setSelectedSensorPosition(0);
+    m_Drive.right1.setSelectedSensorPosition(0);
     
     
   }
@@ -102,6 +109,7 @@ public class RobotContainer {
     JoystickButton IntakeOUT = new JoystickButton(m_OI.Control2, Constants.INTAKE_OUT_BUTTON);
     IntakeIn.whileHeld(new IntakeInCMD(m_IntakeBrush));
     IntakeOUT.whileHeld(new IntakeOutCmd(m_IntakeBrush));
+
     
     /*
       Controller #2
