@@ -36,7 +36,7 @@ public class ShootingGroup extends ParallelCommandGroup {
       new IntakeInCMD(m_IntakeBrush),
       new SequentialCommandGroup(
         new Halt(1.0),
-        new ParallelCommandGroup(new ConveyorInCMD(m_Conveyor, -0.9), new DoorUpCMD(m_Door))         
+        new ParallelCommandGroup(new ConveyorPowerCMD(m_Conveyor, -0.9), new DoorUpCMD(m_Door))         
         )
 
     );

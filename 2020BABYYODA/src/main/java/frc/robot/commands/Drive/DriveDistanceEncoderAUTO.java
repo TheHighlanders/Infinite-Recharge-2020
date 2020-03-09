@@ -26,9 +26,9 @@ public class DriveDistanceEncoderAUTO extends CommandBase {
   private WPI_TalonSRX left, right;
 
 
-  public DriveDistanceEncoderAUTO(Drive drive_subsystem, Double distance) {
+  public DriveDistanceEncoderAUTO(Drive m_Drive, Double distance) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_Drive = drive_subsystem;
+    this.m_Drive = m_Drive;
     this.left = m_Drive.left1;
     this.right = m_Drive.right1;
     distance = this.distance;

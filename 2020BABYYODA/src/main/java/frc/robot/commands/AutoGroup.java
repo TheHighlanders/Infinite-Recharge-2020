@@ -41,7 +41,7 @@ public class AutoGroup extends SequentialCommandGroup {
           new SequentialCommandGroup(
             //new AlignCmd(m_Drive).withTimeout(1.0),
             new Halt(3.0),
-            new ParallelDeadlineGroup(new ConveyorInCMD(m_Conveyor, -0.9).withTimeout(4.0),new DoorUpCMD(m_Door)),
+            new ParallelDeadlineGroup(new ConveyorPowerCMD(m_Conveyor, -0.9).withTimeout(4.0),new DoorUpCMD(m_Door)),
             new DoorDownCMD(m_Door).withTimeout(0.5)),
           new ShootingCMD(m_Shooting)),
         new RotateToPosAUTO(m_Drive, 180.0).withTimeout(5.0),

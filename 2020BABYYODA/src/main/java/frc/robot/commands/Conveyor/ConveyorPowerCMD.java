@@ -9,12 +9,12 @@ package frc.robot.commands.Conveyor;
 import frc.robot.subsystems.Conveyor;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ConveyorInCMD extends CommandBase {
+public class ConveyorPowerCMD extends CommandBase {
   private final Conveyor m_Conveyor;
   private double speed;
 
-  public ConveyorInCMD(Conveyor conveyor_subsystem, double speed) {
-    m_Conveyor = conveyor_subsystem;
+  public ConveyorPowerCMD(Conveyor m_Conveyor, double speed) {
+    this.m_Conveyor = m_Conveyor;
     this.speed = speed;
     addRequirements(m_Conveyor);
   }
@@ -28,13 +28,13 @@ public class ConveyorInCMD extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   m_Conveyor.ConveyorIN(this.speed);
+   m_Conveyor.ConveyorPower(this.speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Conveyor.ConveyorSTOP();
+    m_Conveyor.ConveyorStop();
   }
 
   // Returns true when the command should end.

@@ -122,8 +122,8 @@ public class RobotContainer {
     // Conveyor
     JoystickButton ConveyorIn = new JoystickButton(m_OI.Control2, Constants.CONVERYOR_IN_BUTTON);
     JoystickButton ConveyorOut = new JoystickButton(m_OI.Control2, Constants.CONVERYOR_OUT_BUTTON);
-    ConveyorIn.whileHeld(new ConveyorInCMD(m_Conveyor, -0.5));
-    ConveyorOut.whileHeld(new ConveyorOutCMD(m_Conveyor));
+    ConveyorIn.whileHeld(new ConveyorPowerCMD(m_Conveyor, -0.5));
+    ConveyorOut.whileHeld(new ConveyorPowerCMD(m_Conveyor, 1.0));
     
     // Climb ??
     JoystickButton ClimbUpLeft = new JoystickButton(m_OI.Control2, Constants.CLIMB_UP_LEFT);

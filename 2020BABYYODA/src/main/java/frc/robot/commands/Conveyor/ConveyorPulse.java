@@ -9,17 +9,19 @@ package frc.robot.commands.Conveyor;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.*;
+import frc.robot.commands.*;
 
 public class ConveyorPulse extends SequentialCommandGroup {
-  
-  public ConveyorPulse(Conveyor m_Conveyor, Double speedFoward, Double speedBackward, Double timeFoward, Double timeBackward, Double haltTime) {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
+
+  public ConveyorPulse(Conveyor m_Conveyor, Double speedIn, Double speedOut, Double timeIn, Double timeOut, Double haltTime1, Double haltTime2) {
+    // Remember negative speed is in and pos speed is out
     addCommands(
-      new ConveyorInCMD(m_Conveyor, 1.0)
-
-
-
+      new ConveyorPowerCMD(m_Conveyor, speedIn).withTimeout(timeIn),
+      new Halt(haltTime1),
+      new ConveyorPowerCMD(m_Conveyor, speedOut).withTimeout(timeOut),
+      new Halt(haltTime2)
     );
+    // Example Conveyor Shake back and forth is ConveyorPulse(m_Conveyor, -1,1,0.5,0.5,0.0,0.0)
+    // Pulse in would be ConveyorPulse(m_Conveyor,-1,0.0,0.5,0,0.5,0)
   }
 }
