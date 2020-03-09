@@ -60,6 +60,10 @@ public class RobotContainer {
 
     // Configure the button bindings
     configureButtonBindings();
+    configureLeftControlPanel();
+    configureRightControlPanel();
+    configureXboxBindings();
+    // configureTestBindings();
 
     // Configure Auto Commands
     // m_autoCommand = new AlignCmd(m_Drive);
@@ -83,62 +87,18 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {
-    
-    //Joystick joystick2 = new Joystick(Constants.CONTROL2_PORT);
-    //Joystick joystick3 = new Joystick(Constants.CONTROL3_PORT);
 
-    // Xbox is Controller #1 (In Port 1)
-    // Left side of the Control Panel is Controller #3 (In Port 3)
-    // Right side of the Control Panel is Controller #2 (In Port 2)
+  private void configureLeftControlPanel(){
+    // Configure Left Control Panel, Port 3
 
-    /*
-      Controller #3
-      Moving the Intake Arm up and down (Called Intake Up and Down on the Panel)
-    */
+    // IntakeArm
     JoystickButton ArmUp = new JoystickButton(m_OI.Control3,Constants.ARM_UP_BUTTON);
     JoystickButton ArmDown = new JoystickButton(m_OI.Control3,Constants.ARM_DOWN_BUTTON);
     ArmUp.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
     ArmDown.whileHeld(new IntakeArmDownCMD(m_IntakeArm));
-    
-    /*
-      Controller #2
-      Intake in and out (Called Intaker IN and OUT on the Panel)
-    */
-    JoystickButton IntakeIn = new JoystickButton(m_OI.Control2, Constants.INTAKE_IN_BUTTON);
-    JoystickButton IntakeOUT = new JoystickButton(m_OI.Control2, Constants.INTAKE_OUT_BUTTON);
-    IntakeIn.whileHeld(new IntakeInCMD(m_IntakeBrush));
-    IntakeOUT.whileHeld(new IntakeOutCmd(m_IntakeBrush));
 
-    
-    /*
-      Controller #2
-      Conveyor in and out
-    */
-    JoystickButton ConveyorIn = new JoystickButton(m_OI.Control2, Constants.CONVERYOR_IN_BUTTON);
-    JoystickButton ConveyorOut = new JoystickButton(m_OI.Control2, Constants.CONVERYOR_OUT_BUTTON);
-    ConveyorIn.whileHeld(new ConveyorInCMD(m_Conveyor, -0.5));
-    ConveyorOut.whileHeld(new ConveyorOutCMD(m_Conveyor));
+    // Hook?? Why is constants called telescope?
 
-    /*
-      Drive #2 controllers
-      Climbing: Moving the robot up
-    */
-     
-    // Initialize buttons. This is actually being controlled in the climber subsystem.
-    // JoystickButton ClimbLeft = new JoystickButton(m_OI.Control3, 1);
-    // JoystickButton ClimbRight = new JoystickButton(m_OI.Control3, 5);
-
-    JoystickButton ClimbUpLeft = new JoystickButton(m_OI.Control2, Constants.CLIMB_UP_LEFT);
-    ClimbUpLeft.whileHeld(new ClimberUpLeft(m_climberLeft));
-    JoystickButton ClimbUpRight = new JoystickButton(m_OI.Control2, Constants.CLIMB_UP_RIGHT);
-    ClimbUpRight.whileHeld(new ClimberUpRight(m_climberRight));
-    JoystickButton ClimbDownLeft = new JoystickButton(m_OI.Control2, Constants.CLIMB_DOWN_LEFT);
-    ClimbDownLeft.whileHeld(new ClimberDownLeft(m_climberLeft));
-    JoystickButton ClimbDownRight = new JoystickButton(m_OI.Control2, Constants.CLIMB_DOWN_RIGHT);
-    ClimbDownRight.whileHeld(new ClimberDownRight(m_climberRight));
-
-    
     JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
     HookUpLeft.whileHeld(new HookLeftUpCMD(m_telescopeLeft));
     JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_LEFT);
@@ -148,15 +108,41 @@ public class RobotContainer {
     JoystickButton HookDownRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_RIGHT);
     HookDownRight.whileHeld(new HookRightDownCMD(m_telescopeRight));
 
-    /*
-      Controller #2
-      Shoot
-    */
+  }
+
+  private void configureRightControlPanel(){
+    // Configure Left Control Panel, Port 2
+
+    // Intake Brush
+    JoystickButton IntakeIn = new JoystickButton(m_OI.Control2, Constants.INTAKE_IN_BUTTON);
+    JoystickButton IntakeOUT = new JoystickButton(m_OI.Control2, Constants.INTAKE_OUT_BUTTON);
+    IntakeIn.whileHeld(new IntakeInCMD(m_IntakeBrush));
+    IntakeOUT.whileHeld(new IntakeOutCmd(m_IntakeBrush));
+    
+    // Conveyor
+    JoystickButton ConveyorIn = new JoystickButton(m_OI.Control2, Constants.CONVERYOR_IN_BUTTON);
+    JoystickButton ConveyorOut = new JoystickButton(m_OI.Control2, Constants.CONVERYOR_OUT_BUTTON);
+    ConveyorIn.whileHeld(new ConveyorInCMD(m_Conveyor, -0.5));
+    ConveyorOut.whileHeld(new ConveyorOutCMD(m_Conveyor));
+    
+    // Climb ??
+    JoystickButton ClimbUpLeft = new JoystickButton(m_OI.Control2, Constants.CLIMB_UP_LEFT);
+    ClimbUpLeft.whileHeld(new ClimberUpLeft(m_climberLeft));
+    JoystickButton ClimbUpRight = new JoystickButton(m_OI.Control2, Constants.CLIMB_UP_RIGHT);
+    ClimbUpRight.whileHeld(new ClimberUpRight(m_climberRight));
+    JoystickButton ClimbDownLeft = new JoystickButton(m_OI.Control2, Constants.CLIMB_DOWN_LEFT);
+    ClimbDownLeft.whileHeld(new ClimberDownLeft(m_climberLeft));
+    JoystickButton ClimbDownRight = new JoystickButton(m_OI.Control2, Constants.CLIMB_DOWN_RIGHT);
+    ClimbDownRight.whileHeld(new ClimberDownRight(m_climberRight));
+    
+    // Shoot
+
     JoystickButton Shoot = new JoystickButton(m_OI.Control2, Constants.SHOOT_BUTTON);
     Shoot.whileHeld(new ShootingCMD(m_Shooting));
     // JoystickButton ShootReverse = new JoystickButton(m_OI.Control2, 6);
-    // ShootReverse.whileHeld(new ShootingReverseCMD(m_Shooting));
+    // ShootReverse.whileHeld(new ShootingReverseCMD(m_Shooting));   
     
+    // Shooting Speed Set
     JoystickButton red = new JoystickButton(m_OI.Control2, Constants.WHITE_BUTTON);
     red.whenPressed(new SetShootingSpeed(m_Shooting, .75 * -30000));
     JoystickButton yellow = new JoystickButton(m_OI.Control2, Constants.BLUE_BUTTON);
@@ -165,12 +151,19 @@ public class RobotContainer {
     green.whenPressed(new SetShootingSpeed(m_Shooting, .95 * -30000));
     JoystickButton blue = new JoystickButton(m_OI.Control2, Constants.RED_BUTTON);
     blue.whenPressed(new SetShootingSpeed(m_Shooting, 1 * -30000));
-    
-    
 
-    /*
-      Controller #1 Xbox
-    */
+  }
+  
+  private void configureButtonBindings() {
+    
+    // Initialize buttons. This is actually being controlled in the climber subsystem.
+    // JoystickButton ClimbLeft = new JoystickButton(m_OI.Control3, 1);
+    // JoystickButton ClimbRight = new JoystickButton(m_OI.Control3, 5);
+  }
+
+  private void configureXboxBindings(){
+    // Xbox Bindings Port 0
+
     JoystickButton xboxA = new JoystickButton(m_OI.xbox,1);
     JoystickButton xboxB = new JoystickButton(m_OI.xbox,2);
     JoystickButton xboxC = new JoystickButton(m_OI.xbox,3);
@@ -190,7 +183,10 @@ public class RobotContainer {
 
     xboxLeftBumper.whenPressed(new DoorDownCMD(m_Door));
     xboxRightBumper.whenPressed(new DoorUpCMD(m_Door));
+  }
 
+  private void configureTestBindings(){
+    // Put Test Bindings in here comment out in constructor if not to be used
   }
 
 
