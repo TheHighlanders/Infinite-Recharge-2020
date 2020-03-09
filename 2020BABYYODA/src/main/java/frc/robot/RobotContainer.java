@@ -45,9 +45,9 @@ public class RobotContainer {
   private final Shooting m_Shooting = new Shooting();
   private final IntakeArm m_IntakeArm = new IntakeArm();
   private final IntakeBrush m_IntakeBrush = new IntakeBrush();
-  private final Door m_Door = new Door();
+  private final Door m_Door = new Door();  
+  //private final Vision m_Vision = new Vision();
   private Command m_autoCommand;
- // private final Vision m_Vision = new Vision();
   
  
 
