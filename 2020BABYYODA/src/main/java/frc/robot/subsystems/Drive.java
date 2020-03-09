@@ -11,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.kauailabs.navx.frc.AHRS;
@@ -83,6 +82,7 @@ public class Drive extends SubsystemBase {
 	 * Only one message will print here
 	 * Leave this at -3000?
 	 */
+  
   public void setEncoders(int pulses){
     // left1.getSensorCollection().setPulseWidthPosition(pulses, 0);
     // right1.getSensorCollection().setPulseWidthPosition(pulses, 0);
