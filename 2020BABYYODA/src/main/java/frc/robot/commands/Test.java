@@ -5,26 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Hook;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Telescope;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStation;
 
-/*
-  Climbs Left Down
-*/
-
-public class HookLeftUpCMD extends CommandBase {
-
-  private final Telescope m_Hook;
-  DigitalInput limitSwitch = new DigitalInput(Constants.LEFT_LIMIT_SWITCH);
-
-  public HookLeftUpCMD(Telescope Hook_subsystem) {
-    m_Hook = Hook_subsystem;
-    addRequirements(m_Hook);
+public class Test extends CommandBase {
+  /**
+   * Creates a new Test.
+   */
+  public Test() {
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -35,24 +25,11 @@ public class HookLeftUpCMD extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //if limit switch was not pressed
-    boolean switchIsGood = limitSwitch.get() == true;
-    //DriverStation.reportWarning("Sensor Status: " + switchIsGood, false);
-    if(limitSwitch.get() == false){
-      //move left not right 
-      //DriverStation.reportWarning("Hook left up", false);
-      m_Hook.HookUpLeft();
-    }
-     //if limit switch was pressed
-    if(limitSwitch.get() == true){
-      m_Hook.HookStopLeft();
-    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Hook.HookStopLeft();
   }
 
   // Returns true when the command should end.

@@ -7,6 +7,7 @@
 
 package frc.robot.commands.Door;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Door;
 
@@ -24,6 +25,7 @@ public class DoorDownCMD extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {   
+    DriverStation.reportWarning("Door Close", false);
     m_Door.DoorClose();
   }
 

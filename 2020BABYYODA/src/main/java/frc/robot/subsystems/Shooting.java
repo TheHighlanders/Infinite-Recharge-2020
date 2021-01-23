@@ -73,7 +73,7 @@ public class Shooting extends SubsystemBase {
 
   public void ShootingLaunch(){
     
-    //DriverStation.reportWarning("Bombs Away!" , false);
+    DriverStation.reportWarning("Bombs Away!" , false);
     //DriverStation.reportWarning("Shooting Speed:" + " " + this.shootingSpeed , false);
     // shootingMotor.set(ControlMode.PercentOutput, this.shootingSpeed/100);
     // shootingMotor.set(ControlMode.Velocity, setpoint * 1000);
@@ -123,7 +123,7 @@ public class Shooting extends SubsystemBase {
 
   public void ShootingStop(){
     
-    //DriverStation.reportWarning("Shooting has stopped", false);
+    DriverStation.reportWarning("Shooting has stopped", false);
     shootingMotor.set(ControlMode.PercentOutput, 0);
   }
 
@@ -141,7 +141,7 @@ public class Shooting extends SubsystemBase {
     }
     int position = shootingMotor.getSelectedSensorPosition();
     int velocity = shootingMotor.getSelectedSensorVelocity();
-   // DriverStation.reportWarning("Position: " + position + " Velocity: " + velocity, false);
+    //DriverStation.reportWarning("Position: " + position + " Velocity: " + velocity, false);
    
     double currentCenter = this.centerX.getDouble(0);
     if(currentCenter < Constants.CENTER_TARGET + Constants.GOAL_ERROR && currentCenter > Constants.CENTER_TARGET - Constants.GOAL_ERROR)
@@ -165,7 +165,7 @@ public class Shooting extends SubsystemBase {
         }
         this.averageRange = total/numValuesToAverage;
         nextIndex++;
-        DriverStation.reportWarning("Range: " + this.averageRange, false);
+        //DriverStation.reportWarning("Range: " + this.averageRange, false);
       } catch (Exception e) {
         //TODO: handle exception
       }

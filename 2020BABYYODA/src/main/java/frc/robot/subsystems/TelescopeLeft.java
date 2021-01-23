@@ -35,17 +35,17 @@ public class TelescopeLeft extends SubsystemBase {
     Hanging for the Left Side
   */
   public void HookUpLeft(){
-    DriverStation.reportWarning("Left hook Up", false);
+    //DriverStation.reportWarning("Left hook Up", false);
     HookLeft.set(-0.25);
   }
   
   public void HookDownLeft(){
-    DriverStation.reportWarning("Left hook Down", false);
+    //DriverStation.reportWarning("Left hook Down", false);
     HookLeft.set(0.25);
   }
   
   public void HookStopLeft(){
-    DriverStation.reportWarning("Left hook Stop", false);
+    //DriverStation.reportWarning("Left hook Stop", false);
     HookLeft.set(0);
   }
 

@@ -23,7 +23,7 @@ public class Climber extends SubsystemBase {
   
 
   // private DigitalInput magInput;
-
+  //I probably switched these
   Joystick rightJoystick = new Joystick(Constants.CONTROL2_PORT);
   Joystick leftJoystick = new Joystick(Constants.CONTROL3_PORT);
   private boolean isLeft;

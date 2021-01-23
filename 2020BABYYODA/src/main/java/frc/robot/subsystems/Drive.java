@@ -26,12 +26,12 @@ public class Drive extends SubsystemBase {
 
   private double ramp = 0.2;
   public OI xbox_io;
+  public OI WiiControllDriver_oi;
 
   //private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
   private AHRS imu = new AHRS(); 
 
   public Drive() {
-
     left1 = new WPI_TalonSRX(Constants.LEFT_WHEELS_1);
     left2 = new WPI_VictorSPX(Constants.LEFT_WHEELS_2);
     right1 = new WPI_TalonSRX(Constants.RIGHT_WHEELS_1);
@@ -51,7 +51,8 @@ public class Drive extends SubsystemBase {
     // right1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 
     xbox_io = new OI();
-
+    WiiControllDriver_oi = new OI();
+    
     left2.follow(left1);
     right2.follow(right1);
 
@@ -62,7 +63,10 @@ public class Drive extends SubsystemBase {
     //left2.set(left_power);
     right1.set(right_power);
     //right2.set(right_power);
-    // DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
+    //DriverStation.reportWarning("Left Power is set to: " + left_power, false);
+    //DriverStation.reportWarning("Right Power is set to: " + right_power, false);
+    //DriverStation.reportWarning("Left Y:" + " " + left_power + "and Right Y: " + right_power , false);
+
   }
 
   public void stopPower(){
@@ -82,12 +86,15 @@ public class Drive extends SubsystemBase {
 	 * Only one message will print here
 	 * Leave this at -3000?
 	 */
-  
+ 
+  /*
+  //wii don't need this
   public void setEncoders(int pulses){
     // left1.getSensorCollection().setPulseWidthPosition(pulses, 0);
     // right1.getSensorCollection().setPulseWidthPosition(pulses, 0);
 
   }
+  */
 
   /**
 	 * 
@@ -96,10 +103,12 @@ public class Drive extends SubsystemBase {
 	 *         over time.
 	 * 
 	 */
+  /*
   public double getDistanceTraveled() {
     //DriverStation.reportWarning("Left:" + (-(left1.getSensorCollection().getPulseWidthPosition())) + " Right: " + right1.getSensorCollection().getPulseWidthPosition(), false);
     return -((double) left1.getSensorCollection().getPulseWidthPosition() / 4096.0) * 6 * Math.PI;
   }
+  */
 
   public void setPositionAUTO(double distance){
     left1.set(ControlMode.Position, 4096*distance/Constants.INCHES_PER_ROTATION);

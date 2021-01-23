@@ -29,7 +29,7 @@ public class Vision extends SubsystemBase {
   double xt = 0;
   
   public Vision() {
-    DriverStation.reportWarning("Vision Ran" , false);
+    //DriverStation.reportWarning("Vision Ran" , false);
     table = inst.getTable("datatableeo"); 
     Distance = table.getEntry("Distance");
 

@@ -6,17 +6,23 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 
 /** import edu.wpi.first.hal.sim.mockdata.DriverStationDataJNI; import edu.wpi.first.wpilibj.Joystick;*/
 
-
 public class OI {
 
-    public XboxController xbox = new XboxController(Constants.XBOX_PORT);
+    public Joystick WiiControllDriver = new Joystick(Constants.WII_DRIVER);
+    public Joystick WiiControlOperator = new Joystick(Constants.WII_OPERATOR);
+    //Not in use for wii remotes, I kept them so code would stop screaming
+    //public XboxController xbox = new XboxController(Constants.XBOX_PORT);
     public Joystick Control2 = new Joystick(Constants.CONTROL2_PORT);    
     public Joystick Control3 = new Joystick(Constants.CONTROL3_PORT);
     /** Contructer */
@@ -27,9 +33,42 @@ public class OI {
     }
     /*
         Driver #1
+        Wii control
+    */
+    public boolean get1Button(){
+        return WiiControllDriver.getRawButton(1);
+    }
+
+    public boolean get2Button(){
+        return WiiControllDriver.getRawButton(2);
+    }
+
+    public boolean getBackButton(){
+        return WiiControllDriver.getRawButton(4);
+    }
+
+    //getXboxLeftX
+    public double getWiiAxisLeftX(){
+        return WiiControllDriver.getRawAxis(4);
+    }
+
+    //getXboxLeftY
+    public double getWiiAxisLeftY(){
+        return WiiControllDriver.getRawAxis(3);
+    }
+    //getXboxRightX
+    public double getWiiAxisRightX(){
+        return WiiControllDriver.getRawAxis(3);
+    }
+    //getXboxRightY
+    public double getWiiAxisRightY(){
+        return WiiControllDriver.getRawAxis(4);
+    }
+    /*
+        Driver #1
         Xbox control
     */
-
+    /*
     public boolean getXboxButtonA(){
         return xbox.getAButton();
     }
@@ -50,9 +89,9 @@ public class OI {
 		return xbox.getY(GenericHID.Hand.kRight);
 
     }
-
+    */
     /** Xbox Triggers */
-
+    /*
     public double getXboxRightTrigger() {
         return xbox.getTriggerAxis(GenericHID.Hand.kRight);
         }
@@ -61,13 +100,12 @@ public class OI {
         return xbox.getTriggerAxis(GenericHID.Hand.kLeft);
         }
 
-    /** RUMBLE CODE
+   RUMBLE CODE
     public void setXboxRumble(double power) {
         xbox.setRumble(GenericHID.RumbleType.kLeftRumble, power);
         xbox.setRumble(GenericHID.RumbleType.kRightRumble, power);
         }
     */
-
-
+    
 
 }

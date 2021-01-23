@@ -35,7 +35,7 @@ public class HookRightUpCMD extends CommandBase {
   public void execute() {
     //if button is not pressed
     boolean switchIsGood = limitSwitch.get() == true;
-    DriverStation.reportWarning("Sensor Status: " + switchIsGood, false);
+    //DriverStation.reportWarning("Sensor Status: " + switchIsGood, false);
     if(limitSwitch.get() == false){
       m_Hook.HookUpRight();
     }

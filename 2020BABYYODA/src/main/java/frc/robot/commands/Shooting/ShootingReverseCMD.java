@@ -7,6 +7,7 @@
 
 package frc.robot.commands.Shooting;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooting;
 
@@ -29,12 +30,14 @@ public class ShootingReverseCMD extends CommandBase {
   @Override
   public void execute() {
     m_Shooting.ShootingReverse();
+    DriverStation.reportWarning("Reverse shoot!!!", false);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_Shooting.ShootingStop();
+    DriverStation.reportWarning("Reverse shoot STOPS!!!", false);
     
   }
 

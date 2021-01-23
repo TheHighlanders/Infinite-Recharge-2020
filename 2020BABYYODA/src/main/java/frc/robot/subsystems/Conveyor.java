@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -29,10 +30,12 @@ public class Conveyor extends SubsystemBase {
 
   public void ConveyorPower(double speed) {
     conveyorMotor.set(speed);
+    DriverStation.reportWarning("Coneyor on", false);
   }
   
   public void ConveyorStop(){
     conveyorMotor.set(0);
+    DriverStation.reportWarning("Coneyor stop", false);
   }
   
   @Override

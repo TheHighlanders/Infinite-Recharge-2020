@@ -29,7 +29,9 @@ public class IntakeArm extends SubsystemBase {
   }
   
   public void ArmUp() {
+    DriverStation.reportWarning("ARM UP", false);
     intakeArm.set(-1);
+    DriverStation.reportWarning("ARM UP", false);
     // double armCurrent = intakeArm.getStatorCurrent();
     // DriverStation.reportWarning("Arm Current: " + armCurrent, false);
     DriverStation.reportWarning("Arm up" , false);

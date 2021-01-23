@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -60,9 +61,8 @@ public class RobotContainer {
     DriverStation.reportWarning("Initialized",false);
 
     // Configure the button bindings
+    configureWiiRemoteOperator();
     configureButtonBindings();
-    configureLeftControlPanel();
-    configureRightControlPanel();
     configureXboxBindings();
     // configureTestBindings();
 
@@ -71,11 +71,9 @@ public class RobotContainer {
     m_autoCommand = new AutoGroup("Back", m_Drive, m_Shooting, m_Conveyor, m_IntakeBrush, m_Door);
     
     // Configure Commands
-
     m_Drive.setDefaultCommand(new TeleopDriveCMD(m_Drive, m_OI));
     
     // Configure Sensors
-
     m_Drive.left1.setSelectedSensorPosition(0);
     m_Drive.right1.setSelectedSensorPosition(0);
     
@@ -88,18 +86,49 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
+  
+  private void configureWiiRemoteOperator(){
+    //Intake Arm
+    
+    //Intake
 
-  private void configureLeftControlPanel(){
+
+    //Conveyor
+    JoystickButton ConveyorIn = new JoystickButton(m_OI.WiiControlOperator, Constants.CONVERYOR_IN_BUTTON);
+    JoystickButton ConveyorOut = new JoystickButton(m_OI.WiiControlOperator, Constants.CONVERYOR_OUT_BUTTON);
+    ConveyorIn.whileHeld(new ConveyorPowerCMD(m_Conveyor, -0.5));
+    ConveyorOut.whileHeld(new ConveyorPowerCMD(m_Conveyor, 1.0));
+
+    //Door
+    JoystickButton DoorUp = new JoystickButton(m_OI.WiiControlOperator,Constants.DOOR_UP_BUTTON);
+    JoystickButton DoorDown = new JoystickButton(m_OI.WiiControlOperator,Constants.DOOR_DOWN_BUTTON);
+    DoorUp.whenPressed(new DoorDownCMD(m_Door));
+    DoorDown.whenPressed(new DoorDownCMD(m_Door));
+
+
+    //Shooting
+    JoystickButton Shoot = new JoystickButton(m_OI.WiiControlOperator,Constants.SHOOT_BUTTON);
+    Shoot.whileHeld(new ShootingCMD(m_Shooting));
+    JoystickButton ShootReverse = new JoystickButton(m_OI.WiiControlOperator,Constants.SHOOT_REVERSE);
+    ShootReverse.whileHeld(new ShootingReverseCMD(m_Shooting));   
+
+
+  }
+
+
+
     // Configure Left Control Panel, Port 3
 
     // IntakeArm
+    /*
     JoystickButton ArmUp = new JoystickButton(m_OI.Control3,Constants.ARM_UP_BUTTON);
     JoystickButton ArmDown = new JoystickButton(m_OI.Control3,Constants.ARM_DOWN_BUTTON);
     ArmUp.whileHeld(new IntakeArmUpCMD(m_IntakeArm));
     ArmDown.whileHeld(new IntakeArmDownCMD(m_IntakeArm));
+    */
 
     // Hook?? Why is constants called telescope?
-
+    /*
     JoystickButton HookUpLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_UP_LEFT);
     HookUpLeft.whileHeld(new HookLeftUpCMD(m_telescopeLeft));
     JoystickButton HookDownLeft = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_LEFT);
@@ -108,23 +137,16 @@ public class RobotContainer {
     HookUpRight.whileHeld(new HookRightUpCMD(m_telescopeRight));
     JoystickButton HookDownRight = new JoystickButton(m_OI.Control3,Constants.TELESCOPE_DOWN_RIGHT);
     HookDownRight.whileHeld(new HookRightDownCMD(m_telescopeRight));
+    */
 
-  }
-
-  private void configureRightControlPanel(){
     // Configure Left Control Panel, Port 2
 
-    // Intake Brush
+    // Intake 
+    /*
     JoystickButton IntakeIn = new JoystickButton(m_OI.Control2, Constants.INTAKE_IN_BUTTON);
     JoystickButton IntakeOUT = new JoystickButton(m_OI.Control2, Constants.INTAKE_OUT_BUTTON);
     IntakeIn.whileHeld(new IntakeInCMD(m_IntakeBrush));
     IntakeOUT.whileHeld(new IntakeOutCmd(m_IntakeBrush));
-    
-    // Conveyor
-    JoystickButton ConveyorIn = new JoystickButton(m_OI.Control2, Constants.CONVERYOR_IN_BUTTON);
-    JoystickButton ConveyorOut = new JoystickButton(m_OI.Control2, Constants.CONVERYOR_OUT_BUTTON);
-    ConveyorIn.whileHeld(new ConveyorPowerCMD(m_Conveyor, -0.5));
-    ConveyorOut.whileHeld(new ConveyorPowerCMD(m_Conveyor, 1.0));
     
     // Climb ??
     JoystickButton ClimbUpLeft = new JoystickButton(m_OI.Control2, Constants.CLIMB_UP_LEFT);
@@ -136,13 +158,6 @@ public class RobotContainer {
     JoystickButton ClimbDownRight = new JoystickButton(m_OI.Control2, Constants.CLIMB_DOWN_RIGHT);
     ClimbDownRight.whileHeld(new ClimberDownRight(m_climberRight));
     
-    // Shoot
-
-    JoystickButton Shoot = new JoystickButton(m_OI.Control2, Constants.SHOOT_BUTTON);
-    Shoot.whileHeld(new ShootingCMD(m_Shooting));
-    // JoystickButton ShootReverse = new JoystickButton(m_OI.Control2, 6);
-    // ShootReverse.whileHeld(new ShootingReverseCMD(m_Shooting));   
-    
     // Shooting Speed Set
     JoystickButton red = new JoystickButton(m_OI.Control2, Constants.WHITE_BUTTON);
     red.whenPressed(new SetShootingSpeed(m_Shooting, .75 * -30000));
@@ -152,8 +167,8 @@ public class RobotContainer {
     green.whenPressed(new SetShootingSpeed(m_Shooting, .95 * -30000));
     JoystickButton blue = new JoystickButton(m_OI.Control2, Constants.RED_BUTTON);
     blue.whenPressed(new SetShootingSpeed(m_Shooting, 1 * -30000));
+    */
 
-  }
   
   private void configureButtonBindings() {
     
@@ -164,14 +179,14 @@ public class RobotContainer {
 
   private void configureXboxBindings(){
     // Xbox Bindings Port 0
-
+    /*
     JoystickButton xboxA = new JoystickButton(m_OI.xbox,1);
     JoystickButton xboxB = new JoystickButton(m_OI.xbox,2);
     JoystickButton xboxC = new JoystickButton(m_OI.xbox,3);
     JoystickButton xboxD = new JoystickButton(m_OI.xbox,4);
     JoystickButton xboxLeftBumper = new JoystickButton(m_OI.xbox, 5);
     JoystickButton xboxRightBumper = new JoystickButton(m_OI.xbox, 6);
-
+    
     // xboxA.whileHeld(new ShootingCMD(m_Shooting));
     // xboxA.whileHeld(new ShootingGroup(m_Shooting, m_Conveyor, m_IntakeBrush, m_Door));
     // xboxB.whileHeld(new ConveyorInCMD(m_Conveyor, -0.5));
@@ -184,6 +199,7 @@ public class RobotContainer {
 
     xboxLeftBumper.whenPressed(new DoorDownCMD(m_Door));
     xboxRightBumper.whenPressed(new DoorUpCMD(m_Door));
+    */
   }
 
   private void configureTestBindings(){

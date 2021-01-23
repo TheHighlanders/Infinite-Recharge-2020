@@ -17,7 +17,11 @@ package frc.robot;
  */
 public final class Constants {
 
-    public static final int XBOX_PORT = 0;
+    public static final int WII_OPERATOR = 0;
+    public static final int WII_DRIVER = 1;
+  
+    //public static final int XBOX_PORT = 5;
+    //gets replaced by Wii remote
     public static final int CONTROL2_PORT = 2;
     public static final int CONTROL3_PORT = 1;
     
@@ -30,7 +34,6 @@ public final class Constants {
     public static final int DOOR = 45;
 
     public static final int INTAKE_ARM = 52;
-
     public static final int INTAKE = 54;
 
     public static final int LEFT_HOOK = 40; 
@@ -58,15 +61,31 @@ public final class Constants {
 
     public static final double GOAL_ERROR = 10;
 
-    // Button Constants
-    // Control 3
-    // Control 1 on driver statoin
+    //Wii Remotes
+    //This does work
+    public static final int CONVERYOR_IN_BUTTON = 5;
+    public static final int CONVERYOR_OUT_BUTTON = 6;
+    public static final int SHOOT_BUTTON = 3;//I think this works
+    public static final int SHOOT_REVERSE = 4;
+    public static final int DOOR_UP_BUTTON = 8;
+    public static final int DOOR_DOWN_BUTTON = 7;
+
+    //trying to get it to work
+    //pov is shitty
     public static final int ARM_UP_BUTTON = 6;
     public static final int ARM_DOWN_BUTTON = 7;
+    public static final int INTAKE_IN_BUTTON = 2;
+    public static final int INTAKE_OUT_BUTTON = 1;
+
+    //This doesn't work
     public static final int TELESCOPE_UP_LEFT = 9;
     public static final int TELESCOPE_DOWN_LEFT = 8;
     public static final int TELESCOPE_UP_RIGHT = 11;
     public static final int TELESCOPE_DOWN_RIGHT = 10;
+    
+    /*not enough buttons on the wii*/
+    // Button Constants
+    // Control 3 Control 1 on driver statoin
     public static final int BALANCE = 1;
     public static final int WHITE_BUTTON = 5;
     public static final int BLUE_BUTTON = 4;
@@ -78,13 +97,6 @@ public final class Constants {
     public static final int CLIMB_UP_RIGHT = 6;
     public static final int CLIMB_DOWN_LEFT = 9;
     public static final int CLIMB_DOWN_RIGHT = 7;
-    public static final int SHOOT_BUTTON = 5;
-    public static final int INTAKE_IN_BUTTON = 2;
-    public static final int INTAKE_OUT_BUTTON = 1;
-    public static final int CONVERYOR_IN_BUTTON = 4;
-    public static final int CONVERYOR_OUT_BUTTON = 3;
-    
-   
 
 
 }

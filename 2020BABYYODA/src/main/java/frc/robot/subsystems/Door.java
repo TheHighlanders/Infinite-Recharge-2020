@@ -46,7 +46,7 @@ public class Door extends SubsystemBase {
 
   public void DoorOpen(){
     double distancetomove = 44.4*(5/Constants.GEAR_INCHES);
-    DriverStation.reportError("Target Height: " + distancetomove, false);
+    //DriverStation.reportError("Target Height: " + distancetomove, false);
     door.set(ControlMode.Position, 4*44.4*(5/Constants.GEAR_INCHES));
   }
 
@@ -57,6 +57,6 @@ public class Door extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    DriverStation.reportError("Door PID: " + door.getSelectedSensorPosition(), false);
+    //DriverStation.reportError("Door PID: " + door.getSelectedSensorPosition(), false);
   }
 }
